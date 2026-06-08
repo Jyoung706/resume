@@ -1,0 +1,24 @@
+/* IconButton */
+.IconButton__base {
+    &.MuiIconButton-root {
+        padding: 0;
+
+        &[class*="sizeSmall"] {
+            width: var(--alias-icon-btn-width-small);
+            height: var(--alias-icon-btn-height-small);
+            border-radius: var(--alias-btn-radius-small);
+        }
+
+        &[class*="sizeMedium"] {
+            width: var(--alias-icon-btn-width-medium);
+            height: var(--alias-icon-btn-height-medium);
+            border-radius: var(--alias-btn-radius-medium);
+        }
+
+        &[class*="sizeLarge"] {
+            width: var(--alias-icon-btn-width-large);
+            height: var(--alias-icon-btn-height-large);
+            border-radius: var(--alias-btn-radius-large);
+        }
+    }
+}

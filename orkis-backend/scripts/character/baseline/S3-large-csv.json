@@ -1,0 +1,15 @@
+{
+  "scenario": "S3-large-csv",
+  "outcome": "streamed",
+  "statusCode": 200,
+  "headers": {
+    "Content-Type": "text/csv; charset=utf-8"
+  },
+  "body_size": 27046,
+  "body_sha256": "345617f9c77ac18c9a74ca7292a56ae21ad97f4f04e03fd6033f172b92c76c7e",
+  "body_preview": "﻿id,name,score,memo\n1,name_1,0.5,\"with,comma\"\n2,name_2,1,\"with \"\"quote\"\"\"\n3,name_3,1.5,\"multi\nline\"\n4,name_4,2,\n5,name_5,2.5,tab\there\n6,name_6,3,memo_6\n7,name_7,3.5,memo_7\n8,name_8,4,memo_8\n9,name_9,4.5,memo_9\n10,name_10,5,plain\n11,name_11,5.5,\"with,comma\"\n12,name_12,6,\"with \"\"quote\"\"\"\n13,name_13,6.5,\"multi\nline\"\n14,name_14,7,\n15,name_15,7.5,tab\there\n16,name_16,8,memo_16\n17,name_17,8.5,memo_17\n18,name_18,9,memo_18\n19,name_19,9.5,memo_19\n20,name_20,10,plain\n21,name_21,10.5,\"with,comma\"\n22,name_22,11,\"with ",
+  "ended": true,
+  "writableEnded": true,
+  "headersSent": true,
+  "rejectedError": null
+}

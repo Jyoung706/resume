@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: jenkins
+  namespace: cicd
+  labels:
+    app: jenkins
+    component: controller
+spec:
+  type: ClusterIP
+  ports:
+    - name: web
+      port: 80
+      targetPort: 8080
+    - name: agent
+      port: 50333
+      targetPort: 50000
+  selector:
+    app: jenkins
+    component: controller    # ★ controller만 정확히 매칭 (agent 제외)

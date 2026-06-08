@@ -1,0 +1,188 @@
+// ============================================
+// ui/Dialog — 정보 입력/조회 팝업 레이아웃 스타일
+// ============================================
+
+.Dialog__base {
+  overflow: hidden;
+
+  @media (max-width: 3840px) {}
+
+  @media (max-width: 1920px) {}
+
+  @media (max-width: 1440px) {
+    // z-index: 9999;
+  }
+
+  @media (max-width: 1024px) {}
+
+  @media (max-width: 800px) {}
+
+  @media (max-width: 640px) {}
+
+  // Paper 기본 스타일
+  .MuiDialog-paper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    max-height: 90vh;
+    border-radius: var(--alias-dialog-radius);
+    border: 1px solid var(--alias-dialog-border);
+    outline: none !important;
+
+    // ── Header ──
+    .Dialog__title {
+      position: relative;
+      padding: 1.75rem 1.875rem 0;
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--alias-popup-title);
+      line-height: 1.4;
+
+      >.Box__base {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-end;
+      }
+
+      [class*="__title"] {
+        padding: 0;
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: var(--alias-popup-title);
+      }
+
+      [class*="__subtitle"] {
+        margin-bottom: 0.125rem;
+        margin-left: 0.375rem;
+        font-size: 0.75rem;
+        color: var(--alias-popup-title-descript);
+        line-height: 1.4;
+      }
+
+      .IconButton__base,
+      .Dialog__close-btn {
+        position: absolute;
+        top: 1.75rem;
+        right: 1.875rem;
+        color: var(--alias-popup-icon);
+        flex-shrink: 0;
+        margin-top: -0.25rem;
+        margin-right: -0.5rem;
+
+        .MuiSvgIcon-root {
+          font-size: 1.25rem;
+        }
+      }
+    }
+
+    // ── Content ──
+    .Dialog__content {
+      flex: 1;
+      padding: 1.25rem 1.875rem 1.8125rem;
+      overflow-y: auto;
+    }
+
+    // ── Footer ──
+    .Dialog__actions {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      // gap: 0.75rem;
+      flex-shrink: 0;
+      height: 3.25rem;
+      padding: 0 1.5rem;
+      // border-top: 1px solid var(--divider);
+      background-color: var(--alias-popup-footer-bg);
+
+      .Box__base {
+        gap: 0;
+      }
+
+      .Button__base {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+        margin: 0;
+
+        .MuiSvgIcon-root,
+        .MuiButton-icon {
+          margin-right: 0.25rem;
+        }
+      }
+    }
+  }
+
+  // ── footer 버튼 텍스트화 reset (ConfirmModal 제외) ──
+  // ui/Dialog(DbConnectionWizard, DbConnectionEditDialog, DbSchemaDialog, LLMModelDialog) 및
+  // ui/Modal direct 사용처(SqlViewModal, DataViewModal, UserTypeSelectionPage 등)는
+  // footer 버튼을 텍스트 스타일(border 없음, background 투명)로 표시.
+  // ConfirmModal 만 호출처 variant(outlined/contained) 시각을 그대로 표현.
+  //
+  // 매칭 메커니즘: base/Dialog 가 root 에 `Dialog__base` 자동 부여 + ConfirmModal 이
+  // `ConfirmModal__base` 부여 → `&:not(.ConfirmModal__base)` 로 ConfirmModal scope 만 제외.
+  // specificity: 0,5,0 (Dialog__base + :not + MuiDialog-paper + Dialog__actions + Button__base)
+  &:not(.ConfirmModal__base) {
+    .MuiDialog-paper {
+      .Dialog__actions {
+        .Button__base {
+          border: none;
+          background-color: transparent;
+        }
+      }
+    }
+  }
+
+  // ── 사이즈 프리셋 ──
+  &.sizeXsmall .MuiDialog-paper {
+    max-width: 16rem;
+  }
+
+  &.sizeSmall .MuiDialog-paper {
+    max-width: 20rem;
+  }
+
+  &.sizeMedium .MuiDialog-paper {
+    max-width: 26.8125rem;
+  }
+
+  &.sizeLarge .MuiDialog-paper {
+    max-width: 37.5rem;
+  }
+
+  &.sizeXlarge .MuiDialog-paper {
+    max-width: 50rem;
+  }
+
+  &.AlertModal__base {
+    .MuiDialog-paper {
+      .Dialog__actions {
+        justify-content: center;
+        align-items: flex-start;
+        height: auto;
+        padding-bottom: 1.25rem;
+        background-color: transparent;
+
+        .Button__base {
+          min-width: 3.75rem;
+        }
+      }
+    }
+  }
+
+  ~.Menu__base {
+    &.MuiPopover-root {
+      @media (max-width: 3840px) {}
+
+      @media (max-width: 1920px) {}
+
+      @media (max-width: 1440px) {
+        // z-index: 99999;
+      }
+
+      @media (max-width: 1024px) {}
+
+      @media (max-width: 800px) {}
+
+      @media (max-width: 640px) {}
+    }
+  }
+}

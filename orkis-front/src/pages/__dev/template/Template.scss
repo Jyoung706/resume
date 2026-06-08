@@ -1,0 +1,19 @@
+.Paper__base:has(.Box__base) {
+  border-radius: var(--alias-paper-radius);
+  border: 1px solid var(--alias-paper-border-color);
+}
+
+// 컴포넌트 정렬
+.MainLayout__main {
+  .Stack__base {
+    flex: 1;
+
+    .Box__base {
+      &:has(.Button__base),
+      &:has(.Input__base) {
+        display: flex;
+        align-items: flex-start;
+      }
+    }
+  }
+}

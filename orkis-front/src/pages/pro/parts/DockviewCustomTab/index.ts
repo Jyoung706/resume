@@ -1,0 +1,1 @@
+export { DockviewCustomTab } from "./DockviewCustomTab";

@@ -1,0 +1,53 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: orkis-app-ingress
+  namespace: orkis
+  annotations:
+    nginx.org/proxy-connect-timeout: "30s"
+    nginx.org/proxy-read-timeout: "1800s"
+    nginx.org/proxy-send-timeout: "1800s"
+    nginx.org/client-max-body-size: "500m"
+    nginx.org/proxy-buffer-size: "8k"
+    nginx.org/proxy-buffers: "4 8k"
+    # 임시 외부 백엔드 접근 허용을 위해 orkis-backend-websocket 추가
+    nginx.org/websocket-services: "orkis-front,orkis-backend-websocket"
+    # 임시 외부 접속을 위한 path rewrite 설정
+    nginx.org/rewrites: "serviceName=orkis-backend rewrite=/;serviceName=orkis-backend-websocket rewrite=/"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: orkis.kr
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: orkis-front
+                port:
+                  number: 80
+          - path: /orkisbackend-api/
+            pathType: Prefix
+            backend:
+              service:
+                name: orkis-backend
+                port:
+                  number: 80
+          - path: /orkisbackend-ws/
+            pathType: Prefix
+            backend:
+              service:
+                name: orkis-backend-websocket
+                port:
+                  number: 8081
+    - host: demo-design.orkis.kr
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: orkis-front-design
+                port:
+                  number: 80

@@ -1,0 +1,142 @@
+// ============================================
+// default/_theme-default.scss
+// 기본 테마 (라이트)
+// ============================================
+
+@use "../../design-system/core/mixins" as gen;
+@use "config/tokens" as t;
+@use "config/custom-tokens" as ct;
+
+[data-theme="default"] {
+  @include gen.apply(t.$tokens, t.$overrides, ct.$custom);
+
+  /*** Components 재정의 (MUI 기본형) ***/
+  /* Touch Ripple */
+  .MuiTouchRipple-root {
+    border-radius: inherit;
+
+    span {
+      border-radius: inherit;
+    }
+  }
+
+  /* Components with Label */
+  .MuiFormControl-root {
+    &:has(.MuiOutlinedInput-root) {
+      .MuiFormLabel-root {
+        top: 50%;
+        transform: translate(var(--alias-input-padding), -50%) scale(1);
+        transition: all 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
+
+        &.Mui-focused,
+        &.MuiFormLabel-filled {
+          top: 0;
+        }
+      }
+
+      &:has(.MuiInputAdornment-root) {
+        .MuiTypography-root {
+          font-size: inherit;
+        }
+      }
+
+      &:has(.MuiInputAdornment-root) {
+        &:has(.MuiInputAdornment-positionStart) {
+          .MuiFormLabel-root {
+            top: 0;
+          }
+        }
+      }
+
+      &:has(.MuiFormHelperText-root) {
+        .MuiFormHelperText-root {
+          position: absolute;
+        }
+      }
+
+      &[class*="sizeSmall"] {
+        .MuiFormLabel-root {
+          font-size: var(--font-size-small);
+
+          &.Mui-focused,
+          &.MuiFormLabel-filled {
+            transform: translate(var(--alias-input-padding), calc(var(--font-size-small) * 1.0625 / -2)) scale(0.75);
+          }
+        }
+
+        &:has(.MuiInputAdornment-root) {
+          &:has(.MuiInputAdornment-positionStart) {
+            .MuiFormLabel-root {
+              transform: translate(var(--alias-input-padding), calc(var(--font-size-small) * 1.0625 / -2)) scale(0.75);
+            }
+          }
+        }
+
+        &:has(.MuiFormHelperText-root) {
+          margin-bottom: calc(var(--font-size-small) * 1.66 + 0.25rem);
+
+          .MuiFormHelperText-root {
+            bottom: calc((var(--font-size-small) * 1.66 + 0.25rem) * -1);
+            font-size: var(--font-size-small);
+          }
+        }
+      }
+
+      &[class*="sizeMedium"] {
+        .MuiFormLabel-root {
+          font-size: var(--font-size-medium);
+
+          &.Mui-focused,
+          &.MuiFormLabel-filled {
+            transform: translate(var(--alias-input-padding), calc(var(--font-size-medium) * 1.0625 / -2)) scale(0.75);
+          }
+        }
+
+        &:has(.MuiInputAdornment-root) {
+          &:has(.MuiInputAdornment-positionStart) {
+            .MuiFormLabel-root {
+              transform: translate(var(--alias-input-padding), calc(var(--font-size-medium) * 1.0625 / -2)) scale(0.75);
+            }
+          }
+        }
+
+        &:has(.MuiFormHelperText-root) {
+          margin-bottom: calc(var(--font-size-medium) * 1.66 + 0.25rem);
+
+          .MuiFormHelperText-root {
+            bottom: calc((var(--font-size-medium) * 1.66 + 0.25rem) * -1);
+            font-size: var(--font-size-medium);
+          }
+        }
+      }
+    }
+  }
+
+  /* Icon */
+  .MuiSvgIcon-root {
+    &.MuiSvgIcon-fontSizeSmall {
+      font-size: var(--icon-size-small);
+    }
+
+    &.MuiSvgIcon-fontSizeMedium {
+      font-size: var(--icon-size-medium);
+    }
+
+    &.MuiSvgIcon-fontSizeLarge {
+      font-size: var(--icon-size-large);
+    }
+  }
+
+  /* List */
+  .MuiMenu-list {
+    .MuiMenuItem-root {
+      height: var(--alias-list-item-height-small);
+      font-size: var(--alias-list-item-font-size-small);
+    }
+  }
+
+  /* Dialog */
+  .MuiDialog-paper {
+    border-radius: var(--alias-dialog-radius);
+  }
+}

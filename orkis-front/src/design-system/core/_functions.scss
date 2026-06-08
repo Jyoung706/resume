@@ -1,0 +1,19 @@
+// ============================================
+// _functions.scss
+// 순수 함수만 — 외부 의존 없음
+// ============================================
+
+@use "sass:color";
+
+/// RGB 채널 문자열 생성 (MUI *Channel 변수용)
+/// null-safe: null 입력시 빈 문자열 반환
+/// @param {Color} $c - 대상 색상
+/// @return {String} "R G B" 형태 문자열
+@function channels($c) {
+  @if $c == null {
+    @return "";
+  }
+  @return #{color.channel($c, "red", $space: rgb)}
+    #{color.channel($c, "green", $space: rgb)}
+    #{color.channel($c, "blue", $space: rgb)};
+}

@@ -1,0 +1,11 @@
+#!/bin/bash
+# Orkis Desktop - preinstall
+# PKG 설치 시 root 권한으로 실행됨
+# 파일 복사 전 실행 — 앱 번들이 아직 없으므로 여기서는 사전 정리만 수행
+
+echo "[Orkis] preinstall: preparing installation..."
+
+# 기존 앱이 실행 중이면 종료
+pkill -f "orkis.app" 2>/dev/null || true
+
+exit 0

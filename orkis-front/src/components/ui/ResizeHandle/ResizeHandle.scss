@@ -1,0 +1,26 @@
+// ============================================
+// ResizeHandle — 드래그 리사이즈 핸들 스타일
+// ============================================
+
+.ResizeHandle {
+  flex-shrink: 0;
+  background-color: transparent;
+  transition: background-color 0.15s ease;
+
+  &:hover,
+  &:active {
+    background-color: var(--primary, #c84111);
+  }
+
+  // ── 가로 리사이즈 (좌우 드래그) ──
+  &--horizontal {
+    width: 4px;
+    cursor: col-resize;
+  }
+
+  // ── 세로 리사이즈 (상하 드래그) ──
+  &--vertical {
+    height: 4px;
+    cursor: row-resize;
+  }
+}

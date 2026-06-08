@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ${APP_NAME}
+  namespace: ${KUBE_NAMESPACE}
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: ${APP_NAME}
+  template:
+    metadata:
+      labels:
+        app: ${APP_NAME}
+    spec:
+      nodeSelector:
+        workload: orkis
+      imagePullSecrets:
+        - name: gitlab-registry
+      containers:
+        - name: ${APP_NAME}
+          image: ${IMAGE_NAME}:${BUILD_NUMBER}
+          ports:
+            - containerPort: 8000
+              name: http
+          envFrom:
+            - configMapRef:
+                name: orkis-node-jobs-config
+            - secretRef:
+                name: orkis-node-jobs-secret
+          resources:
+            requests:
+              cpu: "300m"
+              memory: "512Mi"
+            limits:
+              cpu: "600m"
+              memory: "1024Mi"
+          volumeMounts:
+            - name: data-archive
+              mountPath: /app/data-archive
+      volumes:
+        - name: data-archive
+          persistentVolumeClaim:
+            claimName: orkis-jobs-data-archive-pvc

@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: orkis-jobs-data-archive-pv
+spec:
+  capacity:
+    storage: 30Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: nfs-static
+  nfs:
+    server: 172.25.1.129
+    path: /share_ee5038c0_4304_4915_a277_a5ea082e01f1/orkis-orkis-jobs-data-archive-pvc
+  claimRef:
+    namespace: orkis
+    name: orkis-jobs-data-archive-pvc

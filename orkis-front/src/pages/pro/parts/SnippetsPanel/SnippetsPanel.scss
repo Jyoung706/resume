@@ -1,0 +1,116 @@
+// ============================================
+// SnippetsPanel — SQL 스니펫 목록 스타일
+// ============================================
+
+.SnippetsPanel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  font-size: 0.75rem;
+}
+
+.SnippetsPanel--empty {
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.SnippetsPanel__empty-text {
+  color: var(--text-muted);
+}
+
+// ── 헤더 ──
+.SnippetsPanel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.625rem;
+  border-bottom: 1px solid var(--border-color);
+  flex-shrink: 0;
+}
+
+.SnippetsPanel__header-title {
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.SnippetsPanel__save-btn {
+  background: none;
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+  cursor: pointer;
+  font-size: 0.6875rem;
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+}
+
+// ── 리스트 ──
+.SnippetsPanel__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.SnippetsPanel__item {
+  justify-content: space-between;
+  padding: 0.375rem 0.625rem;
+  border-bottom: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: background-color 0.1s;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.03);
+  }
+}
+
+.SnippetsPanel__item-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.125rem;
+}
+
+.SnippetsPanel__item-title {
+  font-weight: 500;
+  color: var(--text-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+}
+
+.SnippetsPanel__delete-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 0.875rem;
+  padding: 0;
+  line-height: 1;
+  flex-shrink: 0;
+
+  .material-symbols-outlined,
+  .Icon__base {
+    font-size: 1.125rem;
+  }
+
+  &:hover {
+    color: var(--alias-process-fail);
+  }
+}
+
+.SnippetsPanel__sql {
+  font-family: "Fira Code", "Cascadia Code", Consolas, monospace;
+  font-size: 0.6875rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

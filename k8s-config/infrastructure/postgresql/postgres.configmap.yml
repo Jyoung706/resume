@@ -1,0 +1,61 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-config
+  namespace: orkis
+data:
+  POSTGRES_DB: orkisdb
+  # 아래는 메모리 2GB 환경에 맞춘 예시 설정입니다. 필요에 따라 조정하세요.
+  postgresql.conf: |
+    listen_addresses = '*'
+    # 메모리 설정 (2GB 메모리 제한 기준)
+    shared_buffers = 512MB                    # 전체 메모리의 25% (2GB의 25%)
+    effective_cache_size = 1536MB             # 전체 메모리의 75% (운영체제 캐시 포함)
+    work_mem = 8MB                            # 정렬/해시 작업용 메모리
+    maintenance_work_mem = 128MB              # VACUUM, CREATE INDEX 등 유지보수 작업용
+
+    # WAL (Write-Ahead Logging) 설정
+    wal_buffers = 16MB                        # WAL 버퍼 크기
+    checkpoint_completion_target = 0.9        # 체크포인트 완료 목표 시간
+    checkpoint_timeout = 15min                # 체크포인트 간격
+    max_wal_size = 2GB                        # 최대 WAL 크기
+    min_wal_size = 512MB                      # 최소 WAL 크기
+
+    # 연결 설정
+    max_connections = 200                     # 최대 동시 연결 수
+
+    #   # 쿼리 플래너 설정
+    #   default_statistics_target = 100           # 통계 수집 정밀도
+    #   random_page_cost = 1.1                    # SSD 기준 (HDD면 4.0)
+    #   effective_io_concurrency = 200            # SSD 기준 I/O 동시성
+
+    #   # Autovacuum 설정 (성능 최적화)
+    #   autovacuum = on
+    #   autovacuum_max_workers = 4
+    #   autovacuum_naptime = 30s                  # 더 자주 실행
+    #   autovacuum_vacuum_threshold = 25          # 임계값 낮춤
+    #   autovacuum_analyze_threshold = 10         # 분석 임계값 낮춤
+    #   autovacuum_vacuum_scale_factor = 0.1      # 스케일 팩터 낮춤
+    #   autovacuum_analyze_scale_factor = 0.05    # 분석 스케일 팩터 낮춤
+
+    # 로깅 설정 강화 (연결 문제 디버깅)
+    # log_destination = 'stderr'
+    # logging_collector = on
+    # log_directory = 'pg_log'
+    # log_filename = 'postgresql-%Y-%m-%d_%H%M%S.log'
+    # log_rotation_age = 1d
+    # log_min_messages = warning
+    # log_min_error_statement = error
+
+    # 연결 관련 상세 로깅 추가
+    # log_connections = on
+    # log_disconnections = on
+    # log_duration = on
+    # log_line_prefix = '%t [%p]: [%l-1] user=%u,db=%d,app=%a,client=%h '
+    # log_statement = 'all'  # none, ddl, mod, all 중 선택
+    # log_min_duration_statement = 0  # 1초 이상 걸리는 쿼리만 로깅
+
+    #   # 기타 성능 설정
+    #   synchronous_commit = off                  # 비동기 커밋 (성능 향상, 약간의 데이터 손실 위험)
+    #   fsync = on                               # 데이터 안전성 보장
+    #   full_page_writes = on                    # 부분 페이지 쓰기 보호

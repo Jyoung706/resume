@@ -1,0 +1,138 @@
+// ============================================
+// pages/login/LoginPage.scss
+// LoginPage 전용 스타일 (일반 SCSS)
+// ============================================
+@use "@/pages/common.mixin" as common;
+@use "@/pages/auth/auth.mixin" as auth;
+
+// 로그인
+.LoginPage__root {
+  @include auth.page;
+}
+
+// 로고
+.LoginPage__logo {
+  @include common.logo;
+
+  .LoginPage__logo-symbol {
+    @include common.logo-symbol;
+  }
+
+  .LoginPage__logo-text {
+    @include common.logo-text;
+  }
+}
+
+// 카드
+.LoginPage__card {
+  @include auth.card;
+
+  // 카드 내용
+  .LoginPage__card-content {
+    @include auth.card-content;
+
+    .MuiDivider-root {
+      display: none
+    }
+  }
+
+  // 타이틀
+  .LoginPage__title {
+    @include auth.card-title;
+  }
+
+  // 입력폼 영역
+  .LoginPage__form-fields {
+    gap: 0.875rem;
+  }
+
+  // 입력폼
+  .member__form-field {
+    .Input__base {
+      &.MuiFormControl-root {
+        &:has(.MuiOutlinedInput-root) {
+          --alias-input-padding: 1.0625rem;
+
+          .MuiOutlinedInput-root {
+            height: 2.875rem;
+            font-size: 0.9375rem;
+          }
+
+          .MuiFormLabel-root {
+            font-size: 0.9375rem;
+          }
+        }
+      }
+    }
+
+    // 로그인 버튼
+    .LoginPage__submit-btn {
+      @include auth.button;
+    }
+  }
+
+  // 소셜로그인
+  .LoginPage__social {
+    gap: 0.5rem;
+
+    .SocialLoginButton__root {
+      justify-content: space-between;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      border-radius: 0.5rem;
+      border-color: var(--alias-member-loginbtn-border);
+      font-size: 0.8125rem;
+      font-weight: 400;
+      line-height: 1.5;
+
+      &[data-provider="naver"] {
+        .SocialLoginButton__icon {
+          width: 0.875rem;
+          height: 0.875rem;
+        }
+
+        &::after {
+          width: 0.875rem;
+        }
+      }
+
+      &[data-provider="kakao"] {
+        .SocialLoginButton__icon {
+          width: 1rem;
+          height: 0.9375rem;
+        }
+
+        &::after {
+          width: 1rem;
+        }
+      }
+
+      &::after {
+        content: '';
+      }
+    }
+  }
+
+  // 링크 영역
+  .LoginPage__links {
+    @include auth.links;
+
+    .Link__base {
+      @include auth.link;
+    }
+
+    .LoginPage__signup-row {
+      gap: 0.5rem;
+      align-items: center;
+      font-size: 0.8125rem;
+
+      .MuiTypography-root {
+        font-size: inherit;
+      }
+
+      .LoginPage__link--bold {
+        font-size: inherit;
+      }
+    }
+  }
+}

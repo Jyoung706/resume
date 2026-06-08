@@ -1,0 +1,24 @@
+/* Radio */
+.Radio__base {
+    &+.MuiFormControlLabel-label {
+        text-transform: capitalize;
+    }
+
+    &[class*="sizeSmall"] {
+        width: var(--alias-radio-height-small);
+        height: var(--alias-radio-height-small);
+
+        &+.MuiFormControlLabel-label {
+            font-size: var(--alias-checkbox-font-size-small);
+        }
+    }
+
+    &[class*="sizeMedium"] {
+        width: var(--alias-radio-height-medium);
+        height: var(--alias-radio-height-medium);
+
+        &+.MuiFormControlLabel-label {
+            font-size: var(--alias-checkbox-font-size-medium);
+        }
+    }
+}

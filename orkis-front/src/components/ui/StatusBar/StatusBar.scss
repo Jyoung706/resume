@@ -1,0 +1,56 @@
+// ============================================
+// ui/StatusBar — 서버 연결 상태 표시 바 스타일
+// Figma specs (node: 139:3506) 기반
+// ============================================
+
+.StatusBar {
+  display: flex;
+  align-items: center;
+  gap: 0.8125rem;
+  height: 2.1875rem;
+  border: 1px solid var(--alias-top-state-border);
+  background-color: var(--alias-top-state-bg);
+  border-radius: 0.5rem;
+  padding: 0 1.125rem;
+
+  &__group {
+    display: flex;
+    align-items: center;
+    gap: 0.8125rem;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+
+    &--clickable {
+      cursor: pointer;
+    }
+  }
+
+  &__icon {
+    // width: 1.25rem; // 20px
+    // height: 1.25rem;
+    height: 1.125rem;
+    object-fit: contain;
+    flex-shrink: 0;
+
+    &--small {
+      // width: 1.125rem; // 18px (RAG 아이콘)
+      // height: 1.125rem;
+    }
+  }
+
+  &__label {
+    font-size: 0.875rem; // 14px
+    font-weight: 400;
+    text-transform: uppercase;
+    color: var(--topbar-state-text);
+    line-height: normal;
+  }
+
+  &__divider {
+    height: 0.9375rem; // 15px
+  }
+}

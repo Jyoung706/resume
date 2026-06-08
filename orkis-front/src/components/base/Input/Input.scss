@@ -1,0 +1,141 @@
+/* Input */
+.Input__base {
+    position: relative;
+
+    &.MuiFormControl-root {
+        &:has(.MuiOutlinedInput-root) {
+            .MuiOutlinedInput-root {
+                height: 100%;
+                background-color: var(--alias-input-bg);
+
+                .MuiOutlinedInput-input {
+                    min-height: auto;
+                    height: auto;
+                    padding-top: 0;
+                    padding-bottom: 0;
+                    padding-left: var(--alias-input-padding);
+                    padding-right: var(--alias-input-padding);
+                    line-height: normal;
+
+                    &:-webkit-autofill {
+                        -webkit-box-shadow: 0 0 0 100px var(--alias-input-autofill-bg) inset;
+                        -webkit-text-fill-color: var(--alias-input-text);
+                        caret-color: inherit;
+                    }
+                }
+
+                &:has(.MuiInputAdornment-root) {
+                    .IconButton__base {
+                        width: auto;
+                    }
+
+                    &:has(.MuiInputAdornment-positionStart) {
+                        .MuiInputBase-input {
+                            padding-left: 0;
+                        }
+                    }
+
+                    &:has(.MuiInputAdornment-positionEnd) {
+                        .MuiInputBase-input {
+                            padding-right: 0;
+                        }
+                    }
+                }
+
+                &.MuiInputBase-multiline {
+                    padding: 0;
+
+                    .MuiOutlinedInput-input {
+                        padding-top: 0.5rem;
+                        padding-bottom: 0.5rem;
+                    }
+                }
+
+                .MuiInputAdornment-positionStart {
+                    .MuiButtonBase-root {
+                        padding: 0;
+                    }
+                }
+
+                .MuiInputAdornment-positionEnd {
+                    .MuiButtonBase-root {
+                        padding: 0;
+                    }
+                }
+            }
+        }
+
+        &.hasHeight {
+            &:has(.MuiOutlinedInput-root) {
+                .MuiOutlinedInput-root {
+                    height: 100% !important;
+
+                    .MuiOutlinedInput-input {
+                        height: 100%;
+                        box-sizing: border-box;
+                    }
+                }
+            }
+        }
+
+        &[class*="sizeSmall"] {
+            &:has(.MuiOutlinedInput-root) {
+                .MuiOutlinedInput-root {
+                    height: var(--alias-input-height-small);
+                    border-radius: var(--alias-input-radius-small);
+                    font-size: var(--alias-input-font-size-small);
+
+                    .MuiSvgIcon-root {
+                        &[class*="MuiSvgIcon-fontSize"] {
+                            font-size: var(--icon-size-small);
+                        }
+                    }
+
+                    &.MuiInputBase-multiline {
+                        height: auto;
+                    }
+                }
+            }
+        }
+
+        &[class*="sizeMedium"] {
+            &:has(.MuiOutlinedInput-root) {
+                .MuiOutlinedInput-root {
+                    height: var(--alias-input-height-medium);
+                    border-radius: var(--alias-input-radius-medium);
+                    font-size: var(--alias-input-font-size-medium);
+
+                    .MuiSvgIcon-root {
+                        &[class*="MuiSvgIcon-fontSize"] {
+                            font-size: var(--icon-size-medium);
+                        }
+                    }
+
+                    &.MuiInputBase-multiline {
+                        height: auto;
+                    }
+                }
+            }
+        }
+    }
+
+    &[class*="sizeLarge"] {
+        .MuiInputBase-root {
+            &.MuiOutlinedInput-root {
+                // height: var(--alias-input-height-large);
+                border-radius: var(--alias-input-radius-large);
+                font-size: var(--alias-input-font-size-large);
+
+                .MuiSvgIcon-root {
+                    &[class*="MuiSvgIcon-fontSize"] {
+                        font-size: var(--icon-size-large);
+                    }
+
+                    &.MuiInputBase-multiline {
+                        height: auto;
+                    }
+                }
+            }
+        }
+    }
+}

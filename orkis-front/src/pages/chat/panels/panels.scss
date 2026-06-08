@@ -1,0 +1,138 @@
+// ============================================
+// pages/chat/panels/panels.scss
+// 패널 콘텐츠 전용 스타일 (단독 관리)
+// ============================================
+// 사용 패턴:
+//   import "../panels.scss";
+//   className="Panel__placeholder"
+// 네이밍: {PanelName}__{kebab-case}
+// ============================================
+
+// ── 패널 시맨틱 변수 (기존 CSS 변수 재참조) ──
+:root {
+  --panel-bg: var(--bg-paper);
+  --panel-bg-collapsed: var(--bg-subtle);
+  --panel-border: var(--border-color);
+  --panel-text: var(--text-color);
+  --panel-text-muted: var(--text-muted);
+  --panel-text-faint: var(--text-faint);
+  --panel-accent: var(--secondary);
+  --panel-unread: var(--info);
+  --panel-link: var(--link-color);
+}
+
+// ── 공통: 패널 컨테이너 ───────────────────────
+.Panel__container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  // overflow-y: auto;
+  // padding: var(--space-4) var(--space-5);
+  gap: 1.25rem;
+
+  // 스크롤바 항상 표시
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--panel-border);
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: var(--panel-text-faint);
+  }
+
+  // scrollbar-width: thin;
+  // scrollbar-color: var(--panel-border) transparent;
+}
+
+// ── 공통: 검색바 ──────────────────────────────
+.Panel__search-bar {
+  flex-shrink: 0;
+  width: 100%;
+
+  &.Input__base {
+    &.MuiFormControl-root:has(.MuiOutlinedInput-root) .MuiOutlinedInput-root {
+      flex-flow: row-reverse;
+      height: 2.25rem;
+      padding-right: 0;
+      font-size: 0.875rem;
+      // background-color: var(--alias-chatting-input-bg);
+
+      .MuiInputBase-input {
+        // padding-top: 0.5rem;
+        // padding-bottom: 0.5rem;
+        // padding-right: 30px;
+        // line-height: 1.5;
+      }
+
+      .InputAdornment__base {
+        &.MuiInputAdornment-positionEnd {
+          position: absolute;
+          right: 1.875rem;
+        }
+      }
+
+      .MuiOutlinedInput-notchedOutline {
+        // top: -4px;
+      }
+    }
+  }
+}
+
+// ── 공통: 섹션 헤더 ───────────────────────────
+.Panel__section-header {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--panel-text);
+  margin-bottom: var(--space-3);
+}
+
+// ── 공통: 로딩 상태 ───────────────────────────
+.Panel__loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-8) 0;
+}
+
+// ── 공통: 플레이스홀더 (준비 중) ──────────────
+.Panel__placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: var(--space-2);
+}
+
+.Panel__placeholder-title {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.Panel__placeholder-text {
+  font-size: 0.875rem;
+  // color: var(--text-muted);
+}
+
+// ── 공통: 빈 목록 ────────────────────────────
+.Panel__empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  margin-top: 0.625rem;
+
+  .Panel__empty-text {
+    font-size: 0.8125rem;
+    color: var(--alias-common-body-text);
+  }
+}

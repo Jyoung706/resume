@@ -1,0 +1,141 @@
+{
+  "name": "orkis-electron",
+  "version": "1.0.0",
+  "description": "Orkis Desktop Application",
+  "main": "./out/main/index.js",
+  "packageManager": "yarn@4.12.0",
+  "author": "Beomik",
+  "scripts": {
+    "dev": "electron-vite dev --inspect --mode dev",
+    "dev:debug": "MAIN_DEBUG_CONTAINERS=true electron-vite dev --inspect=9228 --mode debug",
+    "dev:detached": "electron-vite dev --inspect --mode detached",
+    "build": "electron-vite build",
+    "build:dev": "electron-vite build --mode dev",
+    "build:prod": "electron-vite build --mode prod",
+    "preview": "electron-vite preview --mode prod",
+    "preview:dev": "electron-vite preview --mode dev",
+    "preview:detached": "electron-vite preview --mode detached",
+    "build:backend": "node scripts/build-backend.mjs",
+    "build:ai": "node scripts/build-ai.mjs",
+    "build:services": "node scripts/build-all.mjs",
+    "pack": "electron-builder",
+    "pack:mac": "yarn build:prod && electron-builder --mac",
+    "pack:mac:debug": "ORKIS_DEBUG_BUILD=true yarn build:prod && electron-builder --mac -c.appId=kr.orkis.app.debug -c.productName='Orkis Debug' -c.artifactName='orkis-debug-${version}-${os}-${arch}.${ext}'",
+    "pack:win": "yarn build:prod && electron-builder --win",
+    "pack:linux": "yarn build:prod && electron-builder --linux",
+    "pack:all": "yarn build:prod && electron-builder --mac --win"
+  },
+  "devDependencies": {
+    "@electron-toolkit/preload": "^3.0.2",
+    "@electron-toolkit/tsconfig": "^2.0.0",
+    "@types/node": "^22.8.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "electron": "^39.2.7",
+    "electron-builder": "26.0.12",
+    "electron-vite": "^5.0.0",
+    "typescript": "^5.6.3",
+    "vite": "^6.0.4"
+  },
+  "build": {
+    "npmRebuild": false,
+    "appId": "kr.orkis.app",
+    "productName": "orkis",
+    "executableName": "orkis",
+    "artifactName": "${productName}-${version}-${os}-${arch}.${ext}",
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    },
+    "files": [
+      "out/**/*",
+      "build/orkis-tray.png"
+    ],
+    "extraResources": [
+      {
+        "from": "resources/images",
+        "to": "images",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ],
+    "mac": {
+      "icon": "build/orkis-mac.icns",
+      "extraResources": [
+        {
+          "from": "resources/podman/mac",
+          "to": "podman/mac",
+          "filter": [
+            "**/*"
+          ]
+        }
+      ],
+      "target": [
+        {
+          "target": "pkg",
+          "arch": [
+            "arm64"
+          ]
+        }
+      ]
+    },
+    "pkg": {
+      "scripts": "pkg-scripts",
+      "installLocation": "/Applications",
+      "allowAnywhere": false,
+      "allowCurrentUserHome": false,
+      "isRelocatable": false
+    },
+    "win": {
+      "icon": "build/orkis-win.ico",
+      "extraResources": [
+        {
+          "from": "resources/podman/win",
+          "to": "podman/win",
+          "filter": [
+            "**/*"
+          ]
+        },
+        {
+          "from": "resources/podman/win-arm64",
+          "to": "podman/win-arm64",
+          "filter": [
+            "**/*"
+          ]
+        }
+      ],
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Orkis",
+      "include": "build/installer.nsh"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ]
+    }
+  },
+  "dependencies": {
+    "@electron-toolkit/utils": "^4.0.0"
+  }
+}

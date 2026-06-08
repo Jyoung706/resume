@@ -1,0 +1,20 @@
+---
+# GitLab 소스코드 미러 백업 전용 PVC (NAS RWX, 동적 프로비저닝)
+# - nfs-retain-prod SC 가 NAS 안에 cicd-gitlab-mirror-pvc 디렉토리 자동 생성
+# - 사전 mkdir 불필요. PVC 삭제 시 archived-cicd-gitlab-mirror-pvc 로 자동 백업 (archiveOnDelete=true)
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: gitlab-mirror-pvc
+  namespace: cicd
+  labels:
+    workload: cicd
+    app: gitlab
+    purpose: source-mirror
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 100Gi
+  storageClassName: nfs-retain-prod

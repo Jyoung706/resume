@@ -1,0 +1,13 @@
+original_column_name,column_name,column_description,data_format,value_description
+id,,the unique identifier of the sanction screening record,integer,
+customer_id,customer id,the id of the customer being screened,integer,Maps to customer(id)
+screening_date,screening date,the date when the screening was performed,datetime,Format: YYYY-MM-DD HH:MM:SS
+match_score,match score,the similarity score of the potential match,integer,"commonsense evidence:
+Score ranges from 0 to 100. Higher scores indicate stronger potential matches. Scores above 80 typically require manual review."
+list_name,list name,the name of the sanctions list matched against,text,"commonsense evidence:
+Common lists: OFAC SDN, UN Sanctions, EU Sanctions, FATF Blacklist, Local Watchlists"
+match_status,match status,the status of the match determination,text,"commonsense evidence:
+Common statuses: Potential Match, Confirmed Match, False Positive, Under Review"
+reviewed_by,reviewed by,the analyst who reviewed the screening result,text,Name or ID of the compliance officer
+review_date,review date,the date when the review was completed,datetime,"Format: YYYY-MM-DD HH:MM:SS
+NULL if not yet reviewed"

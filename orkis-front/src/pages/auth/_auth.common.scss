@@ -1,0 +1,44 @@
+// ============================================
+// Auth 페이지 공통 SCSS mixins
+// ============================================
+// 사용: @use "../auth.common" as auth;
+//       @include auth.auth-card;
+// ============================================
+
+// ── Paper 카드 (p={4} rounded="lg" bgcolor="surface" shadow="xl") ──
+@mixin auth-card {
+  padding: var(--space-8); // p={4} → 32px
+  border-radius: var(--radius-lg);
+  background-color: var(--bg-surface);
+  box-shadow: var(--shadow-lg); // shadow="xl" → --shadow-lg
+}
+
+// ── 로고 FlexBox (align="center" justify="center" gap={1}) ──
+@mixin auth-logo {
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2); // gap={1} → 8px
+}
+
+// ── 로고 심볼 이미지 ──
+@mixin auth-logo-symbol {
+  width: 2.55rem;
+  height: 2.4375rem;
+}
+
+// ── 로고 텍스트 이미지 ──
+@mixin auth-logo-text {
+  height: 1.325rem;
+}
+
+// ── 페이지 타이틀 (variant="h3" fontWeight={600} fontSize="var(--text-3xl)") ──
+@mixin auth-title {
+  font-weight: 600;
+  font-size: var(--text-3xl);
+  text-align: center;
+}
+
+// ── 페이지 서브타이틀 (variant="body2" textAlign="center") ──
+@mixin auth-subtitle {
+  text-align: center;
+}

@@ -1,0 +1,178 @@
+// ============================================
+// default/config/_custom-tokens.scss
+// 기본 테마 커스텀 토큰
+// ============================================
+
+$custom: (
+  // 필요한 유틸리티 스케일 토큰을 여기에 정의
+  // 전체 키 레퍼런스: template/config/_custom-tokens.scss
+
+  /*** 컴포넌트 사이즈 전체 설정 ***/
+  // 사이즈값를 정의하지 않거나 null로 처리하면 기본으로 셋팅된 값이 적용됨.
+  "config-default-size-pc": null,
+  "config-default-size-mobile": null,
+
+  /*** Global 변수 ***/
+  // Alias 번수에 넣어 사용하고 맵핑된 값을 수정하여 전체적인 사이즈를 변경함.
+  // 필요에 따라 재사용될 변수들을 추가하면서 필요한 Alias 변수에 맵핑하여 사용함.
+  /* Size Variables */
+  "component-size-xsmall": 1.75rem,
+  "component-size-small": 2.1875rem,
+  "component-size-medium": 3rem,
+  "component-size-large": 3.625rem,
+  "component-size-xlarge": 4.25rem,
+  "radius-xsmall": 0.25rem,
+  "radius-small": 0.5rem,
+  "radius-medium": 0.625rem,
+  "radius-large": 0.75rem,
+  "radius-xlarge": 1rem,
+  "font-size-xsmall": 0.75rem,
+  "font-size-small": 0.875rem,
+  "font-size-medium": 1rem,
+  "font-size-large": 1.25rem,
+  "font-size-xlarge": 1.5rem,
+  "icon-size-small": 1.25rem,
+  "icon-size-medium": 1.5rem,
+  "icon-size-large": 1.875rem,
+
+  /* Primitive Color */
+  "primitive-white": #FFFFFF,
+  "primitive-black": #000000,
+
+  /* Global Color */
+  // Gray
+  "global-gray-light": var(--primitive-white),
+  "global-gray-dark": var(--primitive-black),
+  "global-gray-100": #999999,
+  "global-gray-200": #888888,
+  "global-gray-300": #777777,
+  "global-gray-400": #666666,
+  "global-gray-450": #5C5C5C,
+  "global-gray-500": #555555,
+  "global-gray-600": #444444,
+  "global-gray-700": #333333,
+  "global-gray-800": #222222,
+  "global-gray-900": #111111,
+  // Gray A
+  "global-grayA-50": #AAAAAA,
+  "global-grayA-100": #A9A9A9,
+  "global-grayA-200": #A8A8A8,
+  // Gray B
+  "global-grayB-50": #BBBBBB,
+  "global-grayB-100": #B9B9B9,
+  "global-grayB-200": #B8B8B8,
+  // Gray C
+  "global-grayC-50": #CCCCCC,
+  "global-grayC-100": #C9C9C9,
+  "global-grayC-200": #C8C8C8,
+  // Gray D
+  "global-grayD-50": #DDDDDD,
+  "global-grayD-100": #D9D9D9,
+  "global-grayD-200": #D8D8D8,
+  // Gray E
+  "global-grayE-50": #EEEEEE,
+  "global-grayE-100": #E9E9E9,
+  "global-grayE-200": #E8E8E8,
+  "global-grayE-500": #E5E5E5,
+  // Gray F
+  "global-grayF-100": #F9F9F9,
+  "global-grayF-200": #F8F8F8,
+  "global-grayF-300": #F7F7F7,
+
+  /*** Alias 변수 ***/
+  // 컴포넌트나 레이아웃에 Alias 번수를 맵핑하여 값을 정의하고 값을 수정하고 싶을땐 각 Alias 변수에 맵핑된 Global 변수의 값을 수정하여 변경함. 
+  // 색상을 정의하는 변수명에 Alias prefix를 붙여 성격을 규정함.
+  // 필요에 따라 Alias 변수들을 추가하면서 적당한 Global 변수를 맵핑하여 사용함.
+  // 컴포넌트 사이즈 변수들은 가급적 개별 컴포넌트에 할당된 scss파일에 맵팡함.
+  /* Components (Size + Color) */
+  // Accordion (Size)
+  "alias-accordion-radius": var(--radius-small),
+  "alias-accordion-heading-margin": 0.5rem,
+  // Accordion (Color)
+  "alias-accordion-border": var(--global-grayE-500),
+  "alias-accordion-shadow": var(--mui-shadows-1),
+  // Alert (Size)
+  "alert-radius": var(--radius-medium),
+  // Button (Size)
+  "alias-btn-height-small": var(--component-size-small),
+  "alias-btn-height-medium": var(--component-size-medium),
+  "alias-btn-height-large": var(--component-size-large),
+  "alias-btn-radius-small": var(--radius-small),
+  "alias-btn-radius-medium": var(--radius-medium),
+  "alias-btn-radius-large": var(--radius-large),
+  "alias-btn-font-size-small": var(--font-size-small),
+  "alias-btn-font-size-medium": var(--font-size-medium),
+  "alias-btn-font-size-large": var(--font-size-large),
+  "alias-btn-padding-small": 0.875rem,
+  "alias-btn-padding-medium": 1.125rem,
+  "alias-btn-padding-large": 1.375rem,
+  // Checkbox (Size)
+  "alias-checkbox-height-small": var(--component-size-small),
+  "alias-checkbox-height-medium": var(--component-size-medium),
+  "alias-checkbox-font-size-small": var(--font-size-small),
+  "alias-checkbox-font-size-medium": var(--font-size-medium),
+  // Chip (Size)
+  "alias-chip-height-small": var(--component-size-small),
+  "alias-chip-height-medium": var(--component-size-medium),
+  "alias-chip-font-size-small": var(--font-size-small),
+  "alias-chip-font-size-medium": var(--font-size-medium),
+  "alias-chip-padding-small": 0.375rem,
+  "alias-chip-padding-medium": 0.5rem,
+  "alias-chip-label-padding-small": 0.5rem,
+  "alias-chip-label-padding-medium": 0.625rem,
+  // Dialog (Size)
+  "alias-dialog-radius": var(--radius-large),
+  "alias-dialog-title-padding": 0.5rem,
+  "alias-dialog-actions-padding": 0.5rem,
+  // Form Field (Size)
+  "alias-formField-height-small": var(--component-size-small),
+  "alias-formField-height-medium": var(--component-size-medium),
+  "alias-formField-margin": 0.375rem,
+  "alias-formField-component-gap": 0.5rem,
+  // Icon Button (Size)
+  "alias-icon-btn-width-small": var(--component-size-small),
+  "alias-icon-btn-height-small": var(--component-size-small),
+  "alias-icon-btn-width-medium": var(--component-size-medium),
+  "alias-icon-btn-height-medium": var(--component-size-medium),
+  "alias-icon-btn-width-large": var(--component-size-large),
+  "alias-icon-btn-height-large": var(--component-size-large),
+  // Input (Size)
+  "alias-input-autofill-bg": var(--global-gray-light),
+  // Label (Size)
+  "alias-label-height-small": var(--component-size-small),
+  "alias-label-height-medium": var(--component-size-medium),
+  "alias-label-font-size-small": var(--font-size-small),
+  "alias-label-font-size-medium": var(--font-size-medium),
+  // Label (Color)
+  "alias-label-asterisk-color": var(--error),
+  // List (Size)
+  "alias-list-item-height-small": var(--component-size-small),
+  "alias-list-item-height-medium": var(--component-size-medium),
+  "alias-list-item-font-size-small": var(--font-size-small),
+  "alias-list-item-font-size-medium": var(--font-size-medium),
+  "alias-list-item-depth-indent": 2.25rem,
+  // Paper (Size)
+  "alias-paper-radius": var(--radius-medium),
+  // Paper (Color)
+  "alias-paper-border-color": var(--global-grayE-500),
+  // Radio Button (Size)
+  "alias-radio-height-small": var(--component-size-small),
+  "alias-radio-height-medium": var(--component-size-medium),
+  "alias-radio-font-size-small": var(--font-size-small),
+  "alias-radio-font-size-medium": var(--font-size-medium),
+  // Select (Size)
+  "alias-select-height-small": var(--component-size-small),
+  "alias-select-height-medium": var(--component-size-medium),
+  "alias-select-radius-small": calc(var(--radius-small) - 0.125rem),
+  "alias-select-radius-medium": var(--radius-medium),
+  "alias-select-font-size-small": var(--font-size-small),
+  "alias-select-font-size-medium": var(--font-size-medium),
+  // Text Field (Size)
+  "alias-input-height-small": var(--component-size-small),
+  "alias-input-height-medium": var(--component-size-medium),
+  "alias-input-radius-small": calc(var(--radius-small) - 0.125rem),
+  "alias-input-radius-medium": var(--radius-medium),
+  "alias-input-font-size-small": var(--font-size-small),
+  "alias-input-font-size-medium": var(--font-size-medium),
+  "alias-input-padding": 0.875rem,
+);

@@ -1,0 +1,198 @@
+// ============================================
+// HistoryPanel.scss
+// ============================================
+@use "@/pages/common.mixin" as common;
+@use "@/pages/chat/chat.mixin" as chat;
+
+// ── HistoryPanel ──────────────────────────────
+.HistoryPanel__list {
+  @include chat.panel-accordion-list;
+  gap: 0.25rem;
+
+  .HistoryPanel__count {
+    font-size: 0.8125rem;
+    color: var(--alias-chatting-history-sum-text);
+  }
+
+  // ── HistoryItem ───────────────────────────────
+  .HistoryItem {
+    // border-radius: var(--radius-md);
+    // background-color: var(--panel-bg-collapsed);
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 1.125rem;
+    border-bottom: none;
+    overflow: hidden;
+    min-width: 0;
+
+    .MuiAccordion-heading {
+      height: auto;
+
+      .Accordion__summary {
+        gap: 0.5rem;
+        min-height: auto;
+        padding: 0;
+
+        // Accordion 내부 컨테이너 overflow 제어
+        .MuiAccordionSummary-content {
+          overflow: hidden;
+          min-width: 0;
+
+          .Accordion__title {
+            width: 100%;
+            font-size: 0.875rem;
+
+            .HistoryItem__summary {
+              gap: 0.625rem;
+              // padding: 0 0.25rem;
+
+              .HistoryItem__summary-text {
+                flex: 1;
+                min-width: 0;
+                overflow: hidden;
+                gap: 0.125rem;
+              }
+            }
+
+            .HistoryItem__question-icon {
+              flex-shrink: 0;
+              width: auto;
+              height: 1rem;
+              margin-top: 0.125rem;
+            }
+
+            .HistoryItem__question {
+              font-size: 0.875rem;
+              font-weight: 400;
+              // color: var(--panel-text);
+              word-wrap: break-word;
+              word-break: keep-all;
+              white-space: normal;
+
+              &.HistoryItem__question--ellipsis {
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+              }
+            }
+
+            .HistoryItem__meta {
+              // gap: var(--space-2);
+              flex-wrap: nowrap;
+              overflow: hidden;
+
+              .HistoryItem__meta-text {
+                font-size: 0.8125rem;
+                font-weight: 400;
+                color: var(--alias-notice-light-text);
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+              }
+
+              .HistoryItem__meta-divider {
+                font-size: 0.8125rem;
+                color: var(--alias-notice-line);
+              }
+            }
+
+            // Accordion__title의 white-space: nowrap 오버라이드
+            .MuiTypography-root {
+              white-space: normal;
+            }
+          }
+        }
+      }
+    }
+
+    .MuiCollapse-root {
+      .MuiAccordionDetails-root {
+        padding: 0;
+      }
+    }
+
+    &.HistoryItem--expanded {
+
+      // background-color: var(--panel-bg);
+      // border: 1px solid var(--panel-border);
+      .MuiCollapse-root {
+        margin-top: 1rem;
+      }
+
+      .HistoryItem__answer {
+        &:not(:only-child) {
+          margin-top: 1rem;
+        }
+      }
+    }
+  }
+}
+
+.HistoryItem__details {
+  gap: var(--space-4);
+  padding-top: var(--space-2);
+  overflow: hidden;
+  min-width: 0;
+
+  .SqlProcess__section {
+    padding: 0;
+    border-radius: 0;
+
+    .SqlProcess__step-group {
+      flex: auto;
+    }
+    
+    .SqlProcess__chip {
+      flex-direction: column;
+      width: auto;
+      padding-left: 0.25rem;
+      padding-right: 0.25rem;
+    }
+  }
+}
+
+// ── SQL 보기 버튼 ─────────────────────────────
+.HistoryItem__sql-action {
+  .HistoryItem__sql-btn {
+    gap: 0.25rem;
+    margin-top: 0.5rem;
+    // width: 100%;
+    height: 1.625rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    font-size: 0.75rem;
+  }
+
+  .HistoryItem__sql-btn-icon {
+    width: auto;
+    height: 0.75rem;
+    filter: brightness(0) saturate(100%);
+  }
+}
+
+.HistoryItem__sql-btn-text {
+  font-size: var(--text-xs);
+  font-weight: 500;
+  color: var(--panel-text);
+}
+
+// ── 답변 영역 ─────────────────────────────────
+.HistoryItem__answer {
+  gap: 0.625rem;
+}
+
+.HistoryItem__answer-icon {
+  flex-shrink: 0;
+  width: auto;
+  height: 1rem;
+  margin-top: 0.125rem;
+}
+
+.HistoryItem__answer-text {
+  font-size: 0.8125rem;
+  // color: var(--panel-text);
+  // line-height: 1.5;
+  // word-break: break-word;
+  // overflow-wrap: break-word;
+  // min-width: 0;
+}

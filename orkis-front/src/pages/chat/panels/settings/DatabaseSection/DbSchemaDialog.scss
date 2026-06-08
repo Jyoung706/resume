@@ -1,0 +1,276 @@
+// ============================================
+// DbSchemaDialog 전용 스타일
+// ============================================
+@use "@/pages/common.mixin" as common;
+@use "@/pages/chat/chat.mixin" as chat;
+
+.DbSchemaDialog {}
+
+.DbSchema__loading {
+  min-height: 200px;
+}
+
+.DbSchema__loading-sm {
+  padding: var(--space-4) 0;
+}
+
+.DbSchema__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+
+  .DbSchema__accordion {
+    @include common.accordion-base;
+
+    border-bottom: none;
+
+    &.Mui-expanded {
+      border: 1px solid var(--alias-popup-collapse-line);
+    }
+  }
+}
+
+// ── DB 정보 ──
+.DbSchema__info {
+  gap: 0.5rem;
+}
+
+.DbSchema__info-row {
+  gap: var(--space-2);
+  align-items: center;
+  padding: var(--space-1) 0;
+}
+
+.DbSchema__info-label {
+  flex-shrink: 0;
+  width: 8rem;
+  font-size: 0.8125rem;
+  color: var(--alias-popup-collapse-text);
+}
+
+.DbSchema__info-value {
+  font-size: 0.8125rem;
+  color: var(--alias-popup-text);
+}
+
+// ── 공통 섹션 ──
+.DbSchema__section {
+  gap: 0.75rem;
+}
+
+.DbSchema__toolbar {
+  gap: 0.5rem;
+  justify-content: space-between;
+}
+
+.DbSchema__search {
+  flex: 1;
+  // max-width: 16rem;
+}
+
+.DbSchema__empty {
+  font-size: 0.8125rem;
+  // color: var(--text-muted);
+  text-align: center;
+  padding: 0.5rem 0;
+}
+
+.DbSchema__alert {
+  margin-bottom: 0.75rem;
+}
+
+.DbSchema__sub-title {
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+// ── 테이블 래퍼 ──
+.DbSchema__table-wrap {
+  // overflow-x: auto;
+  // border: 1px solid var(--divider);
+  // border-radius: 0.375rem;
+
+  table {
+    @include common.table;
+
+    .Table__cell {
+      @include common.table2-cell;
+
+      &.MuiTableCell-head {
+        @include common.table2-header-cell;
+      }
+
+      .Chip__base {
+        .MuiChip-label {
+          color: var(--alias-chip-text)
+        }
+      }
+
+      .ActionMenu__trigger {
+        height: 1.625rem;
+      }
+    }
+  }
+}
+
+.DbSchema__table {
+  @include common.table;
+
+  .Table__cell {
+    @include common.table2-cell;
+
+    &.MuiTableCell-head {
+      @include common.table2-header-cell;
+    }
+
+    .Input__base {
+      .MuiInputBase-root {
+        background-color: var(--alias-table2-input-bg);
+
+        .MuiOutlinedInput-notchedOutline {
+          border: none;
+        }
+      }
+    }
+  }
+}
+
+.DbSchema__clickable-row {
+  cursor: pointer;
+}
+
+.DbSchema__table-name {
+  font-size: var(--text-sm);
+  font-weight: 500;
+}
+
+.DbSchema__type-chip {
+  min-width: 5rem;
+  font-size: var(--text-xs);
+  text-align: center;
+}
+
+.DbSchema__comment {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  max-width: 12rem;
+}
+
+// ── 컬럼 ──
+.DbSchema__col-name {
+  font-size: var(--text-sm);
+}
+
+.DbSchema__col-name--pk {
+  font-size: var(--text-sm);
+  font-weight: 700;
+}
+
+.DbSchema__datatype-chip {
+  min-width: 5rem;
+  // font-size: var(--text-xs);
+  // font-family: monospace;
+  // background-color: var(--bg-muted, #f5f5f5);
+  text-align: center;
+}
+
+.DbSchema__default-value {
+  font-size: var(--text-xs);
+  font-family: monospace;
+  color: var(--text-secondary);
+  max-width: 8rem;
+}
+
+// ── 데이터 미리보기 ──
+.DbSchema__data-preview-wrap {
+  // overflow-x: auto;
+  // border: 1px solid var(--divider);
+  // border-radius: 0.375rem;
+  max-height: 20rem;
+  overflow: auto;
+
+  table {
+    @include common.table;
+
+    .Table__cell {
+      @include common.table2-cell;
+
+      &.MuiTableCell-head {
+        @include common.table2-header-cell;
+      }
+    }
+  }
+}
+
+.DbSchema__data-header {
+  font-weight: 600;
+  white-space: nowrap;
+  min-width: 7.5rem;
+  position: sticky;
+  top: 0;
+  background: var(--bg-color, #fff);
+  z-index: 1;
+}
+
+.DbSchema__data-cell {
+  font-size: var(--text-xs);
+  white-space: nowrap;
+  max-width: 12rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.DbSchema__null {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+// ── 폼 요소 (서브 다이얼로그) ──
+.DbSchema__input {
+  width: 100%;
+
+  .MuiInputBase-input {
+    padding: 0.5rem 0.75rem;
+    font-size: var(--text-sm);
+  }
+
+  &--sm .MuiInputBase-input {
+    padding: 0.25rem 0.5rem;
+    font-size: var(--text-xs);
+  }
+}
+
+.DbSchema__select {
+  // width: 100%;
+  // padding: 0.25rem 0.5rem;
+  // border: 1px solid var(--alias-select-border);
+  // border-radius: 0.375rem;
+  // font-size: 0.8125rem;
+  // background: transparent url(/assets/img/select-arrow.png) no-repeat right 0.375rem center;
+  // color: var(--text-color);
+  // outline: none;
+  // min-width: 5rem;
+  // appearance: none;
+
+  &:focus {
+    // border-color: var(--primary-color, #1976d2);
+  }
+}
+
+.DbSchema__checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-left: -0.625rem;
+  font-size: 0.8125rem;
+  cursor: pointer;
+
+  .Checkbox__base {
+    margin-right: -0.375rem;
+  }
+}
+
+// ── 액션 컬럼 (편집/삭제 버튼 열) ──
+.DbSchema__action-cell {
+  width: 48px;
+}

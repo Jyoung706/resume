@@ -1,0 +1,341 @@
+// ============================================
+// SupportPanel.scss -- 고객센터 패널 스타일
+// ============================================
+@use "@/pages/common.mixin" as common;
+@use "@/pages/chat/chat.mixin" as chat;
+
+// --- 컨테이너 오버라이드 ---
+// Panel__container의 overflow-y/padding을 재정의하여
+// 탭은 고정, 콘텐츠만 스크롤되도록 함
+
+.ChatPage__support-panel {
+  &.Panel__container {
+    overflow-y: hidden;
+    padding: 0;
+  }
+}
+
+// --- 탭 ---
+.SupportPanel__tabs {
+  flex-shrink: 0;
+  min-height: auto;
+  border-bottom: 1px solid var(--alias-support-tab-line);
+
+  .SupportPanel__tab {
+    min-height: 2.25rem;
+    font-size: 0.875rem;
+    // font-weight: 500;
+    color: var(--alias-support-tab-text);
+    // text-transform: none;
+    padding: 0.25rem 0.5rem;
+
+    &.Mui-selected {
+      color: var(--alias-support-tab-active-text);
+      // font-weight: 600;
+    }
+  }
+
+  .MuiTabs-indicator {
+    background-color: var(--alias-support-tab-active-line);
+  }
+}
+
+// --- 콘텐츠 영역 ---
+.SupportPanel__content {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-3);
+}
+
+// --- 연락처 카드 ---
+.SupportPanel__contact-card {
+  @include chat.dotted-box;
+  // display: flex;
+  flex-direction: column;
+  gap: 8px;
+  // flex-shrink: 0;
+  // margin: var(--space-3) var(--space-4) var(--space-4);
+  padding: 0.875rem 1.25rem;
+  border: none;
+  // border-radius: var(--radius-md);
+  // background-color: var(--panel-bg-collapsed);
+
+  .SupportPanel__contact-title {
+    font-size: 0.875rem;
+    font-weight: 500;
+    // color: var(--panel-text);
+  }
+
+  .SupportPanel__contact-row {
+    gap: 0.5rem;
+  }
+
+  .SupportPanel__contact-icon {
+    font-size: 1.125rem;
+    // color: var(--panel-accent);
+  }
+
+  .SupportPanel__contact-text {
+    font-size: 0.8125rem;
+    // color: var(--panel-text);
+    // line-height: 1.5;
+  }
+}
+
+// ============================================
+// SupportFAQ
+// ============================================
+
+.SupportFAQ {
+  @include chat.panel-accordion-list;
+
+  .SupportFAQ__item {
+    .SupportFAQ__header {
+      .SupportFAQ__text {
+        gap: 0;
+
+        .SupportFAQ__subtitle {
+          font-size: 0.8125rem;
+          color: var(--alias-notice-light-text);
+        }
+      }
+    }
+
+    .SupportFAQ__content {
+      margin-top: 0.75rem;
+    }
+
+    &.SupportFAQ__item--expanded {
+      .SupportFAQ__header {
+        .SupportFAQ__text {
+          .SupportFAQ__title {
+            text-overflow: clip;
+            white-space: normal;
+          }
+        }
+      }
+    }
+  }
+}
+
+// ============================================
+// SupportInquiry
+// ============================================
+
+.SupportInquiry {
+  gap: 1.25rem;
+}
+
+.SupportInquiry__field {
+  @include chat.panel-search-field;
+  gap: 0.25rem;
+}
+
+.SupportInquiry__required {
+  color: var(--alias-label-asterisk-color);
+}
+
+.SupportInquiry__char-count {
+  // font-size: var(--text-2xs);
+  // color: var(--panel-text-tertiary);
+}
+
+.SupportInquiry__input,
+.SupportInquiry__textarea {
+  font-size: var(--text-sm);
+}
+
+.SupportInquiry__chips {
+  gap: 0.25rem;
+}
+
+.SupportInquiry__chip {
+  // font-size: var(--text-xs);
+  @include chat.panel-category-chip;
+
+  &.MuiChip-filled {
+    background-color: var(--alias-category-chip-select-bg);
+
+    &:hover {
+      background-color: var(--alias-category-chip-select-bg);
+    }
+  }
+}
+
+.SupportInquiry__field-error {
+  font-size: var(--text-2xs);
+  color: var(--color-error);
+}
+
+.SupportInquiry__hint {
+  font-size: var(--text-2xs);
+  color: var(--panel-text-tertiary);
+}
+
+.SupportInquiry__error {
+  margin-bottom: var(--space-2);
+}
+
+.SupportInquiry__submit-btn {
+  margin-top: var(--space-2);
+}
+
+.SupportInquiry__submit-loading {
+  gap: var(--space-2);
+}
+
+// ============================================
+// SupportTicketList
+// ============================================
+
+.SupportTicketList {
+  // gap: var(--space-1);
+  @include chat.panel-accordion-list;
+}
+
+.SupportTicketList__item {}
+
+// ============================================
+// SupportTicketItem
+// ============================================
+
+.SupportTicketItem {
+  // border-radius: var(--radius-sm);
+  // transition: background-color 0.15s ease;
+
+  &:hover {
+    // background-color: var(--panel-bg-hover);
+  }
+
+  &--expanded {
+    gap: 1rem;
+    // background-color: var(--panel-bg-collapsed);
+  }
+}
+
+.SupportTicketItem__header {
+  // padding: var(--space-3);
+  // cursor: pointer;
+  // gap: var(--space-2);
+  // user-select: none;
+}
+
+.SupportTicketItem__text {
+  // flex: 1;
+  // min-width: 0;
+  // gap: var(--space-1);
+}
+
+.SupportTicketItem__title {
+  // font-size: var(--text-sm);
+  font-weight: 500;
+  // color: var(--panel-text);
+  // line-height: 1.4;
+}
+
+.SupportTicketItem__meta {
+  // gap: var(--space-2);
+}
+
+.SupportTicketItem__status {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 500;
+  // padding: 1px var(--space-2);
+  // border-radius: var(--radius-xs);
+
+  &--pending {
+    color: var(--alias-notice-status-pending);
+    // background-color: var(--color-info-bg, rgba(33, 150, 243, 0.1));
+  }
+
+  &--in-progress {
+    color: var(--alias-notice-status-progress);
+    // background-color: var(--color-warning-bg, rgba(255, 152, 0, 0.1));
+  }
+
+  &--answered {
+    color: var(--alias-notice-status-answer);
+    // background-color: var(--color-success-bg, rgba(76, 175, 80, 0.1));
+  }
+
+  &--cancelled {
+    color: var(--alias-notice-status-cancel);
+    // background-color: var(--panel-bg-hover);
+  }
+}
+
+.SupportTicketItem__meta-divider {
+  font-size: 0.75rem;
+  color: var(--alias-notice-line);
+}
+
+.SupportTicketItem__category {
+  font-size: 0.75rem;
+  // color: var(--panel-text-secondary);
+}
+
+.SupportTicketItem__date {
+  font-size: 0.75rem;
+  // color: var(--panel-text-tertiary);
+}
+
+.SupportTicketItem__expand-icon {
+  // font-size: var(--icon-sm);
+  // color: var(--panel-text-secondary);
+  // transition: transform 0.2s ease;
+  // flex-shrink: 0;
+
+  &--open {
+    // transform: rotate(180deg);
+  }
+}
+
+.SupportTicketItem__body {
+  // padding: 0 var(--space-3) var(--space-3);
+  gap: 0.5rem;
+}
+
+.SupportTicketItem__section {
+  // gap: var(--space-2);
+
+  .SupportTicketItem__section-label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    // color: var(--alias-notice-status-progress);
+  }
+
+  .SupportTicketItem__description {
+    font-size: 0.8125rem;
+    // color: var(--panel-text);
+    // line-height: 1.6;
+    white-space: pre-wrap;
+  }
+
+  .SupportTicketItem__divider {
+    margin: 0;
+  }
+
+  .SupportTicketItem__answer {
+    // gap: var(--space-2);
+  }
+
+  .SupportTicketItem__answer-content {
+    font-size: 0.875rem;
+    font-weight: 500;
+    // color: var(--panel-text);
+    // line-height: 1.6;
+  }
+
+  .SupportTicketItem__answer-date {
+    font-size: 0.8125rem;
+    // color: var(--panel-text-tertiary);
+  }
+
+  .SupportTicketItem__no-answer {
+    font-size: 0.8125rem;
+    opacity: 0.65;
+    // color: var(--panel-text-tertiary);
+    // font-style: italic;
+  }
+}

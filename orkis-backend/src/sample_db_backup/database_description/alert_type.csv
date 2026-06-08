@@ -1,0 +1,7 @@
+original_column_name,column_name,column_description,data_format,value_description
+id,,the unique identifier of the alert type,integer,
+alert_name,alert name,the name of the alert type,text,"commonsense evidence:
+Common alert types include: Structuring (Smurfing), Unusual Transaction Pattern, High-Risk Country Transaction, Large Cash Transaction, Rapid Movement of Funds, PEP Transaction"
+alert_description,alert description,description of what triggers this alert,text,
+severity_level,severity level,the severity level of this alert type,text,"commonsense evidence:
+Severity levels: Low, Medium, High, Critical"

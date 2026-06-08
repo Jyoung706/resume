@@ -1,0 +1,33 @@
+# Source files - exclude from yalc distribution
+src/
+test/
+tests/
+
+# Build scripts and configuration
+build.ts
+module-build.ts
+tsconfig.json
+tsconfig.*.json
+
+# Development files
+.env
+.env.*
+*.log
+coverage/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Version control
+.git/
+.gitignore
+
+# Documentation (optional - remove if you want to include)
+README.md
+CHANGELOG.md
+docs/
+
+# Only distribute the compiled lib/ directory and essential files

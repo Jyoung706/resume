@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: gitlab
+  namespace: cicd
+spec:
+  type: ClusterIP
+  ports:
+    - name: gitlab-web
+      port: 80
+      targetPort: 47342
+  selector:
+    app: gitlab
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gitlab-registry
+  namespace: cicd
+spec:
+  type: ClusterIP
+  ports:
+    - name: gitlab-registry
+      port: 80
+      targetPort: 5123
+  selector:
+    app: gitlab
+---
+# Gitlab SSH Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: gitlab-ssh
+  namespace: cicd
+spec:
+  type: ClusterIP
+  ports:
+    - name: gitlab-ssh
+      port: 47343
+      targetPort: 47343
+  selector:
+    app: gitlab

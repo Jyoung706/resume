@@ -1,0 +1,15 @@
+{
+  "scenario": "S1-empty-csv",
+  "outcome": "streamed",
+  "statusCode": 200,
+  "headers": {
+    "Content-Type": "text/csv; charset=utf-8"
+  },
+  "body_size": 3,
+  "body_sha256": "f1945cd6c19e56b3c1c78943ef5ec18116907a4ca1efc40a57d48ab1db7adfc5",
+  "body_preview": "﻿",
+  "ended": true,
+  "writableEnded": true,
+  "headersSent": true,
+  "rejectedError": null
+}

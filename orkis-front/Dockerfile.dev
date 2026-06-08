@@ -1,0 +1,36 @@
+# 개발 환경용 Dockerfile (Vite dev 서버 + HMR)
+FROM node:20-alpine
+
+# Corepack 활성화 및 Yarn 4.9.0 설정
+RUN corepack enable && corepack prepare yarn@4.9.0 --activate
+
+# 개발 도구 설치
+RUN apk add --no-cache bash curl git
+
+WORKDIR /app
+
+# 1. package.json + yarn.lock + Yarn Berry 설정 복사 (Docker 캐시 최적화)
+COPY orkis-front/package.json ./
+COPY orkis-front/yarn.lock* ./
+COPY orkis-front/.yarnrc.yml ./
+COPY orkis-front/.yarn .yarn/
+
+# 2. 의존성 설치 (개발 의존성 포함)
+RUN yarn install
+
+# 3. 소스 코드 복사
+COPY orkis-front/src ./src
+COPY orkis-front/public ./public
+COPY orkis-front/index.html ./
+COPY orkis-front/vite.config.ts ./
+COPY orkis-front/tsconfig*.json ./
+
+# 환경변수 (dev 기본값)
+ENV VITE_API_BASE=/api
+ENV VITE_ENABLE_AGENTATION=false
+
+# 포트 노출
+EXPOSE 5173
+
+# Vite 개발 서버 실행 (HMR 지원)
+CMD ["yarn", "dev", "--host", "0.0.0.0"]

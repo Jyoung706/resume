@@ -1,0 +1,9 @@
+/* FormLabel */
+.FormLabel__base {
+    display: flex;
+    align-items: center;
+    height: var(--alias-label-height-small);
+    font-size: var(--alias-label-font-size-small);
+    line-height: normal;
+    text-transform: capitalize;
+}

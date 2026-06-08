@@ -1,0 +1,26 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["src/main/*"],
+      "src/*": ["src/*"],
+      "@interface/*": ["node_modules/orkis-interface/lib/*"],
+      "@interface-common/*": ["node_modules/orkis-interface/lib/common/*"],
+      "@interface-backend/*": ["node_modules/orkis-interface/lib/backend/*"],
+      "@interface-core/*": ["node_modules/orkis-interface/lib/core/*"]
+    }
+  },
+  "include": [
+    "./src/**/*",
+    "./src/@types/*",
+    "./node_modules/orkis-interface/lib/**/*"
+  ],
+  "exclude": [
+    "dist",
+    "build.ts",
+    "build.ts",
+    "webpack.config.js",
+    "logs",
+    ".idea"
+  ]
+}

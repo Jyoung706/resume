@@ -1,0 +1,31 @@
+/* Modal */
+.Dialog__base {
+
+  // ── 사이즈 프리셋 ──
+  &.sizeXsmall .ok-modal-paper {
+    max-width: 16rem;
+  }
+
+  &.sizeSmall .ok-modal-paper {
+    max-width: 20rem;
+  }
+
+  &.sizeMedium .ok-modal-paper {
+    max-width: 26.8125rem;
+  }
+
+  &.sizeLarge .ok-modal-paper {
+    max-width: 37.5rem;
+  }
+
+  &.sizeXlarge .ok-modal-paper {
+    max-width: 50rem;
+  }
+
+  .MuiDialog-paper {
+    .Dialog__actions {
+      justify-content: center;
+      background-color: transparent;
+    }
+  }
+}

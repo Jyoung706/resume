@@ -1,0 +1,14 @@
+// ============================================
+// design-system/core/_theme-transition.scss
+// 테마 전환 1프레임 깜빡임 차단
+// ============================================
+// useThemeMode.setMode 가 토글 직전 html 에 .theme-transitioning 을 추가하고
+// rAF × 2 후 제거. 그 사이 모든 transition/animation 을 정지시켜
+// CSS 변수 일괄 변경 시 발생하는 무지개색 깜빡임을 막는다.
+// ============================================
+
+html.theme-transitioning,
+html.theme-transitioning * {
+  transition: none !important;
+  animation-duration: 0s !important;
+}

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ${APP_NAME}
+  namespace: ${KUBE_NAMESPACE}
+spec:
+  type: ClusterIP
+  selector:
+    app: ${APP_NAME}
+  ports:
+    - name: orkis-ai-svc
+      port: 80
+      targetPort: 9000

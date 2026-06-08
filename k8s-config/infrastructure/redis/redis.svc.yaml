@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: orkis-chat-redis
+  namespace: orkis
+spec:
+  type: ClusterIP
+  ports:
+    - name: redisport
+      port: 36379
+      targetPort: 6379
+  selector:
+    app: orkis-chat-redis
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: orkis-stage-redis
+  namespace: orkis
+spec:
+  type: ClusterIP
+  ports:
+    - name: redisport
+      port: 36378
+      targetPort: 6379
+  selector:
+    app: orkis-stage-redis
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: orkis-session-redis
+  namespace: orkis
+spec:
+  selector:
+    app: orkis-session-redis
+  ports:
+    - port: 36377
+      targetPort: 6379
+  type: ClusterIP

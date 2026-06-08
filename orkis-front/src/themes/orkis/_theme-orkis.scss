@@ -1,0 +1,323 @@
+// ============================================
+// orkis/_theme-orkis.scss
+// ORKIS 브랜드 테마
+// ============================================
+
+@use "@/design-system/core/mixins" as gen;
+@use "config/tokens" as t;
+@use "config/custom-tokens" as ct;
+@use "@/pages/common.mixin" as common;
+
+body,
+body * {
+  scrollbar-width: thin;
+  scrollbar-color: var(--alias-scrollbar-color) var(--alias-scrollbar-bg);
+}
+
+/*** Components 공통 ***/
+// 컴포넌트에 적용될 글로벌 atrribute를 정의.
+
+[data-theme="orkis"] {
+  @include gen.apply(t.$tokens, t.$overrides, ct.$custom);
+
+  /*** Components 재정의 (MUI 기본형) ***/
+  /* Touch Ripple */
+  .MuiTouchRipple-root {
+    border-radius: inherit;
+
+    span {
+      border-radius: inherit;
+    }
+  }
+
+  /* Components with Label */
+  .MuiFormControl-root {
+    &:has(.MuiOutlinedInput-root) {
+      .MuiFormLabel-root {
+        top: 50%;
+        transform: translate(var(--alias-input-padding), -50%) scale(1);
+        transition: all 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
+
+        &.Mui-focused,
+        &.MuiFormLabel-filled {
+          top: 0;
+        }
+      }
+
+      &:has(.MuiInputAdornment-root) {
+        .MuiTypography-root {
+          font-size: inherit;
+        }
+      }
+
+      &:has(.MuiInputAdornment-root) {
+        &:has(.MuiInputAdornment-positionStart) {
+          .MuiFormLabel-root {
+            top: 0;
+          }
+        }
+      }
+
+      &:has(.MuiFormHelperText-root) {
+        .MuiFormHelperText-root {
+          position: absolute;
+        }
+      }
+
+      &[class*="sizeSmall"] {
+        .MuiFormLabel-root {
+          font-size: var(--font-size-small);
+
+          &.Mui-focused,
+          &.MuiFormLabel-filled {
+            transform: translate(var(--alias-input-padding), calc(var(--font-size-small) * 1.0625 / -2)) scale(0.75);
+          }
+        }
+
+        &:has(.MuiInputAdornment-root) {
+          &:has(.MuiInputAdornment-positionStart) {
+            .MuiFormLabel-root {
+              transform: translate(var(--alias-input-padding), calc(var(--font-size-small) * 1.0625 / -2)) scale(0.75);
+            }
+          }
+        }
+
+        &:has(.MuiFormHelperText-root) {
+          margin-bottom: calc(var(--font-size-small) * 1.66 + 0.25rem);
+
+          .MuiFormHelperText-root {
+            bottom: calc((var(--font-size-small) * 1.66 + 0.25rem) * -1);
+            font-size: var(--font-size-small);
+          }
+        }
+      }
+
+      &[class*="sizeMedium"] {
+        .MuiFormLabel-root {
+          font-size: var(--font-size-medium);
+
+          &.Mui-focused,
+          &.MuiFormLabel-filled {
+            transform: translate(var(--alias-input-padding), calc(var(--font-size-medium) * 1.0625 / -2)) scale(0.75);
+          }
+        }
+
+        &:has(.MuiInputAdornment-root) {
+          &:has(.MuiInputAdornment-positionStart) {
+            .MuiFormLabel-root {
+              transform: translate(var(--alias-input-padding), calc(var(--font-size-medium) * 1.0625 / -2)) scale(0.75);
+            }
+          }
+        }
+
+        &:has(.MuiFormHelperText-root) {
+          margin-bottom: calc(var(--font-size-medium) * 1.66 + 0.25rem);
+
+          .MuiFormHelperText-root {
+            bottom: calc((var(--font-size-medium) * 1.66 + 0.25rem) * -1);
+            font-size: var(--font-size-medium);
+          }
+        }
+      }
+    }
+  }
+
+  /* Paper */
+  .MuiPaper-root {
+    &.MuiPaper-rounded {
+      border-radius: 0.5rem;
+    }
+
+    &.MuiPopover-paper {
+      @include common.shadow-light;
+    }
+  }
+
+  /* Icon */
+  .MuiSvgIcon-root {
+    &.MuiSvgIcon-fontSizeSmall {
+      font-size: var(--icon-size-small);
+    }
+
+    &.MuiSvgIcon-fontSizeMedium {
+      font-size: var(--icon-size-medium);
+    }
+
+    &.MuiSvgIcon-fontSizeLarge {
+      font-size: var(--icon-size-large);
+    }
+  }
+
+  /* List */
+  .MuiMenu-list {
+    .MuiMenuItem-root {
+      gap: 4px;
+      min-height: var(--alias-list-item-height-small);
+      font-size: var(--alias-list-item-font-size-small);
+
+      p {
+        font-size: var(--alias-list-item-font-size-small);
+      }
+    }
+  }
+
+  /* Dialog */
+  .MuiDialog-paper {
+    border-radius: var(--alias-dialog-radius);
+  }
+
+  /*** Components 재정의 (Theme 적용) ***/
+  /* Accodion */
+  .Accordion__base {
+    border-bottom: 1px solid var(--alias-accordion-border);
+
+    &::before {
+      display: none;
+    }
+
+    .Accordion__summary {
+      color: var(--alias-accordion-title);
+
+      .MuiAccordionSummary-content {
+        margin: 0;
+
+        .Accordion__icon {
+          .MuiSvgIcon-root {
+            font-size: inherit;
+          }
+        }
+
+        .Accordion__title {
+          .MuiTypography-root {
+            font-size: inherit;
+            font-weight: 600;
+          }
+        }
+      }
+
+      .MuiAccordionSummary-expandIconWrapper {
+        color: var(--alias-accordion-icon);
+
+        .MuiSvgIcon-root {
+          font-size: inherit;
+          color: inherit;
+        }
+      }
+    }
+
+    // Size
+    &[class*="sizeSmall"] {
+      .Accordion__summary {
+        .MuiAccordionSummary-content {
+          .Accordion__icon {
+            font-size: var(--alias-accordion-heading-icon-size-small);
+          }
+
+          .Accordion__title {
+            font-size: var(--alias-accordion-heading-font-size-small);
+          }
+        }
+
+        .MuiAccordionSummary-expandIconWrapper {
+          font-size: var(--alias-accordion-expand-icon-size-small);
+        }
+      }
+    }
+
+    &[class*="sizeMedium"] {
+      .Accordion__summary {
+        .MuiAccordionSummary-content {
+          .Accordion__icon {
+            font-size: var(--alias-accordion-heading-icon-size-medium);
+          }
+
+          .Accordion__title {
+            font-size: var(--alias-accordion-heading-font-size-medium);
+          }
+        }
+
+        .MuiAccordionSummary-expandIconWrapper {
+          font-size: var(--alias-accordion-expand-icon-size-medium);
+        }
+      }
+    }
+
+    // Outlined : 컴포넌트에 'Accordion__outlined'를 추가하여 사용함.
+    &.Accordion__outlined {
+      border-left: 1px solid var(--alias-accordion-border);
+      border-right: 1px solid var(--alias-accordion-border);
+
+      &:first-of-type {
+        border-top: 1px solid var(--alias-accordion-border);
+      }
+
+      &:last-of-type {
+        border-bottom: 1px solid var(--alias-accordion-border);
+      }
+    }
+
+    // Box type
+    &.Accordion__boxType {
+      border-radius: var(--alias-accordion-radius);
+      border: 1px solid transparent;
+      background-color: var(--alias-accordion-bg);
+
+      &.Mui-expanded {
+        padding-top: var(--alias-accordion-heading-margin);
+        padding-bottom: var(--alias-accordion-heading-margin);
+        border-color: var(--alias-accordion-expand-border);
+        background-color: var(--alias-accordion-expand-bg);
+      }
+
+      &+.Accordion__boxType {
+        margin-top: var(--alias-accordion-gap);
+      }
+    }
+  }
+
+  /* Button */
+  .Button__base {
+    min-width: auto;
+    line-height: normal;
+
+    // Contained
+    &.MuiButton-contained {
+      &.Mui-disabled {
+        border-color: var(--alias-btn-border);
+        background-color: var(--alias-btn-disabled-bg);
+        color: var(--alias-btn-text);
+      }
+    }
+
+    // Outlined
+    &.MuiButton-outlined {
+      border-color: var(--alias-btn-border);
+      background-color: var(--alias-btn-bg);
+      // color: var(--alias-btn-text);
+
+      &:hover {
+        background-color: var(--alias-btn-hover-bg);
+      }
+
+      &.Mui-disabled {
+        border-color: var(--alias-btn-border);
+        background-color: var(--alias-btn-disabled-bg);
+        color: var(--alias-btn-text);
+      }
+    }
+
+    // Text
+    &.MuiButton-text {
+      background-color: transparent;
+      // color: var(--alias-btn-text);
+
+      &:hover {
+        background-color: var(--alias-btn-hover-bg);
+      }
+    }
+
+    &.Mui-disabled {
+      opacity: 0.45;
+    }
+  }
+}

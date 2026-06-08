@@ -1,0 +1,60 @@
+// ============================================
+// domain/RecommendedKeywords 스타일
+// ============================================
+@use "@/pages/common.mixin" as common;
+@use "@/pages/chat/chat.mixin" as chat;
+
+.RecommendedKeywords {
+    @include chat.recommand-section;
+
+    .RecommendedKeywords__title {
+        @include chat.recommand-title;
+    }
+
+    .RecommendedKeywords__list {
+        gap: 0.625rem;
+        column-gap: 0.5rem;
+    }
+
+    .RecommendedKeywords__loading {
+        padding: 1rem;
+    }
+
+    .RecommendedKeywords__chip {
+        height: 2.25rem;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+        border: none;
+        border: 1px solid var(--alias-main-recommand-chip-border);
+        background-color: var(--alias-main-recommand-chip-bg);
+        font-size: 0.875rem;
+        color: var(--alias-main-recommand-chip-text);
+        overflow: hidden;
+        transition: all 0.15s linear;
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--alias-main-recommand-chip-hover-bg);
+            opacity: 0;
+            transition: all 0.15s linear;
+        }
+
+        &:hover::before {
+            opacity: 0.03;
+        }
+
+        &--selected {
+
+            &::before,
+            &:hover::before {
+                background-color: var(--alias-main-recommand-chip-select-bg);
+                opacity: 0.07;
+            }
+        }
+    }
+}

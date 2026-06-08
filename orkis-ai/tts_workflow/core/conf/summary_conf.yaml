@@ -1,0 +1,14 @@
+context:
+  template_name: 'history_summary'
+  parser_name: 'json_output_parser'
+  engine_config:
+    temperature: 0.9
+  language: 'Korean'
+  limit_characters: 100
+app:
+  template_name: 'history_summary'
+  parser_name: 'json_output_parser'
+  engine_config:
+    temperature: 0.9
+  language: 'Korean'
+  limit_characters: 100

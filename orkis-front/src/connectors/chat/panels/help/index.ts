@@ -1,0 +1,1 @@
+export { HelpPanelConnector } from "./HelpPanelConnector";

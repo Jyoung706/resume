@@ -1,0 +1,104 @@
+services:
+  # orkis-chat-redis:
+  #   image: redis:7-alpine
+  #   ports:
+  #     - "36379:6379"
+  # orkis-stage-redis:
+  #   image: redis:7-alpine
+  #   ports:
+  #     - "36378:6379"
+  app:
+    build:
+      context: .
+      dockerfile: dev.Dockerfile
+    # depends_on:
+    #   - orkis-chat-redis
+    #   - orkis-stage-redis
+    environment:
+      - ENV=dev # local, dev, prod
+      - APP_HOST=0.0.0.0
+      - APP_PORT=9000
+      - APP_NAME=Orkis Model Api Server (Dev)
+      - APP_DESC=Orkis LLM, sLLM SQL Generation Service
+      - APP_VER=0.0.1
+      - APP_DOC_URL=/docs
+      - APP_REDOC_URL=/redoc
+      - LOG=DEBUG
+
+      - LOG_CONFIG_PATH=./tts_workflow/core/conf/logger_conf/logger.yaml
+      - WORKER_CONFIG_DIR=./tts_workflow/core/conf/worker_conf/
+      - BASIC_WORKER_PATH=./tts_workflow/core/conf/worker_conf/basic_worker.yaml
+      - DB_ROOT_PATH=./TEMP/sqlite
+      - DB_NETWORK_PATH=./storage/sqlite
+      - TEMPLATES_ROOT_PATH=./tts_workflow/templates
+      - EMBEDDING_FUNCTION_MODEL=text-embedding-3-small
+      - CHAT_CONTEXT_DIR=./storage/orkis-ai/chat_context
+      - CHAT_SUMMARY_DIR=./storage/chat_summary
+      - TITLE_CONFIG_PATH=./tts_workflow/core/conf/title_conf.yaml
+      - SUMMARY_CONFIG_PATH=./tts_workflow/core/conf/summary_conf.yaml
+      - DEALLOC_INTERVAL=10
+
+      # Ray Actor 설정
+      # LogActor
+      - LOG_ACTOR_NAME=log_actor
+      - LOG_ACTOR_NUM_CPUS=0
+      - LOG_ACTOR_MEMORY_MB=32
+      - LOG_FILE_BUFFER_SIZE=0
+
+      # ConversationActor
+      - CONVERSATION_ACTOR_NUM_CPUS=0.1
+      - CONVERSATION_ACTOR_MEMORY_MB=256
+      - MAX_CONVERSATION_ACTORS=2
+
+      # PreprocessActor
+      - PREPROCESS_ACTOR_NUM_CPUS=0.1
+      - PREPROCESS_ACTOR_MEMORY_MB=256
+      - MAX_PREPROCESS_ACTORS=3
+
+      # LLMActor
+      - LLM_ACTOR_NUM_CPUS=0.1
+      - LLM_ACTOR_MEMORY_MB=128
+
+      # OpenAIEmbeddingActor
+      - EMBEDDING_ACTOR_NUM_CPUS=0.1
+      - EMBEDDING_ACTOR_MEMORY_MB=128
+
+      # FaissActor
+      - FAISS_ACTOR_NUM_CPUS=0.2
+      - FAISS_ACTOR_MEMORY_MB=512
+
+      # ResourceActor 공통
+      - LRU_POOL_SIZE=5
+      - LRU_TTL_SECONDS=1800.0
+
+      - REDIS_CHAT_HOST=host.docker.internal
+      - REDIS_CHAT_PORT=36379
+      - REDIS_CHAT_DB_ID=0
+      - REDIS_CHAT_DECODE_RES=true
+      - REDIS_CHAT_MAX_CON=50
+      - REDIS_CHAT_RETRY_ON_TIMEOUT=true
+      - REDIS_CHAT_TIMEOUT=3
+
+      - REDIS_STAGE_HOST=host.docker.internal
+      - REDIS_STAGE_PORT=36378
+      - REDIS_STAGE_DB_ID=0
+      - REDIS_STAGE_DECODE_RES=true
+      - REDIS_STAGE_MAX_CON=100
+      - REDIS_STAGE_RETRY_ON_TIMEOUT=true
+      - REDIS_STAGE_TIMEOUT=3
+
+      # ray config
+      - RAY_DEDUP_LOGS=0
+    volumes:
+      - .:/app
+      - ./storage:/app/storage
+    ports:
+      - "9000:9000" # fastapi
+      - "9002:9002" # docker debugpy
+      - "5678:5678" # actor debugpy
+      - "8265:8265" # ray dashboard
+    cpus: 3
+    # cpu_period: 300000
+    # cpu_quota: 400000
+    mem_limit: 4g
+    shm_size: 1.15gb

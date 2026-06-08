@@ -1,0 +1,18 @@
+FROM node:24.2.0-alpine3.22
+
+RUN corepack enable && corepack prepare yarn@4.9.0 --activate
+
+WORKDIR /app
+
+COPY . .
+
+RUN yarn install 
+
+# 소스코드는 볼륨으로 마운트될 예정이므로 복사하지 않음
+# tsconfig.json도 볼륨으로 마운트됨
+
+# 디버그 포트 노출
+EXPOSE 9229
+
+# 개발 모드로 실행 
+CMD ["yarn", "dev"]

@@ -1,0 +1,7 @@
+original_column_name,column_name,column_description,data_format,value_description
+id,,the unique identifier of the risk indicator,integer,
+indicator_name,indicator name,the name of the risk indicator,text,"commonsense evidence:
+Examples: Transaction Velocity, High-Risk Country Exposure, Cash Transaction Ratio, Large Transaction Frequency, Account Age"
+indicator_description,indicator description,description of what this indicator measures,text,
+threshold_value,threshold value,the threshold value that triggers a flag,decimal,"commonsense evidence:
+When indicator_value exceeds this threshold, it may trigger an alert or increase risk score."

@@ -1,0 +1,40 @@
+/* PanelHeader — 시각은 alias 토큰만 참조, 페이지 SCSS의 child selector로 미세 조정 가능 */
+.PanelHeader {
+  width: 100%;
+  gap: var(--alias-panel-header-gap);
+}
+
+.PanelHeader__bar {
+  width: 100%;
+}
+
+.PanelHeader__leading-title {
+  flex: 1;
+  min-width: 0;
+  gap: var(--alias-panel-header-gap);
+}
+
+.PanelHeader__leading {
+  display: inline-flex;
+  align-items: center;
+}
+
+.PanelHeader__titles {
+  flex: 1;
+  min-width: 0;
+}
+
+.PanelHeader__title {
+  font-size: var(--alias-panel-header-title-font-size);
+  font-weight: var(--alias-panel-header-title-font-weight);
+  color: var(--alias-panel-header-title-color);
+}
+
+.PanelHeader__subtitle {
+  font-size: var(--alias-panel-header-subtitle-font-size);
+  color: var(--alias-panel-header-subtitle-color);
+}
+
+.PanelHeader__actions {
+  flex-shrink: 0;
+}

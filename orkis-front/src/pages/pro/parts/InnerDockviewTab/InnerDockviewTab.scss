@@ -1,0 +1,90 @@
+// ============================================
+// InnerDockviewTab.scss
+// ============================================
+
+.InnerDockviewTab {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 0.5rem;
+  font-size: 0.6875rem;
+  user-select: none;
+  gap: 0.5rem;
+
+  &--collapsed {
+    background-color: var(--alias-top-state-bg);
+    cursor: pointer;
+  }
+
+  &--maximized {
+    background-color: var(--alias-database-bg);
+  }
+}
+
+.InnerDockviewTab__drag {
+  font-size: 1rem;
+  // color: var(--text-muted);
+  cursor: grab;
+}
+
+.InnerDockviewTab__title {
+  flex: 1;
+  min-width: 3.5rem;
+  font-size: 0.8125rem;
+  color: var(--alias-pro-tab-text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.InnerDockviewTab__inline-btn {
+  border: none;
+  background: none;
+  font-size: 0.625rem;
+  padding: 0 0.25rem;
+  color: var(--alias-pro-tab-icon);
+  margin-left: 0.25rem;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.InnerDockviewTab__actions {
+  display: flex;
+  gap: 0.125rem;
+  margin-left: auto;
+
+  .InnerDockviewTab__btn {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 0.625rem;
+    padding: 0.0625rem 0.25rem;
+    color: var(--text-muted);
+    border-radius: 0.125rem;
+
+    &:hover {
+      background-color: var(--bg-hover, rgba(0, 0, 0, 0.06));
+    }
+
+    &--active {
+      color: var(--alias-common-active-icon);
+      font-weight: 700;
+    }
+
+    &.IconButton__base {
+      &.MuiIconButton-root {
+        width: 1.25rem;
+        height: 1.25rem;
+        color: var(--alias-pro-icon);
+
+        .Icon__base,
+        .material-symbols-outlined {
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+}

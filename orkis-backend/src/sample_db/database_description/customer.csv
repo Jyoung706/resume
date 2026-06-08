@@ -1,0 +1,16 @@
+original_column_name,column_name,column_description,data_format,value_description
+id,,the unique identifier of the customer,integer,
+customer_name,customer name,the name of the customer,text,
+full_name,full name,the full legal name of the customer,text,"commonsense evidence:
+The full name of a person typically consists of their given name and surname. This is used for KYC (Know Your Customer) verification."
+date_of_birth,date of birth,the birth date of the customer,date,Format: YYYY-MM-DD
+nationality_id,nationality id,the id of the customer's nationality,integer,Maps to country(id)
+occupation_id,occupation id,the id of the customer's occupation,integer,Maps to occupation(id)
+risk_level_id,risk level id,the risk level assigned to this customer,integer,Maps to risk_level(id)
+account_open_date,account open date,the date when the account was opened,date,Format: YYYY-MM-DD
+kyc_status_id,kyc status id,the KYC verification status,integer,Maps to kyc_status(id)
+pep_status,PEP status,whether the customer is a Politically Exposed Person,boolean,"commonsense evidence:
+1 means the customer is a PEP, 0 means not a PEP. PEPs require enhanced due diligence."
+address,address,the residential address of the customer,text,
+phone_number,phone number,the contact phone number,text,
+email,email,the email address of the customer,text,

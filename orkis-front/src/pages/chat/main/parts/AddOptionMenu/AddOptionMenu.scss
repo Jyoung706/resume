@@ -1,0 +1,51 @@
+.AddOptionMenu {
+  .MuiPaper-root {
+    border: 1px solid var(--alias-chatting-input-dropdown-border);
+    background-color: var(--alias-chatting-input-dropdown-bg);
+  }
+
+  .MuiList-root {
+    padding-top: 0.875rem;
+    padding-bottom: 0.875rem;
+
+    .AddOptionMenu__item {
+      gap: 0.5rem;
+      height: auto;
+      padding: 0.5rem 1.25rem;
+
+      .List__item-text {
+        flex-direction: column;
+        align-items: flex-start;
+
+        .MuiListItemText-primary {
+          font-weight: 500;
+        }
+
+        .MuiListItemText-secondary {
+          font-size: 0.75rem;
+        }
+      }
+
+      &:hover {
+        background-color: var(--alias-chatting-input-dropdown-hover-bg);
+      }
+
+      &--active {
+        background-color: var(--alias-chatting-input-dropdown-select-bg);
+      }
+    }
+  }
+
+  .AddOptionMenu__indicator {
+    // margin-left: var(--space-1);
+    font-size: 1.5rem;
+
+    &--active {
+      color: var(--alias-chatting-input-dropdown-select-icon);
+    }
+
+    &--inactive {
+      color: var(--alias-chatting-input-dropdown-icon);
+    }
+  }
+}

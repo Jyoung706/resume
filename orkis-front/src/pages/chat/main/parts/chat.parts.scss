@@ -1,0 +1,624 @@
+// ============================================
+// pages/chat/parts/chat.parts.scss
+// Chat 전용 컴포넌트 공통 스타일
+// ============================================
+// 사용 패턴:
+//   import "../chat.parts.scss";
+//   className="ChatInput__container"
+// 네이밍: {컴포넌트명}__{kebab-case}
+// ============================================
+@use "@/pages/common.mixin" as common;
+@use "@/pages/chat/chat.mixin" as chat;
+
+// ── CreditAlert ─────────────────────────────
+// 📄 ChatPage (ChatSidebar 내부)
+.CreditAlert__container {
+  @include chat.dotted-box;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+}
+
+.CreditAlert__icon {
+  font-size: var(--icon-md);
+  color: var(--text-muted);
+}
+
+.CreditAlert__info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-0-5);
+}
+
+.CreditAlert__text {
+  font-size: var(--text-xs);
+  color: var(--text-color);
+}
+
+.CreditAlert__exhausted {
+  font-size: var(--text-xs);
+  color: var(--error);
+}
+
+// ── UserProfile ─────────────────────────────
+// 📄 ChatPage (ChatSidebar 내부)
+.UserProfile__container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+
+  &.UserProfile__clickable {
+    cursor: pointer;
+  }
+}
+
+.UserProfile__info {
+  min-width: 0;
+}
+
+.UserProfile__name {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.UserProfile__email {
+  font-size: 0.8125rem;
+  color: var(--alias-left-text);
+}
+
+// ── 공통 내부 플레이스홀더 ──────────────────
+// %menuPaper {
+// border-radius: 0.5rem;
+// background-color: var(--bg-surface);
+// border: 1px solid var(--border-color);
+// }
+
+// ── ChatHeader ──────────────────────────────
+// 📄 ChatPage
+.ChatHeader__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  // height: var(--space-14);
+  padding: 1.1875rem;
+  // border-bottom: none;
+  background-color: var(--alias-top-bg);
+}
+
+.ChatHeader__left {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+}
+
+.ChatHeader__menu-btn {
+  margin-right: var(--space-2);
+}
+
+.ChatHeader__title {
+  font-weight: var(--font-weight-medium);
+  font-size: var(--text-base);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ChatHeader__icon {
+  font-size: var(--icon-md);
+}
+
+.ChatHeader__actions {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.ChatHeader__toggle-btn {
+  &.MuiIconButton-root {
+    // width: 2rem;
+    // height: 2rem;
+    // min-width: 2rem;
+    // max-width: 2rem;
+    // min-height: 2rem;
+    // max-height: 2rem;
+    // padding: 0;
+    // background-color: #1976d2;
+    // color: #fff;
+    // border: none;
+    // border-radius: 50% !important;
+    // aspect-ratio: 1 / 1;
+    // flex-shrink: 0;
+    // display: flex;
+    // align-items: center;
+    // justify-content: center;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      // background-color: #1565c0;
+    }
+
+    .ChatHeader__icon {
+      // font-size: 1.125rem;
+    }
+  }
+}
+
+.ChatHeader__actions-group {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  overflow: hidden;
+  // background-color: #e0e0e0;
+  border-radius: var(--radius-lg, 0.5rem);
+  padding: var(--space-1);
+  transition: max-width 0.25s ease, opacity 0.2s ease, padding 0.25s ease;
+
+  @media (max-width: 3840px) {}
+
+  @media (max-width: 1920px) {}
+
+  @media (max-width: 1440px) {}
+
+  @media (max-width: 1024px) {}
+
+  @media (max-width: 800px) {
+    gap: 0.25rem;
+  }
+
+  @media (max-width: 640px) {}
+
+  &--expanded {
+    max-width: 40rem;
+    margin-left: 0.25rem;
+    opacity: 1;
+    overflow: visible; // 드롭다운이 부모 밖으로 렌더링될 수 있도록 허용
+  }
+
+  &--collapsed {
+    max-width: 0;
+    opacity: 0;
+    padding: 0;
+    pointer-events: none;
+    // overflow: hidden은 기본값으로 유지 (접기 애니메이션에 필요)
+  }
+
+  button {
+    &.IconButton__base {
+      .MuiBadge-badge {
+        margin-top: 0.3125rem;
+        margin-right: 0.1875rem;
+      }
+    }
+
+    &:last-of-type {
+      margin-left: -0.375rem;
+    }
+  }
+
+  .ChatHeader__icon {
+    .MuiSvgIcon-root {
+      font-size: 1.5rem;
+    }
+  }
+}
+
+// ── ChatList ────────────────────────────────
+// 📄 ChatPage (ChatSidebar 내부)
+.ChatList__loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--space-8) 0;
+}
+
+.ChatList__new-chat-wrap {
+  @include chat.dotted-box;
+  height: 3rem;
+  padding: 0.125rem;
+  margin-bottom: 1.0625rem;
+
+  .Button__base {
+    height: 100%;
+    border: none;
+    font-size: 0.9375rem;
+
+    .MuiButton-icon {
+      margin-top: 0.25rem;
+      margin-right: 0.25rem;
+    }
+
+    [class*="Icon__base"] {
+      font-size: 1.875rem;
+      color: var(--alias-left-btn-add-icon);
+    }
+  }
+}
+
+.ChatList__empty {
+  padding: var(--space-8) var(--space-4);
+}
+
+.ChatList__empty-text {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+.ChatList__item {
+  border-radius: 0.375rem;
+  padding: 0;
+  padding-right: 0.375rem;
+  // transition: var(--transition-normal);
+
+  .ChatList__star-icon {
+    font-size: 1rem;
+    color: var(--alias-left-list-active-icon);
+  }
+
+  .ChatList__star-border-icon {
+    font-size: 1rem;
+    color: var(--alias-left-list-icon);
+  }
+
+  .ChatList__more-icon {
+    font-size: 1rem;
+  }
+
+  .ChatList__edit-icon {
+    font-size: 1rem;
+  }
+
+  .ChatList__delete-icon {
+    font-size: 1rem;
+  }
+
+  .ChatList__title-row {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    margin-left: var(--space-1);
+    min-width: 0;
+  }
+
+  .ChatList__title {
+    flex: 1;
+    font-size: 0.8125rem;
+    line-height: normal;
+  }
+
+  .ChatList__date {
+    margin-left: 0.25rem;
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+  }
+
+  &.Mui-selected {
+    padding-right: 0;
+
+    .ChatList__title {
+      font-weight: 500;
+    }
+  }
+
+  &.Mui-focusVisible {
+    background-color: transparent;
+  }
+}
+
+.ChatList__editor-wrap {
+  flex: 1;
+  margin-left: var(--space-1);
+  // border: none;
+
+  .Input__base {
+    .MuiOutlinedInput-notchedOutline {
+      // border: none;
+    }
+  }
+}
+
+.ChatList__load-more-wrap {
+  padding: var(--space-1) var(--space-2) 0;
+}
+
+// 채팅 메뉴편집 팝업
+.ChatList__menu-paper {
+  // @extend %menuPaper;
+  @include chat.dropdown-list;
+}
+
+// ── RightSidebar ────────────────────────────
+// 📄 ChatPage
+.RightSidebar__container {
+  display: flex;
+  flex-direction: column;
+  width: 22.5rem;
+  height: 100%;
+  background-color: var(--alias-right-bg);
+
+  &.RightSidebar__container--fullscreen {
+    width: 100%;
+
+    .RightSidebar__content {
+      padding: var(--space-4) var(--space-8);
+    }
+
+    // 패널 컨테이너 fullscreen 확장
+    .Panel__container {
+      max-width: 60rem;
+      margin-left: auto;
+      margin-right: auto;
+      width: 100%;
+    }
+
+    .RightSidebar__tabs {
+      .MuiTabs-list {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 3840px) {}
+
+    @media (max-width: 1920px) {}
+
+    @media (max-width: 1440px) {}
+
+    @media (max-width: 1024px) {}
+
+    @media (max-width: 800px) {
+      left: 0;
+      width: 100%;
+    }
+
+    @media (max-width: 640px) {
+      .RightSidebar__tabs {
+        .MuiTabs-list {
+          justify-content: flex-start;
+        }
+      }
+    }
+  }
+
+  // 헤더
+  .RightSidebar__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 4.375rem;
+    padding: 1.5rem 1rem 0.875rem;
+    // border-bottom: 1px solid var(--border-color);
+
+    // 타이틀
+    .RightSidebar__title {
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+
+    // 버튼
+    .RightSidebar__header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.125rem;
+
+      .IconButton__base {
+        width: auto;
+        height: auto;
+
+        &:last-child {
+          .RightSidebar__action-icon {
+            font-size: 1.5rem;
+          }
+        }
+      }
+
+      .RightSidebar__action-icon {
+        font-size: 1.25rem;
+        color: var(--alias-right-heading-icon);
+      }
+    }
+  }
+
+  // 탭버튼 그룹
+  .RightSidebar__tabs {
+    min-height: 0;
+    border-bottom: 1px solid var(--alias-tab-line);
+
+    .MuiTabs-indicator {
+      background-color: var(--alias-tab-menu-select-line);
+      height: 2px;
+    }
+
+    .MuiTabs-scrollButtons {
+      width: 1.5rem;
+      border-radius: 0.25rem;
+
+      &.Mui-disabled {
+        opacity: 0.25;
+      }
+    }
+
+    // 탭버튼
+    .RightSidebar__tab {
+      min-height: 0;
+      min-width: 0;
+      padding: 0.5rem 0;
+      margin-left: 0.5rem;
+      margin-right: 0.5rem;
+      font-size: 0.875rem;
+      color: var(--alias-tab-menu-text);
+      opacity: 1;
+
+      &:first-child {
+        margin-left: 0;
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+
+      &.Mui-selected {
+        color: var(--alias-tab-menu-select-text);
+        font-weight: 600;
+      }
+
+      &:hover {
+        &:not(.Mui-selected) {
+          color: var(--alias-tab-menu-hover-text);
+        }
+      }
+    }
+  }
+}
+
+.RightSidebar__content {
+  flex: 1;
+  overflow: auto;
+  // padding: 1.375rem 1rem;
+
+  // 스크롤바 항상 표시
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--border-color);
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: var(--text-faint);
+  }
+
+  // scrollbar-width: thin;
+  // scrollbar-color: var(--border-color) transparent;
+}
+
+// ── RightSidebarPanel ───────────────────────
+.RightSidebarPanel {
+  padding: 1.375rem 1rem;
+}
+
+.RightSidebarPanel__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: var(--space-3);
+}
+
+// ── ChatSidebar ─────────────────────────────
+// 📄 ChatPage
+.ChatSidebar__collapsed-header {
+  display: flex;
+  align-items: center;
+  gap: 1.375rem;
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: var(--mui-zIndex-appBar);
+  opacity: 1;
+  transition: opacity var(--transition-normal);
+
+  &.ChatSidebar__collapsed-header--hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+.ChatSidebar__collapsed-credit {
+  position: fixed;
+  left: 1rem;
+  bottom: 1.5rem;
+  width: 11.5rem;
+  z-index: var(--mui-zIndex-appBar);
+  // background-color: var(--bg-surface);
+  // border-radius: var(--radius-md);
+}
+
+.ChatSidebar__logo-group {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.ChatSidebar__expanded-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6875rem;
+  padding: 0.9375rem var(--space-4) 0;
+}
+
+.ChatSidebar__panel-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: common.$logo-size;
+  cursor: pointer;
+}
+
+// 좌측영역 — persistent Drawer
+// 외부 docked 컨테이너는 0 width (flex 공간 점유 안 함). 메인 콘텐츠 시프트는
+// .ChatPage__content의 margin-left가 담당. paper만 fixed로 슬라이드.
+.ChatSidebar__drawer {
+  width: 0;
+
+  .MuiDrawer-paper {
+    gap: 1.75rem;
+    width: 15rem;
+    padding: 1rem 1rem 1.5rem;
+    border-color: var(--alias-left-border);
+    overflow-x: hidden;
+  }
+
+  .MuiDivider-root {
+    display: none;
+  }
+}
+
+// 좌측영역 - 로고
+.ChatSidebar__logo {
+  @include common.logo;
+
+  .ChatSidebar__logo-img {
+    @include common.logo-symbol;
+  }
+
+  .ChatSidebar__title {
+    @include common.logo-text;
+  }
+
+  &.ChatSidebar__logo-default {
+    cursor: default;
+  }
+}
+
+.ChatSidebar__top-divider {
+  margin-top: 0.75rem;
+}
+
+// 좌측영역 - 채팅리스트
+.ChatSidebar__chat-list-section {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+}
+
+.ChatSidebar__chat-list-scroll {
+  flex: 1;
+  overflow: auto;
+  padding: var(--space-2) 0;
+}
+
+// 좌측영역 - 크레딧 영역
+.ChatSidebar__status-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.0625rem;
+}

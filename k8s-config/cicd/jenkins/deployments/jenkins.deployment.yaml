@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jenkins
+  namespace: cicd
+  labels:
+    app: jenkins
+    component: controller
+  annotations:
+    deployment.upgrade.date: "2026-04-01"
+    deployment.upgrade.reason: "CVE 보안 취약점 수정 - DNS rebinding 공격 및 tar 심볼릭 링크 path traversal (2.541.2 이하 취약)"
+    deployment.upgrade.version: "2.541.3-lts-jdk21"
+spec:
+  strategy:
+    type: Recreate           # local NFS RWO 정책상 안전
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jenkins
+      component: controller
+  template:
+    metadata:
+      labels:
+        app: jenkins
+        component: controller
+    spec:
+      serviceAccountName: jenkins-controller   # controller 권한 (agent pod 생성/관리)
+      nodeSelector:
+        app: jenkins         # worker002 (Jenkins 노드) 매칭
+      containers:
+        - name: jenkins
+          image: jenkins/jenkins:2.541.3-lts-jdk21
+          ports:
+            - containerPort: 8080
+              name: web
+            - containerPort: 50000
+              name: agent
+          env:
+            - name: JAVA_OPTS
+              value: >-
+                -Xmx3g
+                -XX:+UseG1GC
+                -XX:+ExplicitGCInvokesConcurrent
+                -XX:+ParallelRefProcEnabled
+                -XX:+UseStringDeduplication
+                -XX:+HeapDumpOnOutOfMemoryError
+                -Dhudson.model.DirectoryBrowserSupport.CSP="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;"
+          resources:
+            requests:
+              cpu: 1
+              memory: 2Gi
+            limits:
+              cpu: 2
+              memory: 4Gi
+          volumeMounts:
+            - name: jenkins-home
+              mountPath: /var/jenkins_home
+            - name: jenkins-config
+              mountPath: /var/jenkins_home/org.csanchez.jenkins.plugins.kubernetes.KubernetesCloud.xml
+              subPath: org.csanchez.jenkins.plugins.kubernetes.KubernetesCloud.xml
+            - name: jenkins-log
+              mountPath: /var/log/jenkins
+      volumes:
+        - name: jenkins-home
+          persistentVolumeClaim:
+            claimName: jenkins-home-nfs-pvc
+        - name: jenkins-config
+          configMap:
+            name: jenkins-global-config
+        - name: jenkins-log
+          emptyDir: {}

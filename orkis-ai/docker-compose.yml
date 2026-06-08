@@ -1,0 +1,57 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: prod.Dockerfile
+    environment:
+      - ENV=dev # local, dev, prod
+      - APP_HOST=0.0.0.0
+      - APP_PORT=9000
+      - APP_NAME=Orkis Model Api Server (Dev)
+      - APP_DESC=Orkis LLM, sLLM SQL Generation Service
+      - APP_VER=0.0.1
+      - APP_DOC_URL=/docs
+      - APP_REDOC_URL=/redoc
+      - LOG=INFO
+      - DB_TYPE=
+      - DB_NAME=
+      - DB_HOST=
+      - DB_PORT=
+      - DB_USER_ID=
+      - DB_USER_PASSWORD=
+      - DB_URL=
+      - LOG_CONFIG_PATH=./tts_workflow/core/conf/logger_conf/logger.yaml
+      - WORKER_CONFIG_DIR=./tts_workflow/core/conf/worker_conf/
+      - BASIC_WORKER_PATH=./tts_workflow/core/conf/worker_conf/basic_worker.yaml
+      - DB_ROOT_PATH=./TEMP/sqlite
+      - DB_NETWORK_PATH=./storage/sqlite
+      - TEMPLATES_ROOT_PATH=./tts_workflow/templates
+      - EMBEDDING_FUNCTION_MODEL=text-embedding-3-large
+      - CHAT_CONTEXT_DIR=./storage/orkis-ai/chat_context
+      - CHAT_SUMMARY_DIR=./storage/chat_summary
+      - TITLE_CONFIG_PATH=./tts_workflow/core/conf/title_conf.yaml
+      - SUMMARY_CONFIG_PATH=./tts_workflow/core/conf/summary_conf.yaml
+      - DEALLOC_INTERVAL=10
+      - REDIS_CHAT_HOST=host.docker.internal
+      - REDIS_CHAT_PORT=6380
+      - REDIS_CHAT_DB_ID=0
+      - REDIS_CHAT_DECODE_RES=true
+      - REDIS_CHAT_MAX_CON=50
+      - REDIS_CHAT_RETRY_ON_TIMEOUT=true
+      - REDIS_CHAT_TIMEOUT=3
+      - REDIS_STAGE_HOST=host.docker.internal
+      - REDIS_STAGE_PORT=6379
+      - REDIS_STAGE_DB_ID=0
+      - REDIS_STAGE_DECODE_RES=true
+      - REDIS_STAGE_MAX_CON=100
+      - REDIS_STAGE_RETRY_ON_TIMEOUT=true
+      - REDIS_STAGE_TIMEOUT=3
+
+    # volumes:
+    #   - ./storage:/app/storage
+    ports:
+      - "9000:9000" # fastapi
+    cpu_period: 100000
+    cpu_quota: 100000
+    mem_limit: 3g
+    # memswap_limit: 2g

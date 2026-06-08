@@ -1,0 +1,168 @@
+// ============================================
+// components/domain/ChatInput/ChatInput.scss
+// ChatInput 입력창 스타일
+// chat.parts.scss에서 추출
+// ============================================
+
+// ── ChatInput ─────────────────────────────
+.ChatInput__container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  padding: 0.875rem 0.8125rem 0.6875rem 1.125rem;
+  margin-top: 0.25rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--alias-chatting-input-border);
+  background-color: var(--alias-chatting-input-bg);
+}
+
+.ChatInput__body {
+  flex: 1;
+  font-size: 0.875rem;
+}
+
+.ChatInput__textarea {
+  width: 100%;
+  border: none;
+  outline: none;
+  resize: none;
+  background: transparent;
+  font: inherit;
+  font-size: 0.875rem;
+  color: var(--alias-chatting-input-text);
+  line-height: 1.5;
+  max-height: 8rem;
+  overflow-y: auto;
+}
+
+// — 하단 툴바
+.ChatInput__toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ChatInput__toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 0.8125rem;
+}
+
+.ChatInput__toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+// — Add 버튼
+.ChatInput__add-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 0.125rem;
+  background-color: var(--alias-chatting-input-icon-bg);
+  color: var(--alias-chatting-input-icon);
+  cursor: pointer;
+
+  &:hover,
+  &.ChatInput__add-btn--active {
+    background-color: var(--grey-300);
+  }
+}
+
+// — 선택된 옵션 아이콘
+.ChatInput__option-icons {
+  display: flex;
+  align-items: center;
+  gap: 0.5625rem;
+}
+
+.ChatInput__add-icon {
+  font-size: 0.75rem;
+}
+
+.ChatInput__option-icon {
+  font-size: 1.125rem;
+  cursor: pointer;
+}
+
+.ChatInput__selector-arrow {
+  font-size: 1rem;
+}
+
+.ChatInput__send-icon {
+  font-size: 1.5rem;
+  color: var(--primary-contrast);
+}
+
+// — DB/모델 셀렉터
+.ChatInput__selector {
+  display: flex;
+  align-items: center;
+  height: 1.625rem;
+  padding: 0.125rem 0.125rem 0.125rem 0.25rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--state-hover);
+  }
+
+  &.ChatInput__selector--highlighted {
+    .ChatInput__selector-text {
+      color: var(--primary);
+    }
+  }
+}
+
+.ChatInput__selector-text {
+  max-width: 7.5rem;
+  font-size: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// — 전송/중지 버튼
+.ChatInput__send-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.1875rem;
+  background-color: var(--alias-chatting-input-btn-bg);
+  overflow: hidden;
+  cursor: pointer;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(255, 255, 255);
+    opacity: 0;
+    transition: all 0.15s linear;
+  }
+
+  &:hover {
+    background-color: var(--alias-chatting-input-btn-bg);
+
+    &::before {
+      opacity: 0.2;
+    }
+  }
+
+  &.Mui-disabled {
+    opacity: 0.5;
+    pointer-events: none;
+    background-color: var(--alias-chatting-input-btn-bg);
+  }
+
+  &.ChatInput__send-btn--streaming {
+    // background-color: var(--text-muted);
+  }
+}

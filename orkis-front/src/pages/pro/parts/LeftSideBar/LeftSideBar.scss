@@ -1,0 +1,66 @@
+// ============================================
+// LeftSideBar.scss
+// ============================================
+
+.LeftSideBar {
+  height: 100%;
+  overflow: hidden;
+}
+
+// ── 아이콘 레일 ──
+.LeftSideBar__rail {
+  width: 44px;
+  padding: 0.5rem 0;
+  gap: 0.25rem;
+  background-color: var(--alias-pro-left-bg);
+}
+
+.LeftSideBar__rail-btn {
+  font-size: 1.25rem;
+  color: var(--alias-pro-icon);
+
+  .Icon__base,
+  .material-symbols-outlined {
+    font-size: inherit;
+  }
+
+  &--active {
+    color: var(--alias-pro-active-icon);
+    background-color: var(--alias-pro-left-list-active-bg);
+  }
+}
+
+// ── 패널 콘텐츠 ──
+.LeftSideBar__content {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid var(--alias-pro-left-line);
+  overflow: auto;
+
+  // collapsed 상태: display:none 으로 마운트는 유지하되 시각만 숨김
+  // (스트리밍·Monaco 초기화 등 비용 큰 자식의 unmount 회피)
+  &--hidden {
+    display: none;
+  }
+}
+
+// ── ChatMini 채팅 영역 ──
+.ChatMini__content {
+  flex: 1;
+  min-width: 29.5rem;
+  min-height: 0;
+  // overflow: auto;
+  display: flex;
+  flex-direction: column;
+
+  .ChatWelcome__greeting {
+
+    .ChatWelcome__title,
+    .ChatWelcome__subtitle {
+      font-size: 1.75rem;
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "scenario": "S3-large-json",
+  "outcome": "streamed",
+  "statusCode": 200,
+  "headers": {
+    "Content-Type": "application/json; charset=utf-8"
+  },
+  "body_size": 60627,
+  "body_sha256": "369439fca715a6c075e7b14ae38014a182344aed47565156a73ed646e7638b56",
+  "body_preview": "[\n{\"id\":1,\"name\":\"name_1\",\"score\":0.5,\"memo\":\"with,comma\"},\n{\"id\":2,\"name\":\"name_2\",\"score\":1,\"memo\":\"with \\\"quote\\\"\"},\n{\"id\":3,\"name\":\"name_3\",\"score\":1.5,\"memo\":\"multi\\nline\"},\n{\"id\":4,\"name\":\"name_4\",\"score\":2,\"memo\":\"\"},\n{\"id\":5,\"name\":\"name_5\",\"score\":2.5,\"memo\":\"tab\\there\"},\n{\"id\":6,\"name\":\"name_6\",\"score\":3,\"memo\":\"memo_6\"},\n{\"id\":7,\"name\":\"name_7\",\"score\":3.5,\"memo\":\"memo_7\"},\n{\"id\":8,\"name\":\"name_8\",\"score\":4,\"memo\":\"memo_8\"},\n{\"id\":9,\"name\":\"name_9\",\"score\":4.5,\"memo\":\"memo_9\"},\n{\"id\":10,\"name\":\"n",
+  "ended": true,
+  "writableEnded": true,
+  "headersSent": true,
+  "rejectedError": null
+}

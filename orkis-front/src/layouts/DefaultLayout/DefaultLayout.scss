@@ -1,0 +1,20 @@
+// ============================================
+// layouts/DefaultLayout — 기본 레이아웃 스타일
+// ============================================
+
+.DefaultLayout__root {
+  min-height: 100vh;
+  // padding-top: 7.5rem;
+  padding-top: 5.375rem;
+  padding-bottom: 4.375rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+
+  &:has(.UserTypePage__root) {
+    background-color: var(--alias-payment-bg);
+  }
+
+  &:has(.SignupPage__root) {
+    background-color: var(--alias-member-bg);
+  }
+}

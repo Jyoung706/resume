@@ -1,0 +1,6 @@
+template_name: 'generate_title'
+parser_name: 'str_output_parser'
+engine_config:
+  temperature: 0.9
+language: 'Korean'
+limit_characters: 15

@@ -1,0 +1,144 @@
+{
+  "manifest": {
+    "name": "orkis-interface",
+    "version": "1.0.0",
+    "description": "ORKIS 시스템 인터페이스 정의 - Git Submodule 형태로 제공되는 통합 인터페이스 라이브러리",
+    "main": "lib/index.js",
+    "types": "lib/index.d.ts",
+    "exports": {
+      ".": {
+        "import": "./lib/index.js",
+        "require": "./lib/index.js",
+        "types": "./lib/index.d.ts"
+      },
+      "./auth": {
+        "import": "./lib/domains/auth/index.js",
+        "require": "./lib/domains/auth/index.js",
+        "types": "./lib/domains/auth/index.d.ts"
+      },
+      "./chat": {
+        "import": "./lib/domains/chat/index.js",
+        "require": "./lib/domains/chat/index.js",
+        "types": "./lib/domains/chat/index.d.ts"
+      },
+      "./core": {
+        "import": "./lib/domains/core/index.js",
+        "require": "./lib/domains/core/index.js",
+        "types": "./lib/domains/core/index.d.ts"
+      },
+      "./menu": {
+        "import": "./lib/domains/menu/index.js",
+        "require": "./lib/domains/menu/index.js",
+        "types": "./lib/domains/menu/index.d.ts"
+      },
+      "./sql-process": {
+        "import": "./lib/domains/sql-process/index.js",
+        "require": "./lib/domains/sql-process/index.js",
+        "types": "./lib/domains/sql-process/index.d.ts"
+      },
+      "./constants": {
+        "import": "./lib/constants/index.js",
+        "require": "./lib/constants/index.js",
+        "types": "./lib/constants/index.d.ts"
+      },
+      "./common": {
+        "import": "./lib/common/index.js",
+        "require": "./lib/common/index.js",
+        "types": "./lib/common/index.d.ts"
+      },
+      "./domains/*": {
+        "import": "./lib/domains/*.js",
+        "require": "./lib/domains/*.js",
+        "types": "./lib/domains/*.d.ts"
+      },
+      "./internal": {
+        "import": "./lib/internal/index.js",
+        "require": "./lib/internal/index.js",
+        "types": "./lib/internal/index.d.ts"
+      },
+      "./external/*": {
+        "import": "./lib/external/*.js",
+        "require": "./lib/external/*.js",
+        "types": "./lib/external/*.d.ts"
+      },
+      "./utils": {
+        "import": "./lib/utils/index.js",
+        "require": "./lib/utils/index.js",
+        "types": "./lib/utils/index.d.ts"
+      }
+    },
+    "scripts": {
+      "build": "tsc",
+      "build:watch": "tsc -w",
+      "clean": "rimraf lib",
+      "prebuild": "npm run clean",
+      "dev": "npm run build:watch",
+      "type-check": "tsc --noEmit",
+      "lint": "eslint src --ext .ts",
+      "lint:fix": "eslint src --ext .ts --fix",
+      "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,md}\"",
+      "format:check": "prettier --check \"src/**/*.{ts,tsx,js,jsx,json,md}\"",
+      "prepublishOnly": "npm run build"
+    },
+    "files": ["lib/**/*", "src/**/*", "README.md"],
+    "keywords": [
+      "orkis",
+      "interface",
+      "typescript",
+      "api",
+      "definitions",
+      "backend",
+      "frontend",
+      "core",
+      "decorators",
+      "types"
+    ],
+    "author": {
+      "name": "ORKIS Development Team"
+    },
+    "license": "MIT",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/your-org/orkis-interface.git"
+    },
+    "bugs": {
+      "url": "https://github.com/your-org/orkis-interface/issues"
+    },
+    "homepage": "https://github.com/your-org/orkis-interface#readme",
+    "dependencies": {
+      "react": "^18.0.0"
+    },
+    "devDependencies": {
+      "@types/express": "^4.17.21",
+      "@types/node": "^20.11.0",
+      "@types/react": "^18.0.0",
+      "@typescript-eslint/eslint-plugin": "^6.19.0",
+      "@typescript-eslint/parser": "^6.19.0",
+      "eslint": "^8.56.0",
+      "prettier": "^3.2.4",
+      "rimraf": "^5.0.0",
+      "typescript": "^5.3.3"
+    },
+    "peerDependencies": {
+      "express": "^4.18.0",
+      "react": "^18.0.0"
+    },
+    "engines": {
+      "node": ">=16.0.0",
+      "npm": ">=8.0.0"
+    },
+    "_registry": "npm",
+    "_loc": "C:\\Users\\shPar\\AppData\\Local\\Yarn\\Cache\\v6\\npm-orkis-interface-1.0.0-cd176744-63b0-495d-820a-9d7f0ac8c419-1754287194340\\node_modules\\orkis-interface\\package.json",
+    "readmeFilename": "README.md",
+    "readme": "# 🚀 ORKIS Interface\n\n**ORKIS 프로젝트 간 공유되는 타입 정의 라이브러리**\n\nGit Submodule 방식으로 모든 ORKIS 프로젝트에서 공통으로 사용하는 타입과 인터페이스를 정의합니다.\n\n## 📋 목적\n\n1. **타입 안전성**: 프로젝트 간 통신에서 타입 안전성 보장\n2. **코드 재사용**: 공통 타입 정의를 통한 중복 코드 제거  \n3. **API 계약**: Frontend-Backend 간 명확한 인터페이스 정의\n4. **확장성**: 도메인별 구조화를 통한 쉬운 확장\n\n## 🏗️ 프로젝트 구조\n\n```\norkis-interface/\n├── src/\n│   ├── constants/               # 🆕 공용 상수 모음 \n│   │   ├── auth.ts              # LOGIN_TYPE 통합, 인증 상수\n│   │   ├── errors.ts            # 모든 에러 코드 통합 (1xxx-7xxx)\n│   │   ├── status.ts            # 상태 코드 통합 (메시지, 프로세스, 세션 등)\n│   │   ├── http.ts              # HTTP 관련 상수 (메서드, 상태, MIME 등)\n│   │   └── index.ts\n│   │\n│   ├── common/                  # 범용 기본 타입\n│   │   ├── api.ts               # API 응답 구조체 (ApiResponse, ApiError)\n│   │   ├── base.ts              # 기본 타입 (PaginationParams, PaginationInfo)\n│   │   ├── error.ts             # 에러 처리 타입\n│   │   └── index.ts\n│   │\n│   ├── domains/                 # 도메인별 공통 타입 (PUBLIC API)\n│   │   ├── auth/                # 인증 도메인\n│   │   │   ├── index.ts         # 공통 auth 타입 (표준화된 LoginType 등)\n│   │   │   ├── api.ts           # Auth API 계약 (Request/Response)\n│   │   │   └── frontend.ts      # Frontend 전용 타입\n│   │   │\n│   │   ├── chat/                # 채팅 도메인\n│   │   │   ├── index.ts         # 공통 chat 타입 (ChatMessage, ChatSession)\n│   │   │   ├── api.ts           # Chat API 계약 (Request/Response)\n│   │   │   ├── frontend.ts      # Frontend 전용 타입\n│   │   │   └── rag-server.ts    # RAG 서버 연동 타입\n│   │   │\n│   │   ├── sql-process/         # SQL 처리 도메인\n│   │   │   ├── index.ts         # 공통 SQL 처리 타입\n│   │   │   ├── frontend.ts      # Frontend 전용 타입\n│   │   │   └── rag-server.ts    # RAG 서버 연동 타입\n│   │   │\n│   │   ├── menu/                # 메뉴 도메인\n│   │   │   ├── index.ts         # 공통 메뉴 타입\n│   │   │   └── frontend.ts      # Frontend 메뉴 타입\n│   │   │\n│   │   ├── file/                # 파일 도메인 (향후 확장용)\n│   │   │   └── index.ts\n│   │   │\n│   │   └── core/                # 핵심 시스템 타입\n│   │       ├── index.ts         # 공통 core 타입 (프레임워크)\n│   │       ├── backend.ts       # Backend core 타입 (공유됨)\n│   │       └── decorators.ts    # 데코레이터 타입\n│   │\n│   ├── shared/                  #  Backend/Frontend 간 공유 내부 타입\n│   │   ├── events.ts            # INTERNAL_EVENTS, InternalEvent\n│   │   ├── messages.ts          # InternalMessage, 메시지 타입\n│   │   ├── internal-status.ts   # INTERNAL_STATUS_CODES\n│   │   ├── internal-errors.ts   # INTERNAL_ERROR_CODES  \n│   │   ├── config.ts            # INTERNAL_CONFIG_KEYS\n│   │   └── index.ts\n│   │\n│   ├── internal/                # 각 프로젝트 내부 전용 타입\n│   │   ├── backend/\n│   │   │   ├── domains/\n│   │   │   │   ├── auth/\n│   │   │   │   │   ├── database.ts    # DB 스키마 (USER_INFO 등)\n│   │   │   │   │   ├── session.ts     # OAuth 세션 처리\n│   │   │   │   │   └── index.ts\n│   │   │   │   ├── chat/\n│   │   │   │   │   ├── processing.ts  # 채팅 처리 상태 관리\n│   │   │   │   │   └── index.ts\n│   │   │   │   ├── sql-process/\n│   │   │   │   │   ├── processing.ts  # SQL 실행 컨텍스트\n│   │   │   │   │   └── index.ts\n│   │   │   │   └── core/\n│   │   │   │       ├── request.ts     # Request 확장, 세션 관리\n│   │   │   │       └── index.ts\n│   │   │   ├── database.ts      # 공통 DB 스키마\n│   │   │   ├── process.ts       # 백엔드 처리 로직\n│   │   │   ├── storage.ts       # 스토리지 내부 타입\n│   │   │   └── index.ts\n│   │   │\n│   │   ├── frontend/\n│   │   │   ├── store.ts         # 글로벌 상태 관리\n│   │   │   ├── ui.ts            # UI 컴포넌트 내부 타입\n│   │   │   ├── routing.ts       # 라우팅 내부 타입\n│   │   │   └── index.ts\n│   │   │\n│   │   └── index.ts\n│   │\n│   ├── external/                # 외부 시스템 연동\n│   │   └── redis/\n│   │       └── types.ts         # Redis 타입, 키 패턴 정의\n│   │\n│   └── index.ts                 # 메인 export (계층별 구분)\n├── package.json\n├── tsconfig.json\n└── README.md\n```\n\n## 📦 설치 및 사용법\n\n### Git Submodule로 추가\n\n```bash\n# 프로젝트 루트에서 서브모듈 추가\ngit submodule add <repository-url> orkis-interface\n\n# 서브모듈 초기화 및 업데이트\ngit submodule update --init --recursive\n\n# 서브모듈 최신 상태로 업데이트\ngit submodule update --remote orkis-interface\n```\n\n### package.json에 의존성 추가\n\n```json\n{\n  \"dependencies\": {\n    \"orkis-interface\": \"file:./orkis-interface\"\n  }\n}\n```\n\n### TypeScript에서 사용\n\n```typescript\n// 🆕 공용 상수 import\nimport { \n  LOGIN_PROVIDERS, \n  ERROR_CODES, \n  MESSAGE_STATUS,\n  HTTP_METHODS \n} from 'orkis-interface';\n\n// 공통 타입 import (PUBLIC API)\nimport { \n  PaginationParams, \n  PaginationInfo,\n  CommonApiResponse,\n  ApiError \n} from 'orkis-interface';\n\n// 도메인별 공통 타입 import\nimport { \n  LoginType,           // 표준화된 로그인 타입\n  ChatMessage,         // 공통 채팅 메시지\n  ChatSession          // 공통 채팅 세션\n} from 'orkis-interface';\n\n// API 계약 import\nimport { \n  CreateSessionRequest,\n  SendMessageRequest,\n  CreateSessionApiResponse \n} from 'orkis-interface';\n\n// Backend 내부 타입 (네임스페이스)\nimport { AuthBackend, ChatBackend, CoreBackend } from 'orkis-interface';\n// 사용: AuthBackend.OAuthState, ChatBackend.ProcessingState, CoreBackend.Request\n\n// 특정 내부 타입 직접 import\nimport { OAuthState } from 'orkis-interface/internal/backend/domains/auth/session';\nimport { ProcessingState } from 'orkis-interface/internal/backend/domains/chat/processing';\n\n// 공유 내부 타입 import\nimport { \n  INTERNAL_EVENTS, \n  InternalMessage \n} from 'orkis-interface';\n```\n\n## 🎯 사용 예시\n\n### 1. 공용 상수 활용\n\n```typescript\nimport { LOGIN_PROVIDERS, ERROR_CODES, MESSAGE_STATUS } from 'orkis-interface';\n\n// 표준화된 로그인 제공자 사용\nfunction handleLogin(provider: keyof typeof LOGIN_PROVIDERS) {\n  switch (provider) {\n    case 'GOOGLE':\n      return LOGIN_PROVIDERS.GOOGLE; // 'google'\n    case 'NAVER':\n      return LOGIN_PROVIDERS.NAVER;  // 'naver'\n  }\n}\n\n// 통합된 에러 코드 사용\nfunction handleError(errorCode: string) {\n  switch (errorCode) {\n    case ERROR_CODES.AUTH_INVALID_CREDENTIALS:\n      return '로그인 정보가 올바르지 않습니다';\n    case ERROR_CODES.CHAT_SESSION_NOT_FOUND:\n      return '채팅 세션을 찾을 수 없습니다';\n  }\n}\n\n// 상태 코드 활용\nfunction updateMessageStatus(status: keyof typeof MESSAGE_STATUS) {\n  return MESSAGE_STATUS[status]; // 'pending', 'sending', 'sent' 등\n}\n```\n\n### 2. Backend에서 내부 타입 사용\n\n```typescript\nimport { CoreBackend, AuthBackend } from 'orkis-interface';\n\nexport class AuthController {\n  async login(req: CoreBackend.Request, res: Response) {\n    // 확장된 Request 타입 사용\n    const loginInfo = req.session.login_info;\n    const context = req.context?.requestMapping;\n    \n    // OAuth 상태 처리\n    const oauthState: AuthBackend.OAuthState = {\n      provider: 'google',\n      timestamp: Date.now()\n    };\n  }\n}\n```\n\n### 3. API 계약 활용\n\n```typescript\nimport { \n  CreateSessionRequest, \n  CreateSessionApiResponse,\n  CommonApiResponse,\n  LOGIN_PROVIDERS \n} from 'orkis-interface';\n\n// Frontend에서 API 호출\nasync function createChatSession(\n  request: CreateSessionRequest\n): Promise<CreateSessionApiResponse> {\n  const response = await fetch('/api/chat/sessions', {\n    method: 'POST',\n    headers: { 'Content-Type': 'application/json' },\n    body: JSON.stringify(request)\n  });\n  \n  return response.json();\n}\n\n// 표준화된 로그인 타입 사용\nasync function login(provider: keyof typeof LOGIN_PROVIDERS): Promise<CommonApiResponse<{token: string}>> {\n  const response = await fetch('/api/auth/login', {\n    method: 'POST',\n    body: JSON.stringify({ \n      provider: LOGIN_PROVIDERS[provider] \n    })\n  });\n  \n  return response.json();\n}\n```\n\n### 4. 공유 내부 타입 사용\n\n```typescript\nimport { INTERNAL_EVENTS, InternalMessage } from 'orkis-interface';\n\n// Backend/Frontend 간 내부 메시지 통신\nfunction sendInternalMessage(message: InternalMessage) {\n  // WebSocket이나 EventBus를 통한 내부 통신\n  eventBus.emit(INTERNAL_EVENTS.CHAT_MESSAGE_RECEIVED, message);\n}\n\n// 내부 이벤트 처리\nfunction handleInternalEvent(eventType: keyof typeof INTERNAL_EVENTS) {\n  switch (eventType) {\n    case 'PROCESS_STARTED':\n      console.log('프로세스가 시작되었습니다');\n      break;\n    case 'SESSION_EXPIRED':\n      // 세션 만료 처리\n      break;\n  }\n}\n```\n\n##  개발\n\n### 빌드\n\n```bash\nnpm run build\n```\n\n### 개발 모드 (Watch)\n\n```bash\nnpm run dev\n```\n\n### 타입 체크\n\n```bash\nnpm run type-check\n```\n\n### 린트\n\n```bash\nnpm run lint\nnpm run lint:fix\n```\n\n### 포맷팅\n\n```bash\nnpm run format\nnpm run format:check\n```\n\n## 📚 도메인별 가이드\n\n### 🔑 Auth (인증) 도메인\n\n**공통 타입 (index.ts)**\n- `LOGIN_TYPE`: 로그인 제공자 타입 (`'GOOGLE'`, `'NAVER'`, `'KAKAO'`)\n\n**Backend 타입 (backend.ts, backend-types.ts)**\n- `OAuthState`: OAuth 상태 정보 (provider, timestamp)\n- `Request`: Express Request 확장 (session, context 포함)\n- `CustomSessionData`: 세션 데이터 구조\n\n**Frontend 타입 (frontend.ts)**\n- 현재 정의된 타입 없음 (필요 시 추가)\n\n### 💬 Chat (채팅) 도메인\n\n**공통 타입 (index.ts)**\n- `ChatMessage`: 채팅 메시지 구조\n- `ChatSession`: 채팅 세션 정보\n\n**Backend 타입 (backend.ts, backend-types.ts)**\n- `ProcessingState`: 채팅 처리 상태\n- 기타 백엔드 전용 채팅 처리 타입\n\n**RAG Server 타입 (rag-server.ts)**\n- RAG(검색 증강 생성) 서버 연동 타입\n\n### 🗄️ SQL Process (SQL 처리) 도메인\n\n**공통 타입 (index.ts)**\n- SQL 쿼리 처리 관련 공통 타입\n\n**Backend/Frontend/RAG 타입**\n- 각각의 전용 타입 정의\n\n### 📋 Menu (메뉴) 도메인\n\n**공통 타입 (index.ts)**\n- 메뉴 구조 및 네비게이션 타입\n\n**Frontend 타입 (frontend.ts)**\n- 프론트엔드 메뉴 렌더링 타입\n\n### 🏗️ Core (핵심) 도메인\n\n**Backend 타입 (backend.ts, backend-types.ts)**\n- `Request`: Express Request 확장\n- `CustomSessionData`: 세션 데이터 정의\n\n**Decorators (decorators.ts)**\n- 프레임워크 데코레이터 타입 정의\n\n###  Common (공통)\n\n**API 응답 (api.ts)**\n- `ApiResponse<T>`: 표준 API 응답 구조\n- `ApiError`: API 에러 정보\n\n**기본 타입 (base.ts)**\n- `PaginationParams`: 페이지네이션 파라미터\n- `PaginationInfo`: 페이지네이션 정보\n\n**에러 처리 (error.ts)**\n- 공통 에러 처리 타입\n\n## 🚀 신규 도메인 추가 가이드\n\n새로운 도메인을 추가할 때는 다음 단계를 따르세요:\n\n### 1. 디렉토리 구조 생성\n\n```bash\nmkdir -p src/domains/새도메인\ncd src/domains/새도메인\ntouch index.ts frontend.ts backend.ts backend-types.ts\n```\n\n### 2. 기본 파일 구조 생성\n\n**index.ts (공통 타입)**\n```typescript\n/**\n * 새도메인 Domain - Common Types\n * 프론트엔드와 백엔드에서 공통으로 사용하는 타입들\n */\n\nexport interface 새도메인Item {\n  id: string;\n  name: string;\n  createdAt: string;\n}\n\nexport type 새도메인Status = 'active' | 'inactive' | 'pending';\n```\n\n**backend-types.ts (Backend 전용 타입)**\n```typescript\n/**\n * 새도메인 Backend Types\n * 백엔드에서만 사용하는 내부 타입들\n */\n\nexport interface 새도메인ProcessingState {\n  status: 'processing' | 'completed' | 'failed';\n  progress: number;\n}\n```\n\n**frontend.ts (Frontend 전용 타입)**\n```typescript\n/**\n * 새도메인 Frontend Types  \n * 프론트엔드에서만 사용하는 UI 관련 타입들\n */\n\nexport interface 새도메인FormData {\n  name: string;\n  description?: string;\n}\n```\n\n### 3. 메인 index.ts에 Export 추가\n\n```typescript\n// src/index.ts에 추가\n\n// Domain types\nexport * from './domains/새도메인';\nexport * as 새도메인Backend from './domains/새도메인/backend';\nexport * from './domains/새도메인/frontend';\n```\n\n### 4. Import 패턴\n\n새로 추가된 도메인은 다음과 같이 사용할 수 있습니다:\n\n```typescript\n// 공통 타입\nimport { 새도메인Item, 새도메인Status } from 'orkis-interface';\n\n// Backend 네임스페이스 타입\nimport { 새도메인Backend } from 'orkis-interface';\n// 사용: 새도메인Backend.새도메인ProcessingState\n\n// 직접 import\nimport { 새도메인ProcessingState } from 'orkis-interface/domains/새도메인/backend-types';\n```\n\n## 📋 타입 정의 규칙\n\n### Export 규칙\n\n1. **PUBLIC API**: 모든 프로젝트에서 사용 가능한 타입\n   - `src/index.ts`에서 직접 export\n   - 공통 타입, 도메인 공통 타입\n\n2. **INTERNAL API**: 특정 프로젝트 내부에서만 사용하는 타입\n   - 네임스페이스로 분리 (`AuthBackend`, `ChatBackend`)\n   - Backend 전용 타입들\n\n### 네이밍 규칙\n\n- **Interface**: `I`로 시작하지 않음 (`User`, `ChatMessage`)\n- **Type**: 명확한 의미를 가진 이름 사용\n- **Enum**: 대문자 스네이크 케이스 (`LOGIN_TYPE`, `CHAT_STATUS`)\n\n### 파일 구조 규칙\n\n- `index.ts`: 공통 타입 (모든 환경에서 사용)\n- `backend.ts`: Backend에서 import할 타입들  \n- `backend-types.ts`: Backend 구현 세부사항\n- `frontend.ts`: Frontend 전용 타입\n- `rag-server.ts`: RAG 서버 연동 타입\n\n##  개발 가이드\n\n### 타입 추가 시 체크리스트\n\n- [ ] 올바른 도메인 디렉토리에 배치\n- [ ] PUBLIC/INTERNAL API 구분 확인\n- [ ] 적절한 파일에 정의 (common/backend/frontend)\n- [ ] `src/index.ts`에 export 추가\n- [ ] JSDoc 주석 작성\n- [ ] 기존 타입과 중복 여부 확인\n\n### 사용되지 않는 타입 정리\n\n정기적으로 다음 도구들을 사용하여 미사용 타입을 정리합니다:\n\n```bash\n# 미사용 타입 찾기\nnpx ts-unused-exports tsconfig.json\n\n# 타입 참조 확인\nnpx find-unused-exports\n```\n\n## 🚨 주의사항\n\n1. **Breaking Changes**: 기존 타입 수정 시 모든 프로젝트 영향 확인\n2. **Import Path**: 절대 경로 사용 권장 (`orkis-interface/domains/...`)\n3. **Git Submodule**: 변경 시 모든 프로젝트에서 서브모듈 업데이트 필요\n4. **Circular Dependencies**: 도메인 간 순환 참조 금지\n\n## 📞 문의 및 지원\n\nORKIS Interface 프로젝트와 관련된 문의사항이나 이슈가 있으시면 개발팀에 문의해주세요.\n"
+  },
+  "artifacts": [],
+  "remote": {
+    "type": "copy",
+    "registry": "npm",
+    "hash": "0b7b387f-0599-4bb1-b582-c54128172c27-1754289276491",
+    "reference": "D:\\workspace\\ORKIS\\orkis-backend-new\\orkis-interface"
+  },
+  "registry": "npm",
+  "hash": "0b7b387f-0599-4bb1-b582-c54128172c27-1754289276491"
+}

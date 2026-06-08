@@ -1,0 +1,36 @@
+{
+  "name": "orkis-jobs",
+  "version": "1.0.0",
+  "main": "lib/main.js",
+  "repository": "https://git.orkis.kr/rnd/orkis/orkis-jobs.git",
+  "author": "psh <psh@example.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "NODE_ENV=prod node ./lib/main.js -e prod",
+    "dev": "NODE_ENV=development ts-node --transpile-only ./src/main.ts -e dev",
+    "dev:debug": "NODE_ENV=development node --inspect=0.0.0.0:9229 -r ts-node/register -r tsconfig-paths/register ./src/main.ts -e dev",
+    "format": "prettier --write src/**/*.{ts,tsx,js,jsx,json}",
+    "build:dev": "tsc -p ./tsconfig.dev.json && tsc-alias -p ./tsconfig.dev.json",
+    "build:prod": "tsc -p ./tsconfig.prod.json && tsc-alias -p ./tsconfig.prod.json"
+  },
+  "dependencies": {
+    "@orkis/core": "^1.0.0",
+    "dotenv": "^16.3.1",
+    "node-cron": "^3.0.3"
+  },
+  "devDependencies": {
+    "@types/ioredis": "^5.0.0",
+    "@types/node": "^22.14.0",
+    "@types/node-cron": "^3.0.11",
+    "@types/pg": "^8.15.6",
+    "@types/source-map-support": "^0",
+    "prettier": "^3.6.2",
+    "source-map-support": "^0.5.21",
+    "ts-node": "^10.9.2",
+    "tsc-alias": "^1.8.16",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.8.3",
+    "yalc": "^1.0.0-pre.53"
+  },
+  "packageManager": "yarn@4.9.0"
+}

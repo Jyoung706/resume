@@ -1,0 +1,27 @@
+@use "@/pages/common.mixin" as common;
+@use "@/pages/chat/chat.mixin" as chat;
+
+// keywordWrite Modal
+.KeywordCreateDialog {
+  .KeywordCreate__rows {
+    .KeywordCreate__row {
+      flex-direction: row;
+      gap: 0.5rem;
+      
+      .KeywordCreate__label {
+        display: flex;
+        flex: 1;
+        align-items: center;
+        height: var(--alias-label-height-small);
+        font-size: var(--alias-label-font-size-small);
+        line-height: normal;
+        text-transform: capitalize;
+        transform: none;
+      }
+
+      .KeywordCreate__form {
+        flex: 2.5;
+      }
+    }
+  }
+}

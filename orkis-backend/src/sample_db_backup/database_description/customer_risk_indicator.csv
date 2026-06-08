@@ -1,0 +1,6 @@
+original_column_name,column_name,column_description,data_format,value_description
+customer_id,customer id,the id of the customer,integer,Maps to customer(id)
+indicator_id,indicator id,the id of the risk indicator,integer,Maps to risk_indicator(id)
+indicator_value,indicator value,the value of the risk indicator for this customer,decimal,"commonsense evidence:
+Higher values indicate higher risk. This could be metrics like transaction velocity, average transaction amount, number of high-risk countries transacted with, etc."
+last_updated,last updated,when this indicator was last calculated,datetime,Format: YYYY-MM-DD HH:MM:SS

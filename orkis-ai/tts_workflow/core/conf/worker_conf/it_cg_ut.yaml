@@ -1,0 +1,66 @@
+# 정의서 : ./tts_workflow/docu/config_information.md
+# [CHECK] edges 설정에서 'start'와 'end' 를 명시 해도 동작하도록 바꾸고 싶어..
+root_import_path: 'tts_workflow.app.worker'
+works:
+  intent_classifier:
+    import_path: 'intent_classifier.IntentClassifier'
+    args:
+      template_name: 'intent_classifier'
+      parser_name: 'str_output_parser'
+      engine_config:
+        engine_name: 'gpt-4o-mini'
+        temperature: 0.2
+  general_llm:
+    import_path: 'general_llm.GeneralLLM'
+    args:
+      template_name: 'general_llm'
+      parser_name: 'str_output_parser'
+      engine_config:
+        engine_name: 'gpt-4o-mini'
+      limit_characters: 300
+      language: 'Korean'
+  # candidate_generator agents
+  generate_candidate:
+    import_path: 'generate_candidate.GenerateCandidate'
+    args:
+      generator_configs:
+        - template_name: 'generate_candidate_one'
+          parser_name: 'generate_candidate_gemini_markdown_cot'
+          engine_config:
+            engine_name: 'gpt-4o-mini'
+            temperature: 0.01
+          sampling_count: 1
+
+  # unit tester agents
+  generate_unit_test:
+    import_path: 'generate_unit_test.GenerateUnitTest'
+    args:
+      template_name: 'generate_unit_tests'
+      parser_name: 'generate_unit_tests'
+      engine_config:
+        engine_name: 'gpt-4o'
+        temperature: 0.8
+      unit_test_count: 20
+      sampling_count: 1
+  evaluate:
+    import_path: 'evaluate.Evaluate'
+    args:
+      template_name: 'evaluate'
+      parser_name: 'evaluate'
+      engine_config:
+        engine_name: 'gpt-4o'
+        temperature: 0.8
+        
+edges:
+  - type: 'conditional'
+    src: 'intent_classifier'
+    dsts:
+      tts_step: 'generate_candidate'
+      general_step: 'general_llm'
+      none_step:
+  - type: 'normal'
+    src: 'generate_candidate'
+    dst: 'generate_unit_test'
+  - type: 'normal'
+    src: 'generate_unit_test'
+    dst: 'evaluate'

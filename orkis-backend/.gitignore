@@ -1,0 +1,166 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# Build outputs
+dist/
+dist-ssr/
+build/
+*.local
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Project specific environment files
+# resources/*.env
+!resources/.env.example
+
+# Local storage and test files
+src/.localStorage/
+src/imgtest/
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+.idea
+.DS_Store
+.history
+.lh
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Testing
+coverage/
+*.lcov
+.nyc_output/
+
+# TypeScript
+*.tsbuildinfo
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Yarn Berry
+.yarn/*
+yalc.lock
+.pnp.*
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# Temporary files
+*.tmp
+*.temp
+*.cache
+tmp/
+temp/
+
+# Docker
+*.pid
+*.seed
+*.pid.lock
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# Optional REPL history
+.node_repl_history
+
+# Serverless directories
+.serverless/
+
+# FuseBox cache
+.fusebox/
+
+# DynamoDB Local files
+.dynamodb/
+
+# TernJS port file
+.tern-port
+
+# Stores VSCode versions used for testing VSCode extensions
+.vscode-test
+
+# yarn v2
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+session/
+
+lib
+
+# Submodule build outputs
+orkis-interface/lib/
+# Yalc - Allow local package linking
+.yalc/**/*
+share/**/*
+storage
+db/
+
+# Dockerfile dev ignore
+Dockerfile.*
+*.Dockerfile
+!dev.Dockerfile
+!Dockerfile.desktop
+
+# Docker Compose 로컬 오버라이드 설정 (개발자별로 다름)
+docker-compose.*.yml
+!docker-compose.override-example.yml
+!docker-compose.test.yml
+
+package.*.json
+
+.vscode/launch.json
+
+# Character test fixtures (runtime 동적 생성, commit 대상 아님)
+scripts/character/fixtures/*.sqlite
+scripts/character/fixtures/*.sqlite3
+scripts/character/fixtures/*.db

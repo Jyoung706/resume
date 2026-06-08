@@ -1,0 +1,106 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gitlab-config
+  namespace: cicd
+data:
+  GITLAB_OMNIBUS_CONFIG: |
+    # 1. 기본 URL 및 프로토콜 설정 (외부 클라이언트 기준)
+    external_url 'https://git.orkis.kr'
+    gitlab_rails['gitlab_https'] = true
+    gitlab_rails['gitlab_protocol'] = 'https'
+    gitlab_rails['gitlab_port'] = 443
+    gitlab_rails['gitlab_host'] = 'git.orkis.kr'
+    gitlab_rails['gitlab_shell_ssh_port'] = 47343
+    gitlab_rails['initial_root_password'] = 'beomik15801234!@#$'
+
+    # 2. Rails 애플리케이션 설정
+    gitlab_rails['gitlab_password_authentication_enabled'] = true
+
+    # 3. Nginx 설정
+    nginx['enable'] = true
+    nginx['listen_https'] = false
+    nginx['listen_port'] = 47342
+
+    nginx['proxy_set_headers'] = {
+      "Host" => "git.orkis.kr",
+      "X-Real-IP" => "$remote_addr",
+      "X-Forwarded-For" => "$proxy_add_x_forwarded_for",
+      "X-Forwarded-Proto" => "https",
+      "X-Forwarded-Port" => "443",
+      "X-Forwarded-Ssl" => "on",
+      "X-Forwarded-Host" => "git.orkis.kr"
+      }
+
+
+    # 4. Registry 설정
+    registry_external_url 'https://gitlab-registry.orkis.kr'
+    gitlab_rails['registry_enabled'] = true
+    gitlab_rails['registry_host'] = 'gitlab-registry.orkis.kr'
+    gitlab_rails['registry_port'] = 443
+    gitlab_rails['registry_protocol'] = 'https'
+
+    # PostgreSQL TCP 연결 설정 (IPv4와 IPv6 모두 지원)
+    postgresql['listen_address'] = 'localhost,127.0.0.1,::1'
+    postgresql['port'] = 5432
+
+    # GitLab Rails용 인증 설정
+    postgresql['trust_auth_cidr_addresses'] = ['127.0.0.1/32', '::1/128']
+    postgresql['md5_auth_cidr_addresses'] = ['127.0.0.1/32', '::1/128']
+
+    # GitLab Rails가 기본 사용자로 접근할 수 있도록 설정
+    postgresql['sql_user'] = 'gitlab'
+
+    registry['database'] = {
+      'enabled' => true,
+      'host' => 'localhost',
+      'port' => 5432,
+      'user' => 'registry',
+      'password' => 'beomik1580',
+      'dbname' => 'registry',
+      'sslmode' => 'disable',
+    }
+
+    registry['storage'] = {
+      'filesystem' => {
+        'rootdirectory' => '/var/opt/gitlab/gitlab-rails/shared/registry'
+      },
+      'maintenance' => {
+        'readonly' => {
+          'enabled' => false
+        }
+      }
+    }
+
+
+    # 5. Registry Nginx 설정
+    registry_nginx['enable'] = true
+    registry_nginx['listen_https'] = false
+    registry_nginx['listen_port'] = 5123
+
+    registry_nginx['proxy_set_headers'] = {
+    "Host" => "gitlab-registry.orkis.kr",
+    "X-Real-IP" => "$remote_addr",
+    "X-Forwarded-For" => "$proxy_add_x_forwarded_for",
+    "X-Forwarded-Proto" => "https",
+    "X-Forwarded-Port" => "443",
+    "X-Forwarded-Ssl" => "on",
+    "X-Forwarded-Host" => "gitlab-registry.orkis.kr"
+    }
+
+    # 6. 로깅 설정
+    logging['svlogd_size'] = 1 * 1024 * 1024  # 1MB
+    logging['svlogd_num'] = 2
+
+    # 7. 비활성화된 서비스들
+    gitlab_kas['enable'] = false
+    prometheus['enable'] = false
+    alertmanager['enable'] = false
+    node_exporter['enable'] = false
+    redis_exporter['enable'] = false
+    postgres_exporter['enable'] = false
+    gitlab_exporter['enable'] = false
+    pages_nginx['enable'] = false
+    gitlab_pages['enable'] = false
+    mattermost_nginx['enable'] = false
+    mattermost['enable'] = false

@@ -1,0 +1,52 @@
+/* Accordion */
+.Accordion__base {
+    .MuiAccordion-heading {
+        display: flex;
+
+        .Accordion__icon {
+            display: flex;
+            align-items: center;
+            margin-right: var(--alias-accordion-heading-margin);
+        }
+    }
+
+    .MuiCollapse-root {
+        overflow: hidden;
+    }
+
+    &[class*="sizeSmall"] {
+        .MuiAccordion-heading {
+            height: var(--alias-accordion-heading-height-small);
+        }
+    }
+
+    &[class*="sizeMedium"] {
+        .MuiAccordion-heading {
+            height: var(--alias-accordion-heading-height-medium);
+        }
+    }
+
+    &.MuiAccordion-rounded {
+        &:first-of-type {
+            border-top-left-radius: var(--alias-accordion-radius);
+            border-top-right-radius: var(--alias-accordion-radius);
+        }
+
+        &:last-of-type {
+            border-bottom-left-radius: var(--alias-accordion-radius);
+            border-bottom-right-radius: var(--alias-accordion-radius);
+
+            .MuiCollapse-root {
+                border-radius: inherit;
+            }
+        }
+    }
+
+    &.Mui-expanded {
+        &::before {
+            opacity: 1;
+        }
+    }
+}
+
+.Accordion__details {}

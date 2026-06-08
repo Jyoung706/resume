@@ -1,0 +1,44 @@
+{
+  // TypeScript 언어 서버 위치 지정
+  // 상위 폴더(orkis 루트)의 node_modules에 설치된 TypeScript 사용
+  "typescript.tsdk": "./node_modules/typescript/lib",
+
+  // package.json의 dependencies를 자동 import 제안에 포함
+  // 'on'으로 설정하면 설치된 패키지를 자동으로 제안
+  "typescript.preferences.includePackageJsonAutoImports": "on",
+
+  // workspace의 TypeScript 버전 사용을 제안하는 프롬프트 활성화
+  // VS Code가 프로젝트의 TypeScript를 사용하도록 제안
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+
+  // import 문 생성 시 경로 스타일 설정
+  // 'shortest': 가장 짧은 경로 사용 (paths 매핑 활용)
+  "typescript.preferences.importModuleSpecifier": "shortest",
+
+  // 코드 네비게이션 동작 설정 (Command+Click 시)
+  // 'goto': 여러 정의가 있을 때 바로 첫 번째로 이동
+  // 'peek': 여러 정의가 있을 때 peek 창으로 표시
+  // 정의는 보통 하나만 있으므로 goto
+  "editor.gotoLocation.multipleDefinitions": "goto",
+  "editor.gotoLocation.multipleTypeDefinitions": "goto",
+
+  // 구현과 참조는 여러 개일 가능성이 높으므로 peek
+  "editor.gotoLocation.multipleImplementations": "peek",
+  "editor.gotoLocation.multipleReferences": "peek",
+
+  // 선언은 상황에 따라 (goto 추천)
+  "editor.gotoLocation.multipleDeclarations": "goto",
+
+  // tsc 리더 작업 자동 감지 비활성화
+  // 빌드 작업을 수동으로 관리하고자 할 때 'off' 설정
+  "typescript.tsc.autoDetect": "off",
+
+  // 프로젝트 전체 진단 기능 비활성화
+  // false로 설정하면 성능 향상 (큰 프로젝트에서 유용)
+  "typescript.tsserver.experimental.enableProjectDiagnostics": false,
+
+  // VS Code Explorer에서 특정 파일/폴더 숨김
+  "files.exclude": {
+    "tsconfig.runtime.json": true // 런타임 설정 파일은 숨김 (개발 시 혼란 방지)
+  }
+}

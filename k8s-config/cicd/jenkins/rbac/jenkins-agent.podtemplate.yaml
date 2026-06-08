@@ -1,0 +1,33 @@
+# Jenkins Agent Pod 템플릿 예시
+# Kubernetes Plugin이 빌드 시 이 구조로 동적 생성 → 빌드 종료 시 자동 삭제
+# Jenkins UI > Configure System > Cloud > Kubernetes > Pod Template 에서 적용
+apiVersion: v1
+kind: Pod
+metadata:
+  name: jenkins-agent
+  labels:
+    app: jenkins
+    component: agent
+spec:
+  serviceAccountName: jenkins-agent
+  nodeSelector:
+    app: jenkins                          # controller와 같은 노드 (worker002)
+  restartPolicy: Never
+  containers:
+    - name: jnlp
+      envFrom:
+        - configMapRef:
+            name: jenkins-global-config
+      resources:
+        requests:
+          cpu: "500m"
+          memory: "1Gi"
+        limits:
+          cpu: "1"
+          memory: "2Gi"
+      volumeMounts:
+        - name: workspace
+          mountPath: /home/jenkins/agent
+  volumes:
+    - name: workspace
+      emptyDir: {}                        # 빌드 끝나면 자동 소멸

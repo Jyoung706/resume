@@ -1,0 +1,70 @@
+// ============================================
+// pages/emailVerification/EmailVerificationPage 스타일
+// ============================================
+@use "@/pages/common.mixin" as common;
+@use "@/pages/auth/auth.mixin" as auth;
+
+.EmailVerifyPage__root {
+  @include auth.page;
+  margin: 0 auto;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.EmailVerifyPage__logo {
+  @include common.logo;
+  margin-bottom: var(--space-4);
+}
+
+.EmailVerifyPage__logo-symbol {
+  @include common.logo-symbol;
+}
+
+.EmailVerifyPage__logo-text {
+  @include common.logo-text;
+}
+
+.EmailVerifyPage__card {
+  width: 100%;
+  @include auth.card;
+}
+
+.EmailVerifyPage__title {
+  @include auth.card-title;
+}
+
+.EmailVerifyPage__subtitle {
+  @include auth.card-subtitle;
+}
+
+.EmailVerifyPage__content {
+  gap: var(--space-6); // spacing={3} → 24px
+  align-items: center;
+}
+
+.EmailVerifyPage__email {
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.EmailVerifyPage__submit-btn {
+  margin-top: var(--space-2); // mt={1} → 8px
+}
+
+.EmailVerifyPage__btn-group {
+  gap: var(--space-3); // spacing={1.5} → 12px
+  width: 100%;
+}
+
+.EmailVerifyPage__status-icon {
+  font-size: 4rem;
+
+  &--success {
+    color: var(--success);
+  }
+
+  &--error {
+    color: var(--error);
+  }
+}

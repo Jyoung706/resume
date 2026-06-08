@@ -1,0 +1,8 @@
+original_column_name,column_name,column_description,data_format,value_description
+id,,the unique identifier of the country,integer,
+country_name,country name,the name of the country,text,
+country_code,country code,the ISO 3166-1 alpha-2 country code,text,"commonsense evidence:
+Two-letter country code (e.g., US, GB, KR)"
+risk_rating,risk rating,the AML risk rating of the country,text,"commonsense evidence:
+Ratings: Low, Medium, High. Based on FATF assessments and sanctions lists."
+sanction_status,sanction status,whether the country is under sanctions,boolean,"1 means country is sanctioned, 0 means not sanctioned"

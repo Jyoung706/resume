@@ -1,0 +1,134 @@
+// ============================================
+// HistoryPanel — 쿼리 히스토리 목록 스타일
+// ============================================
+
+.HistoryPanel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  font-size: 0.75rem;
+}
+
+.HistoryPanel--empty {
+  align-items: center;
+  justify-content: center;
+}
+
+.HistoryPanel__empty-text {
+  color: var(--text-muted);
+}
+
+// ── 헤더 ──
+.HistoryPanel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.625rem;
+  border-bottom: 1px solid var(--border-color);
+  flex-shrink: 0;
+}
+
+.HistoryPanel__header-title {
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.HistoryPanel__clear-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 0.6875rem;
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+
+  &:hover {
+    color: var(--alias-process-fail);
+    background-color: rgba(211, 47, 47, 0.06);
+  }
+}
+
+// ── 리스트 ──
+.HistoryPanel__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  flex: 1;
+
+   > [class*=Item],
+   > [class*=__item] {
+    border-radius: 0;
+   }
+}
+
+.HistoryPanel__item {
+  padding: 0.375rem 0.625rem;
+  border-bottom: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: background-color 0.1s;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.03);
+  }
+
+  &--error {
+    border-left: 2px solid var(--alias-process-fail);
+  }
+}
+
+.HistoryPanel__item-top {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  margin-bottom: 0.125rem;
+}
+
+.HistoryPanel__status {
+  font-size: 0.625rem;
+  font-weight: 700;
+  padding: 0 0.25rem;
+  border-radius: 0.125rem;
+  line-height: 1.4;
+
+  &--ok {
+    color: var(--alias-process-success);
+    background-color: rgba(46, 125, 50, 0.08);
+  }
+
+  &--fail {
+    color: var(--alias-process-fail);
+    background-color: rgba(211, 47, 47, 0.08);
+  }
+}
+
+.HistoryPanel__time {
+  color: var(--text-muted);
+}
+
+.HistoryPanel__duration {
+  color: var(--text-muted);
+}
+
+.HistoryPanel__rows {
+  color: var(--text-muted);
+}
+
+.HistoryPanel__sql {
+  font-family: "Fira Code", "Cascadia Code", Consolas, monospace;
+  font-size: 0.6875rem;
+  color: var(--text-color);
+  // white-space: nowrap;
+  // overflow: hidden;
+  // text-overflow: ellipsis;
+}
+
+.HistoryPanel__error {
+  font-size: 0.625rem;
+  color: var(--alias-process-fail);
+  margin-top: 0.125rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

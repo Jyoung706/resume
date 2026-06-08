@@ -1,0 +1,15 @@
+/* Menu */
+.Menu__base {
+    .MenuItem__base {
+        .List__item-text {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+            font-size: inherit;
+
+            .MuiTypography-root {
+                font-size: inherit;
+            }
+        }
+    }
+}

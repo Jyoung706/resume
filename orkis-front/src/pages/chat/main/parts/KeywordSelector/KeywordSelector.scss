@@ -1,0 +1,13 @@
+// ============================================
+// KeywordSelector — 입력창 상단 키워드 바
+// ============================================
+@use "@/pages/common.mixin" as common;
+@use "@/pages/chat/chat.mixin" as chat;
+
+.ChatPage__input-inner {
+  .KeywordSelector__container {
+    @include chat.searchbox-list;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}

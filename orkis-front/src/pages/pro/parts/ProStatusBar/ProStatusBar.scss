@@ -1,0 +1,26 @@
+// ============================================
+// ProStatusBar.scss — Pro 모드 하단 상태바 스타일
+// ============================================
+
+.ProStatusBar {
+  width: 100%;
+  height: 100%;
+  padding: 0 var(--space-2, 0.5rem);
+}
+
+.ProStatusBar__spacer {
+  flex: 1;
+}
+
+.ProStatusBar__item {
+  color: var(--alias-common-body-text);
+  white-space: nowrap;
+}
+
+.ProStatusBar__db,
+.ProStatusBar__rows,
+.ProStatusBar__time,
+.ProStatusBar__mode {
+  // 하위 종류별 향후 색상 분기 가능 (현재 동일)
+  color: var(--alias-common-body-text);
+}

@@ -1,0 +1,92 @@
+# Phase 3 PR#10-3 / #11-3 - adapter contract test 의 PostgreSQL / MySQL / MariaDB 환경.
+#
+# 사용 (PG + MySQL + MariaDB 모두):
+#   docker compose -f docker-compose.test.yml up -d
+#   yarn pg:setup            # PG fixture seed (3 DB: test_empty / test_small / test_large)
+#   yarn mysql:setup         # MySQL 컨테이너에 fixture seed (mariadb driver 사용)
+#   yarn mariadb:setup       # MariaDB 컨테이너에 fixture seed (mariadb driver 사용)
+#   yarn check:adaptercontract   # SQLite + PG + MySQL + MariaDB 모두 실행
+#   docker compose -f docker-compose.test.yml down
+#
+# 부분 사용 - 특정 컨테이너만:
+#   docker compose -f docker-compose.test.yml up -d postgres-test
+#   docker compose -f docker-compose.test.yml up -d mysql-test
+#   docker compose -f docker-compose.test.yml up -d mariadb-test
+#
+# 환경변수 (test 한정 - 운영 무관):
+#   PG_TEST_HOST=127.0.0.1       PG_TEST_PORT=55432
+#   PG_TEST_USER=test            PG_TEST_PASSWORD=test
+#   MYSQL_TEST_HOST=127.0.0.1    MYSQL_TEST_PORT=33306
+#   MYSQL_TEST_USER=test         MYSQL_TEST_PASSWORD=test
+#   MARIADB_TEST_HOST=127.0.0.1  MARIADB_TEST_PORT=33307
+#   MARIADB_TEST_USER=test       MARIADB_TEST_PASSWORD=test
+
+services:
+  postgres-test:
+    image: postgres:16-alpine
+    container_name: orkis-pg-test
+    environment:
+      POSTGRES_USER: test
+      POSTGRES_PASSWORD: test
+      POSTGRES_DB: postgres
+    ports:
+      - "55432:5432"
+    # tmpfs 로 데이터 볼륨 격리 - 컨테이너 down 시 fixture 도 삭제 (재실행 시 setup-pg-fixture 재시드)
+    tmpfs:
+      - /var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U test"]
+      interval: 2s
+      timeout: 3s
+      retries: 10
+
+  mysql-test:
+    image: mysql:8.0
+    container_name: orkis-mysql-test
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_USER: test
+      MYSQL_PASSWORD: test
+      MYSQL_DATABASE: test_default
+    ports:
+      - "33306:3306"
+    # tmpfs - 컨테이너 down 시 fixture 삭제
+    tmpfs:
+      - /var/lib/mysql
+    healthcheck:
+      test:
+        - "CMD"
+        - "mysqladmin"
+        - "ping"
+        - "-h"
+        - "localhost"
+        - "-u"
+        - "test"
+        - "-ptest"
+      interval: 3s
+      timeout: 5s
+      retries: 30   # mysql 8.0 부팅 약 15초 - retries 넉넉히
+
+  # Phase 3 PR#11-3 - MariaDB 컨테이너 (mysql-test 와 별개).
+  # MariadbStreamAdapter 가 두 컨테이너 모두 wire protocol 호환으로 검증 (Q1=c).
+  mariadb-test:
+    image: mariadb:11
+    container_name: orkis-mariadb-test
+    environment:
+      MARIADB_ROOT_PASSWORD: rootpass
+      MARIADB_USER: test
+      MARIADB_PASSWORD: test
+      MARIADB_DATABASE: test_default
+    ports:
+      - "33307:3306"   # mysql-test 의 33306 과 충돌 회피
+    tmpfs:
+      - /var/lib/mysql
+    healthcheck:
+      test:
+        - "CMD"
+        - "healthcheck.sh"
+        - "--connect"
+        - "--innodb_initialized"
+      interval: 3s
+      timeout: 5s
+      retries: 20   # mariadb 부팅 약 8초

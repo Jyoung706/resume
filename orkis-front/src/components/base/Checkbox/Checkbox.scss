@@ -1,0 +1,22 @@
+/* Checkbox */
+.Checkbox__base {
+    &+.MuiFormControlLabel-label {
+        text-transform: capitalize;
+    }
+
+    &[class*="sizeSmall"] {
+        height: var(--alias-checkbox-height-small);
+
+        &+.MuiFormControlLabel-label {
+            font-size: var(--alias-checkbox-font-size-small);
+        }
+    }
+
+    &[class*="sizeMedium"] {
+        height: var(--alias-checkbox-height-medium);
+
+        &+.MuiFormControlLabel-label {
+            font-size: var(--alias-checkbox-font-size-medium);
+        }
+    }
+}

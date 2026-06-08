@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <!-- <link rel="icon" type="image/svg+xml" href="/vite.svg" /> -->
+  <!-- Favicon package -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preload"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0&display=block"
+    as="style" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0&display=block" />
+  <title>ORKIS</title>
+</head>
+
+<body>
+  <script>
+    // React 마운트 전 테마 적용 — FOUC 방지
+    (function () {
+      var theme = localStorage.getItem("orkis-theme-mode") || "orkis";
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+
+    // 화면 크기에 따른 mo-reWrap 클래스 관리 (1280px 분기)
+    function handleResize() {
+      if (window.innerWidth <= 1280) {
+        document.body.classList.add("mo-reWrap");
+      } else {
+        document.body.classList.remove("mo-reWrap");
+      }
+    }
+    window.addEventListener("resize", handleResize);
+    document.addEventListener("DOMContentLoaded", handleResize);
+  </script>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
+</html>

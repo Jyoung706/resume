@@ -1,0 +1,106 @@
+// ============================================
+// domain/ChatWelcome 스타일
+// ============================================
+@use "@/pages/common.mixin" as common;
+
+.ChatWelcome {
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  width: 100%;
+  height: auto;
+  padding: 1rem;
+
+  @media (max-width: 3840px) {
+    max-width: 82rem;
+  }
+
+  @media (max-width: 1920px) {
+    max-width: 52rem;
+  }
+
+  @media (max-width: 1024px) {
+    max-width: 39.5rem;
+
+    .ChatWelcome__greeting {
+      .ChatWelcome__title {
+        font-size: 2.125rem;
+      }
+
+      .ChatWelcome__subtitle {
+        font-size: 2.125rem;
+      }
+    }
+  }
+
+  @media (max-width: 800px) {
+    .ChatWelcome__greeting {
+      .ChatWelcome__title {
+        font-size: 1.75rem;
+      }
+
+      .ChatWelcome__subtitle {
+        font-size: 1.75rem;
+      }
+    }
+  }
+
+  @media (max-width: 640px) {
+    max-width: 600px;
+
+    .ChatWelcome__greeting {
+      .ChatWelcome__title {
+        font-size: 1.625rem;
+      }
+
+      .ChatWelcome__subtitle {
+        font-size: 1.625rem;
+      }
+    }
+  }
+}
+
+// ── 환영 문구 섹션 ──
+.ChatWelcome__greeting {
+  position: relative;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  padding: 0 1rem 1.25rem;
+
+  p {
+    line-height: 1.2;
+  }
+
+  .ChatWelcome__title {
+    font-family: 'Nanum Myeongjo';
+    font-size: 2.625rem;
+  }
+
+  .ChatWelcome__subtitle {
+    font-family: 'Nanum Myeongjo';
+    font-size: 2.625rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .ChatWelcome__divider {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-color: var(--alias-main-desc-border);
+  }
+
+  .ChatWelcome__tagline {
+    font-size: 0.875rem;
+    color: var(--alias-main-desc-text);
+    margin-bottom: 0.5rem;
+  }
+
+  .ChatWelcome__system-name {
+    font-size: 0.75rem;
+    color: var(--alias-main-desc-text-gray);
+    text-transform: uppercase;
+  }
+}

@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gitlab
+  namespace: cicd
+  annotations:
+    deployment.upgrade.version: "gitlab/gitlab-ee:18.0.6-ee.0"
+    deployment.upgrade.date: "2025-09-22"
+    deployment.upgrade.reason: "CVE 보안취약점 수정"
+spec:
+  strategy:
+    type: Recreate
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gitlab
+  template:
+    metadata:
+      labels:
+        app: gitlab
+    spec:
+      nodeSelector:
+        app: "gitlab"
+      containers:
+        - name: gitlab
+          image: gitlab/gitlab-ee:18.0.6-ee.0 # CVE 보안 취약점 수정 버전
+          ports:
+            - containerPort: 47342
+            - containerPort: 5123
+          envFrom:
+            - configMapRef:
+                name: gitlab-config
+          resources:
+            requests:
+              memory: "6Gi"
+              cpu: "1"
+            limits:
+              memory: "12Gi"
+              cpu: "1.5"
+          volumeMounts:
+            - name: gitlab-config
+              mountPath: /etc/gitlab
+            - name: gitlab-data
+              mountPath: /var/opt/gitlab
+            - name: gitlab-log
+              mountPath: /var/log/gitlab
+            - name: gitlab-backup
+              mountPath: /var/opt/gitlab/backups
+      volumes:
+        - name: gitlab-config
+          persistentVolumeClaim:
+            claimName: gitlab-config-pvc
+        - name: gitlab-data
+          persistentVolumeClaim:
+            claimName: gitlab-data-pvc
+        - name: gitlab-log
+          persistentVolumeClaim:
+            claimName: gitlab-log-pvc
+        - name: gitlab-backup
+          persistentVolumeClaim:
+            claimName: gitlab-backup-pvc

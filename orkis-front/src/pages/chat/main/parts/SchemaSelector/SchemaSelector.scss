@@ -1,0 +1,11 @@
+// ============================================
+// SchemaSelector — 입력창 상단 스키마 선택 바
+// ============================================
+@use "@/pages/common.mixin" as common;
+@use "@/pages/chat/chat.mixin" as chat;
+
+.ChatPage__input-inner {
+  .SchemaSelector__container {
+    @include chat.searchbox-list;
+  }
+}

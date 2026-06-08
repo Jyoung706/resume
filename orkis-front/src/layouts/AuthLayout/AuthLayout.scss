@@ -1,0 +1,29 @@
+// ============================================
+// layouts/AuthLayout — 인증 레이아웃 스타일
+// ============================================
+
+.AuthLayout__root {
+  min-height: 100vh;
+  background-color: var(--alias-member-bg);
+
+  &:has(.LoginPage__root) {
+    background-color: transparent;
+  }
+}
+
+.AuthLayout__bg-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.AuthLayout__form-area {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-3);
+
+  @media (min-width: 900px) {
+    padding: var(--space-5); // 20px?
+  }
+}

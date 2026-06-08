@@ -1,0 +1,15 @@
+{
+  "scenario": "S2-small-csv",
+  "outcome": "streamed",
+  "statusCode": 200,
+  "headers": {
+    "Content-Type": "text/csv; charset=utf-8"
+  },
+  "body_size": 231,
+  "body_sha256": "9af27eaa2992ba0bd25259ed1013eeffb8aa242379ef267b35d311599220fcc3",
+  "body_preview": "﻿id,name,score,memo\n1,name_1,0.5,\"with,comma\"\n2,name_2,1,\"with \"\"quote\"\"\"\n3,name_3,1.5,\"multi\nline\"\n4,name_4,2,\n5,name_5,2.5,tab\there\n6,name_6,3,memo_6\n7,name_7,3.5,memo_7\n8,name_8,4,memo_8\n9,name_9,4.5,memo_9\n10,name_10,5,plain\n",
+  "ended": true,
+  "writableEnded": true,
+  "headersSent": true,
+  "rejectedError": null
+}

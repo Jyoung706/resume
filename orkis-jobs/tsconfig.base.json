@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "es2022",
+    "module": "node16",
+    "moduleResolution": "node16",
+    "rootDir": "./src",
+    "outDir": "lib",
+    "strict": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "checkJs": false,
+    "declaration": false,
+    "paths": {
+      "@/*": ["./src/main/*"]
+    }
+  },
+  "include": ["./src/**/*"],
+  "exclude": ["./dist", "./build.ts", "./logs", "./.idea"]
+}

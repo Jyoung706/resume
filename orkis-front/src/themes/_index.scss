@@ -1,0 +1,64 @@
+// ============================================
+// themes/_index.scss — 테마 등록
+// ============================================
+// 신규 테마 추가 방법:
+//   1. template/ 폴더를 복사 (예: template/ → custom/)
+//   2. _theme-template.scss → _theme-custom.scss 로 이름 변경
+//   3. [data-theme="custom"] 으로 선택자 변경
+//   4. config/_tokens.scss에서 $tokens, $overrides 수정
+//   5. 아래에 @forward "custom/theme-custom" 추가
+//   6. themes/themeConfig.ts 에도 등록
+// ============================================
+
+/**
+테마 시스템 흐름도.
+
+┌──────────────────────────────────────────────────────────────┐
+│  1. MUI Default (cssVariables: true)                         │
+│     → --mui-palette-*, --mui-shadows-* 자동 생성              │
+│     → StyledEngineProvider injectFirst로 순서 보장             │
+└──────────────────────┬───────────────────────────────────────┘
+                       ▼
+┌──────────────────────────────────────────────────────────────┐
+│  2. 테마 토큰 (themes/{theme}/config/_tokens.scss)            │
+│     $tokens:    MUI 오버라이드 (변경할 항목만 정의)              │
+│                 미정의 항목 → MUI 기본값 자동 사용               │
+│     $overrides: 프로젝트 변수 오버라이드 (변경할 항목만)          │
+│                 미정의 항목 → _semantic-defaults.scss 기본값    │
+└──────────────────────┬───────────────────────────────────────┘
+                       ▼
+┌──────────────────────────────────────────────────────────────┐
+│  3. CSS 변수 생성 (design-system/core/_mixins.scss)           │
+│                                                              │
+│     [A] MUI 오버라이드 (조건부)                                │
+│         $tokens에 있는 키만 --mui-* 변수 오버라이드 생성         │
+│         예: "primary": #c84111 → --mui-palette-primary-main  │
+│                                                              │
+│     [B] 시맨틱 별칭 (항상 출력)                                │
+│         --primary: var(--mui-palette-primary-main)            │
+│         --text-color: var(--mui-palette-text-primary)         │
+│         --shadow-sm: var(--mui-shadows-1)                    │
+│                                                              │
+│     [C] 프로젝트 변수 ($defaults + $overrides)                │
+│         --text-xs, --space-*, --radius-*, --btn-bg 등         │
+│         MUI에 없는 프로젝트 전용 디자인 토큰                    │
+└──────────────────────┬───────────────────────────────────────┘
+                       ▼
+┌──────────────────────────────────────────────────────────────┐
+│  4. Runtime                                                  │
+│     MUI 컴포넌트: --mui-palette-* 읽기 (SCSS 오버라이드 우선)   │
+│     프로젝트 코드: --primary, --btn-bg, --text-xs 등 사용      │
+└──────────────────────────────────────────────────────────────┘
+
+핵심 파일:
+  design-system/core/_mixins.scss         — CSS 변수 생성 (generate/apply)
+  design-system/core/_semantic-defaults.scss — 프로젝트 변수 기본값 ($defaults)
+  design-system/core/_functions.scss      — channels() 헬퍼
+  themes/{theme}/config/_tokens.scss      — 테마별 $tokens, $overrides
+  themes/{theme}/_theme-{theme}.scss      — [data-theme] 셀렉터 + apply 호출
+*/
+
+@forward "default/theme-default";
+@forward "orkis/theme-orkis";
+@forward "dark/theme-dark";
+@forward "template/theme-template";

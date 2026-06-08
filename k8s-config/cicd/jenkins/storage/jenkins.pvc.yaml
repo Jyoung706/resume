@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: jenkins-home-nfs-pvc
+  namespace: cicd
+  labels:
+    app: jenkins
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: nfs-static
+  resources:
+    requests:
+      storage: 25Gi
+  volumeName: jenkins-home-pv

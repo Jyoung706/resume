@@ -1,0 +1,135 @@
+/* Button */
+.Button__base {
+  // text-transform: capitalize;
+  text-transform: none;
+  white-space: nowrap;
+  box-shadow: none;
+
+  &:hover {
+    box-shadow: none;
+  }
+
+  // MUI 5 호환 + MUI 7 BEM modifier 양쪽 지원 (color prop 미지정 시 기본 중립색)
+  &[class*="colorDefault"],
+  &.Button__base--default {
+    background-color: var(--alias-btn-light-bg);
+  }
+
+  &.MuiButton-contained {
+    padding-top: 0;
+    padding-bottom: 0;
+    border: 1px solid transparent;
+  }
+
+  &.MuiButton-text {
+    border: 1px solid transparent;
+  }
+
+  &[class*="sizeXsmall"] {
+    height: var(--alias-btn-height-xsmall);
+    padding-left: var(--alias-btn-padding-xsmall);
+    padding-right: var(--alias-btn-padding-xsmall);
+    border-radius: var(--alias-btn-radius-xsmall);
+    font-size: var(--alias-btn-font-size-xsmall);
+
+    .MuiSvgIcon-root,
+    .MuiButton-icon {
+
+      &[class*="MuiSvgIcon-fontSize"],
+      &[class*="MuiIcon-fontSize"] {
+        font-size: var(--alias-btn-icon-size-small);
+      }
+    }
+
+    [class*="MuiIcon-fontSize"] {
+      &:first-child {
+        margin-right: 0.125rem;
+      }
+
+      &:last-child {
+        margin-left: 0.125rem;
+      }
+    }
+  }
+
+  &[class*="sizeSmall"] {
+    height: var(--alias-btn-height-small);
+    padding-left: var(--alias-btn-padding-small);
+    padding-right: var(--alias-btn-padding-small);
+    border-radius: var(--alias-btn-radius-small);
+    font-size: var(--alias-btn-font-size-small);
+
+    .MuiSvgIcon-root,
+    .MuiButton-icon {
+
+      &[class*="MuiSvgIcon-fontSize"],
+      &[class*="MuiIcon-fontSize"] {
+        font-size: var(--alias-btn-icon-size-small);
+      }
+    }
+
+    [class*="MuiIcon-fontSize"] {
+      &:first-child {
+        margin-right: 0.25rem;
+      }
+
+      &:last-child {
+        margin-left: 0.25rem;
+      }
+    }
+  }
+
+  &[class*="sizeMedium"] {
+    height: var(--alias-btn-height-medium);
+    padding-left: var(--alias-btn-padding-medium);
+    padding-right: var(--alias-btn-padding-medium);
+    border-radius: var(--alias-btn-radius-medium);
+    font-size: var(--alias-btn-font-size-medium);
+
+    .MuiSvgIcon-root,
+    .MuiButton-icon {
+
+      &[class*="MuiSvgIcon-fontSize"],
+      &[class*="MuiIcon-fontSize"] {
+        font-size: var(--alias-btn-icon-size-medium);
+      }
+    }
+
+    [class*="MuiIcon-fontSize"] {
+      &:first-child {
+        margin-right: 0.375rem;
+      }
+
+      &:last-child {
+        margin-left: 0.375rem;
+      }
+    }
+  }
+
+  &[class*="sizeLarge"] {
+    height: var(--alias-btn-height-large);
+    padding-left: var(--alias-btn-padding-large);
+    padding-right: var(--alias-btn-padding-large);
+    border-radius: var(--alias-btn-radius-large);
+    font-size: var(--alias-btn-font-size-large);
+
+    .MuiSvgIcon-root,
+    .MuiButton-icon {
+
+      &[class*="MuiSvgIcon-fontSize"],
+      &[class*="MuiIcon-fontSize"] {
+        font-size: var(--alias-btn-icon-size-large);
+      }
+    }
+
+    [class*="MuiIcon-fontSize"] {
+      &:first-child {
+        margin-right: 0.5rem;
+      }
+
+      &:last-child {
+        margin-left: 0.5rem;
+      }
+    }
+  }
+}

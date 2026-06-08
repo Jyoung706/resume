@@ -1,0 +1,86 @@
+// ============================================
+// ChatSessionHeader.scss — Pro 모드 좌측 사이드바 채팅 패널의 세션 헤더 스타일
+// ============================================
+@use "@/pages/common.mixin" as common;
+@use "@/pages/pro/pro.mixin" as pro;
+
+.ChatSessionHeader {
+  // gap: 0.25rem;
+  // min-height: 2.5rem;
+  // height: 2.5rem;
+  // padding: 0 1rem;
+  // border-bottom: 1px solid var(--alias-pro-light-line);
+  @include pro.left-header;
+
+  .IconButton__base {
+    &.MuiIconButton-root {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+
+    &:first-child {
+      color: var(--alias-pro-left-btn-add-icon);
+    }
+  }
+}
+
+// ── 세션 제목 셀렉터 (드롭다운 트리거) ──
+.ChatSessionHeader__selector {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem;
+  margin: 0 1.5rem;
+  border-radius: var(--radius-sm, 4px);
+  cursor: pointer;
+  min-width: 0;
+
+  &:hover {
+    background-color: var(--alias-left-list-hover-bg);
+  }
+}
+
+.ChatSessionHeader__title {
+  flex: 1;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.ChatSessionHeader__arrow {
+  font-size: 1.25rem !important;
+  color: var(--text-muted);
+}
+
+// ── 인라인 편집 ──
+.ChatSessionHeader__editor {
+  flex: 1;
+  min-width: 0;
+  margin: 0 1.5rem;
+}
+
+// ── 즐겨찾기 아이콘 ──
+.ChatSessionHeader__fav-icon {
+  font-size: 1.125rem !important;
+  color: var(--alias-common-active-icon);
+}
+
+// ── 세션 목록 드롭다운 ──
+.ChatSessionHeader__dropdown {
+  max-height: 300px;
+  overflow-y: auto;
+  min-width: 200px;
+}
+
+.ChatSessionHeader__dropdown-item {
+  padding-right: var(--space-3, 0.75rem);
+}
+
+.ChatSessionHeader__dropdown-fav {
+  min-width: unset !important;
+  margin-right: var(--space-1, 0.25rem);
+  color: var(--alias-common-active-icon);
+}

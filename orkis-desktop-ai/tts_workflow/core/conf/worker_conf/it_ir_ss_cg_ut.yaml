@@ -1,0 +1,156 @@
+# 정의서 : ./tts_workflow/docu/config_information.md
+# [CHECK] edges 설정에서 'start'와 'end' 를 명시 해도 동작하도록 바꾸고 싶어..
+root_import_path: 'tts_workflow.app.worker'
+works:
+  intent_classifier:
+    import_path: 'intent_classifier.IntentClassifier'
+    streaming: false
+    args:
+      template_name: 'intent_classifier'
+      parser_name: 'json_output_parser'
+      engine_config:
+        temperature: 0.2
+        max_output_token: 500
+        reasoning_effort: 'none'
+        text_verbosity: 'low'
+  general_llm:
+    import_path: 'general_llm.GeneralLLM'
+    args:
+      template_name: 'general_llm'
+      clarification_template_name: 'clarification_request'
+      parser_name: 'str_output_parser'
+      engine_config:
+        temperature: 0.8
+      limit_characters: 1000
+      language: 'Korean'
+      assistant_name: 'Orkis Assistant'
+
+  # information_retriever agents
+  extract_keywords:
+    import_path: 'extract_keywords_limited.ExtractKeywordsLimited'
+    args:
+      template_name: 'extract_keywords_limited'
+      parser_name: 'python_list_output_parser'
+      max_keywords: 5
+      engine_config:
+        temperature: 0.2
+        max_output_token: 1000
+        reasoning_effort: 'none'
+        text_verbosity: 'low'
+  retrieve_entity:
+    import_path: 'retrieve_entity_faiss.RetrieveEntityFaiss'
+    args:
+      top_k: 10
+      faiss_distance_threshold: 0.1
+  retrieve_context:
+    import_path: 'retrieve_context_faiss.RetrieveContextFaiss'
+    args:
+      top_k: 5
+
+  # schema_selector agents (통합)
+  select_schema:
+    import_path: 'select_schema.SelectSchema'
+    args:
+      template_name: 'select_schema'
+      parser_name: 'select_schema'
+      engine_config:
+        temperature: 0.01
+        max_output_token: 2000
+        reasoning_effort: 'none'
+        text_verbosity: 'low'
+
+  # candidate_generator agents
+  generate_candidate:
+    import_path: 'generate_candidate.GenerateCandidate'
+    args:
+      generator_configs:
+        - template_name: 'generate_candidate_one'
+          parser_name: 'generate_candidate_gemini_markdown_cot'
+          engine_config:
+            temperature: 0.01
+            max_output_token: 500
+            reasoning_effort: 'none'
+            text_verbosity: 'low'
+          sampling_count: 1
+  revise:
+    import_path: 'revise.Revise'
+    args:
+      template_name: 'revise_one'
+      parser_name: 'revise_new'
+      engine_config:
+        temperature: 0.0
+
+  # unit tester agents
+  generate_unit_test:
+    import_path: 'generate_unit_test.GenerateUnitTest'
+    args:
+      template_name: 'generate_unit_tests'
+      parser_name: 'generate_unit_tests'
+      engine_config:
+        temperature: 0.8
+      unit_test_count: 20
+      sampling_count: 1
+
+  evaluate:
+    import_path: 'evaluate.Evaluate'
+    args:
+      template_name: 'evaluate'
+      parser_name: 'evaluate'
+      engine_config:
+        temperature: 0.8
+
+  # final work (must be defined)
+  final:
+    import_path: 'final_work.Final'
+    args: {}
+
+edges:
+  - type: 'conditional'
+    src: 'intent_classifier'
+    dsts:
+      tts_step: 'extract_keywords'
+      general_step: 'general_llm'
+      none_step:
+  - type: 'normal'
+    src: 'extract_keywords'
+    dst: 'retrieve_entity'
+  - type: 'normal'
+    src: 'extract_keywords'
+    dst: 'retrieve_context'
+  - type: 'normal'
+    src: 'retrieve_entity'
+    dst: 'select_schema'
+  - type: 'normal'
+    src: 'retrieve_context'
+    dst: 'select_schema'
+  - type: 'normal'
+    src: 'select_schema'
+    dst: 'generate_candidate'
+  - type: 'normal'
+    src: 'generate_candidate'
+    dst: 'revise'
+  - type: 'normal'
+    src: 'revise'
+    dst: 'generate_unit_test'
+  - type: 'normal'
+    src: 'generate_unit_test'
+    dst: 'evaluate'
+
+procs:
+  - process_id: 'generate_hint'
+    works:
+      - extract_keywords
+      - retrieve_entity
+      - retrieve_context
+  - process_id: 'schema_linking'
+    works:
+      - select_schema
+  - process_id: 'generate_sql'
+    works:
+      - generate_candidate
+      - revise
+  - process_id: 'evaluate'
+    works:
+      - generate_unit_test
+      - evaluate
+      - final

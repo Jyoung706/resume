@@ -1,0 +1,65 @@
+// ============================================
+// pages/signup/parts/signup.parts.scss
+// 회원가입 하위 컴포넌트 공통 스타일
+// ============================================
+@use "@/pages/common.mixin" as common;
+@use "@/pages/auth/auth.mixin" as auth;
+
+// 로고
+.SignupHeader__logo {
+  @include common.logo;
+
+  .SignupHeader__logo-symbol {
+    @include common.logo-symbol;
+  }
+
+  .SignupHeader__logo-text {
+    @include common.logo-text;
+  }
+}
+
+// 타이틀
+.SignupHeader__title-group {
+  gap: 0.5rem;
+
+  .SignupHeader__title-row {
+    align-items: flex-end;
+    gap: 0.625rem;
+  }
+
+  .SignupHeader__title {
+    @include auth.card-title;
+  }
+
+  .SignupHeader__subtitle {
+    @include auth.card-subtitle;
+  }
+}
+
+// 타이틀 Chip (사용자 유형별)
+.SignupHeader__chip {
+  &.sizeXsmall {
+    height: var(--component-size-xsmall);
+
+    .MuiChip-label {
+      font-weight: 500;
+    }
+  }
+
+  &[data-user-type="free"] {
+    background-color: var(--alias-payment-btn-green-bg);
+  }
+
+  &[data-user-type="pro"] {
+    background-color: var(--alias-payment-btn-orange-bg);
+  }
+
+  &[data-user-type="admin"] {
+    background-color: var(--alias-payment-btn-orange-bg);
+  }
+}
+
+.SignupHeader__full {
+  gap: 1.25rem;
+  width: 100%;
+}

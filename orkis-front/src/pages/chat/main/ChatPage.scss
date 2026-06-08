@@ -1,0 +1,276 @@
+// ============================================
+// pages/chat/ChatPage.scss
+// ChatPage 전용 스타일 (일반 SCSS)
+// ============================================
+// 사용 패턴:
+//   import "./ChatPage.scss";
+//   className="ChatPage__root"
+// 네이밍: ChatPage__{kebab-case}
+// ============================================
+@use "@/pages/common.mixin" as common;
+@use "@/pages/chat/chat.mixin" as chat;
+
+// ── 루트 ────────────────────────────────────
+.ChatPage__root {
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+// ── 메인 + 우측 사이드바 컨테이너 ──────────
+// persistent Drawer paper는 position: fixed라 flex 공간을 점유하지 않음.
+// 사이드바 펼침 시 margin-left로 메인+우측 사이드바를 함께 시프트.
+.ChatPage__content {
+  flex: 1;
+  overflow: auto;
+  margin-left: 0;
+  transition: margin-left var(--transition-normal);
+
+  &.ChatPage__content--sidebar-open {
+    margin-left: 15rem;
+
+    @media (max-width: 3840px) {}
+
+    @media (max-width: 1920px) {}
+
+    @media (max-width: 1440px) {}
+
+    @media (max-width: 1024px) {}
+
+    @media (max-width: 800px) {
+      margin-left: 0;
+    }
+
+    @media (max-width: 640px) {}
+  }
+}
+
+// ── 메인 영역 (Stack이 flex column 제공) ──
+.ChatPage__main {
+  flex: 1;
+  min-width: 30rem;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+// 배경 이미지가 있을 때 하위 영역 처리
+.ChatPage__main--has-bg {
+
+  // 헤더: 래퍼 + 컨테이너 모두 동일한 반투명 처리
+  .ChatPage__header-wrapper {
+    background-color: rgba(var(--bg-surface-rgb, 255, 255, 255), 0.15);
+    backdrop-filter: blur(12px);
+  }
+
+  .ChatHeader__container.ChatHeader__container {
+    background-color: transparent;
+    border-bottom-color: transparent;
+  }
+
+  // 채팅 영역: 투명 (이미지/배경 그대로 노출)
+  .ChatPage__messages {
+    background-color: transparent;
+  }
+
+  // 입력 영역: 반투명 필터
+  .ChatPage__input-area {
+    &.MuiPaper-root {
+      background-color: rgba(var(--bg-surface-rgb, 255, 255, 255), 0.15);
+      backdrop-filter: blur(12px);
+    }
+  }
+}
+
+// ── 헤더 래퍼 ──────────────────────────────
+.ChatPage__header-wrapper {
+  // background-color: var(--bg-subtle);
+
+  &.ChatPage__header--collapsed {
+    // padding-left: 11rem;
+  }
+}
+
+// ── Activity 래퍼 (Connector wrapper div) ──
+.ChatPage__activity-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+}
+
+// ── 메시지 영역 ────────────────────────────
+.ChatPage__messages {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  flex: 1;
+  padding: 1rem 0;
+  overflow: auto;
+  background-color: var(--alias-main-bg);
+  // padding: var(--space-4);
+}
+
+// ── Welcome 페이지 (빈 채팅) ────────────────
+// ChatWelcome 컴포넌트가 메시지 영역 내에서 스크롤 가능하도록
+// 메시지 영역이 이미 overflow: auto이므로 별도 처리 불필요
+
+// ── 메시지 목록 ────────────────────────────
+.ChatPage__message-list {
+  max-width: 52rem;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+
+  [data-viewport-type] {
+    position: relative !important;
+    top: auto !important;
+    width: auto !important;
+    height: auto !important;
+
+    [data-testid] {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+  }
+
+  // max-width: 50rem;
+  @media (max-width: 3840px) {
+    max-width: 80rem; // 1280px
+  }
+
+  @media (max-width: 1920px) {
+    max-width: 50rem; // 800px
+  }
+
+  @media (max-width: 1024px) {
+    max-width: 37.5rem; // 600px
+  }
+
+  margin-left: auto;
+  margin-right: auto;
+
+  &:only-child {
+    height: 100%;
+    padding: 2rem 1rem;
+  }
+}
+
+// ── 입력 영역 ──────────────────────────────
+.ChatPage__input-area {
+  &.MuiPaper-root {
+    padding-top: 0.75rem;
+    // padding: var(--space-3) var(--space-4);
+    background-color: var(--alias-chatting-input-area-bg);
+  }
+
+  .ChatPage__input-inner {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin: 0 auto 1.5rem;
+    border-radius: 0.75rem;
+
+    @media (max-width: 3840px) {
+      max-width: 82rem;
+    }
+
+    @media (max-width: 1920px) {
+      max-width: 52rem;
+    }
+
+    @media (max-width: 1024px) {
+      max-width: 39.5rem;
+    }
+  }
+}
+
+// ── 오버레이 (우측 사이드바) ────────────────
+.ChatPage__overlay {
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: 100vh;
+  z-index: calc(var(--mui-zIndex-modal) - 1);
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+
+  &.MuiPaper-root {
+    &.MuiPaper-rounded {
+      border-radius: 0;
+    }
+  }
+}
+
+// 우측 사이드바 확장 시
+.ChatPage__root:has(.ChatPage__overlay--fullscreen) {
+
+  // 대화창 내용 숨김
+  .ChatPage__content {
+    .ChatPage__messages {
+      .ChatPage__message-list {
+        display: none;
+      }
+    }
+
+    .ChatPage__input-area {
+      .ChatPage__input-inner {
+        display: none;
+      }
+    }
+  }
+
+  // 확장 시 우측패널 컨텐츠
+  .ChatPage__overlay--fullscreen {
+    left: var(--sidebar-width);
+    width: calc(100vw - var(--sidebar-width));
+
+    .RightSidebar__tabs {
+      .MuiTabs-scroller {
+        display: flex;
+        justify-content: center;
+      }
+    }
+
+    .RightSidebar__content {
+      // padding: 1.375rem 1rem;
+
+      .GradeOptionCard {
+        min-width: 26rem;
+        max-width: 35rem;
+        width: 100%;
+      }
+
+      .GradePanel__help {
+        min-width: 26rem;
+        max-width: 35rem;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+
+    @media (max-width: 3840px) {}
+
+    @media (max-width: 1920px) {}
+
+    @media (max-width: 1440px) {}
+
+    @media (max-width: 1024px) {}
+
+    @media (max-width: 800px) {
+      left: 0;
+      width: 100%;
+    }
+
+    @media (max-width: 640px) {
+      .RightSidebar__tabs {
+        .MuiTabs-list {
+          justify-content: flex-start;
+        }
+      }
+    }
+  }
+}

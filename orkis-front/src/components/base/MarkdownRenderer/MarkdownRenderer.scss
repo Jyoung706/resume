@@ -1,0 +1,165 @@
+// ============================================
+// MarkdownRenderer — 마크다운 렌더링 스타일
+// ============================================
+// CSS 변수: 프로젝트 토큰 사용 (존재 확인 완료)
+// --text-sm, --text-color, --bg-subtle, --border-color,
+// --primary, --text-muted, --radius-xs, --radius-md
+// ============================================
+
+.MarkdownRenderer__base {
+  font-size: var(--text-sm);
+  color: var(--text-color);
+  line-height: 1.7;
+  word-break: break-word;
+
+  // ── 헤딩 ──
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+    font-weight: 600;
+    color: var(--text-color);
+  }
+  h1 {
+    font-size: 1.4em;
+  }
+  h2 {
+    font-size: 1.2em;
+  }
+  h3 {
+    font-size: 1.1em;
+  }
+
+  // ── 단락 ──
+  p {
+    margin: 0.5em 0;
+
+    &:first-child {
+      margin-top: 0;
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  // ── 리스트 ──
+  ul,
+  ol {
+    padding-left: 1.5em;
+    margin: 0.5em 0;
+  }
+  li {
+    margin: 0.25em 0;
+  }
+
+  // ── 인라인 코드 ──
+  code:not(pre code) {
+    background: var(--bg-subtle, rgba(0, 0, 0, 0.06));
+    padding: 0.15em 0.4em;
+    border-radius: var(--radius-xs);
+    font-size: 0.9em;
+    font-family: Consolas, Monaco, "Courier New", monospace;
+  }
+
+  // ── 코드 블록 ──
+  // NOTE: --bg-code, --text-code는 현재 미정의 → fallback 사용
+  pre {
+    background: #1e1e2e;
+    color: #cdd6f4;
+    padding: 1em;
+    border-radius: var(--radius-md);
+    overflow-x: auto;
+    font-size: 0.85em;
+    margin: 0.75em 0;
+    max-height: 20rem;
+
+    code {
+      background: none;
+      padding: 0;
+      font-size: inherit;
+    }
+  }
+
+  // ── 테이블 (GFM) ──
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0.75em 0;
+    font-size: 0.9em;
+  }
+  th,
+  td {
+    border: 1px solid var(--border-color, #e0e0e0);
+    padding: 0.5em 0.75em;
+    text-align: left;
+  }
+  th {
+    background: var(--bg-subtle, #f5f5f5);
+    font-weight: 600;
+  }
+
+  // ── 인용 ──
+  blockquote {
+    border-left: 3px solid var(--primary, #1976d2);
+    margin: 0.75em 0;
+    padding: 0.5em 1em;
+    color: var(--text-muted);
+    background: var(--bg-subtle, rgba(0, 0, 0, 0.02));
+    border-radius: 0 var(--radius-xs) var(--radius-xs) 0;
+  }
+
+  // ── 구분선 ──
+  hr {
+    border: none;
+    border-top: 1px solid var(--border-color, #e0e0e0);
+    margin: 1em 0;
+  }
+
+  // ── 링크 ──
+  a {
+    color: var(--primary, #1976d2);
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  // ── 강조 ──
+  strong {
+    font-weight: 600;
+  }
+  em {
+    font-style: italic;
+  }
+  del {
+    text-decoration: line-through;
+    color: var(--text-muted);
+  }
+}
+
+// ── 코드 블록 래퍼 (pre 오버라이드) ──
+.MarkdownRenderer__code-block {
+  position: relative;
+  margin: 0.75em 0;
+}
+
+// ── 스트리밍 커서 ──
+.MarkdownRenderer__base--streaming {
+  // 마지막 인라인 요소 끝에 커서 표시
+  & > p:last-child::after,
+  & > ul:last-child > li:last-child::after,
+  & > ol:last-child > li:last-child::after {
+    content: "";
+    display: inline-block;
+    width: 0.5rem;
+    height: 1rem;
+    background-color: var(--text-color);
+    margin-left: 0.125rem;
+    vertical-align: text-bottom;
+  }
+}

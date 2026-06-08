@@ -1,0 +1,20 @@
+{
+  "extends": "./tsconfig.base.json",
+  "include": ["./src/**/*", "./orkis-interface/src/**/*"],
+  "exclude": [
+    "dist",
+    "build.ts",
+    "build.ts",
+    "webpack.config.js",
+    "logs",
+    ".idea",
+    "src/main/test",
+    "src/desktop/**/*",
+    "src/tmp/**/*",
+    "**/frontend.ts",
+    "**/frontend/**/*",
+    "orkis-interface/src/internal/frontend/**/*",
+    "orkis-interface/src/internal/backend/types.ts",
+    "orkis-interface/src/internal/backend/**/*"
+  ]
+}

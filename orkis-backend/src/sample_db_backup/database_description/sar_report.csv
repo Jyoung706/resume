@@ -1,0 +1,15 @@
+original_column_name,column_name,column_description,data_format,value_description
+id,,the unique identifier of the SAR report,integer,
+alert_id,alert id,the id of the alert that triggered this SAR,integer,Maps to alert(id)
+report_date,report date,the date when the SAR was created internally,datetime,Format: YYYY-MM-DD HH:MM:SS
+filing_date,filing date,the date when the SAR was filed with authorities,datetime,"Format: YYYY-MM-DD HH:MM:SS
+NULL if not yet filed"
+report_type,report type,the type of suspicious activity report,text,"commonsense evidence:
+Common types: Initial Report, Continuing Activity Report, Joint Report"
+scenario_type,scenario type,the category of suspicious activity,text,"commonsense evidence:
+Examples: Money Laundering, Terrorist Financing, Fraud, Tax Evasion, Structuring, Identity Theft"
+amount_involved,amount involved,the total monetary amount involved in the suspicious activity,decimal,"commonsense evidence:
+The cumulative amount of all transactions related to this suspicious activity, in base currency."
+filing_officer,filing officer,the compliance officer who filed the report,text,Name or ID of the officer responsible for filing
+fiu_reference_number,FIU reference number,the reference number assigned by Financial Intelligence Unit,text,"commonsense evidence:
+The unique identifier assigned by the regulatory authority upon receipt of the SAR. NULL if not yet acknowledged."

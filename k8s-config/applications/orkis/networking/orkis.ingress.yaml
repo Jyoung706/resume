@@ -1,0 +1,30 @@
+# orkis.kr의 모든 요청은 orkis-front로 보냄 (프론트 nginx가 /api/* 프록시 담당)
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: orkis-app-ingress
+  namespace: orkis
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: "30"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "1800"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "1800"
+    nginx.ingress.kubernetes.io/proxy-body-size: "500m"
+    nginx.ingress.kubernetes.io/proxy-buffer-size: "8k"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - orkis.kr
+      secretName: orkis-tls
+  rules:
+    - host: orkis.kr
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: orkis-front
+                port:
+                  number: 80

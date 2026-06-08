@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "ES2022", // interface에 맞춰 상향
+    "module": "node16", // 현재 runtime 설정 유지
+    "outDir": "lib",
+    "strict": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "sourceMap": true,
+    "declaration": false, // runtime은 false 유지
+    "removeComments": true,
+    "paths": {
+      "@/*": ["./src/main/*"],
+      "@orkis-interface/*": ["./orkis-interface/src/*"]
+    }
+  }
+}

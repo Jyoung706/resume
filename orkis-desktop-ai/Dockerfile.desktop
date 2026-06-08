@@ -1,0 +1,42 @@
+FROM python:3.12-slim-bookworm AS builder
+
+WORKDIR /app
+
+# 빌드 의존성 설치 (faiss-cpu, pandas 등 C 확장 모듈)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# ── Runner ──
+FROM python:3.12-slim-bookworm AS runner
+
+WORKDIR /app
+
+# builder에서 설치된 패키지 복사
+COPY --from=builder /usr/local/lib/python3.12/site-packages /usr/local/lib/python3.12/site-packages
+COPY --from=builder /usr/local/bin /usr/local/bin
+
+# 앱 소스 복사
+COPY main.py .
+COPY .env .
+COPY app/ ./app/
+COPY core/ ./core/
+COPY tts_workflow/ ./tts_workflow/
+
+# 런타임 디렉토리 생성 (DATA_PATH=/app/data 기준)
+RUN mkdir -p /app/data/share/sqlite /app/data/chat/context /app/data/chat/summary
+
+# 환경변수
+ENV PYTHONUNBUFFERED=1
+ENV APP_NAME=orkis-desktop-ai
+ENV LOG=INFO
+
+# Health check — Podman 이 컨테이너 내부에서 self-check 후 events 로 상태 push
+# start-period 25s = uvicorn 부팅 + ChatService 6 단계 init 여유 (실측 부팅 시간 약 5초)
+HEALTHCHECK --interval=3s --timeout=3s --start-period=25s --retries=3 \
+  CMD python -c "import urllib.request, os; r=urllib.request.urlopen('http://localhost:'+os.environ.get('PORT','8000')+'/docs', timeout=2); exit(0 if r.status<500 else 1)"
+
+CMD ["sh", "-c", "uvicorn main:app --host 0.0.0.0 --port ${PORT:-8000} --log-level info"]

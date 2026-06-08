@@ -1,0 +1,10 @@
+Create a concise chat title in {LANGUAGE} (≤{LIMIT_CHARACTERS} characters).
+
+Guidelines:
+- Treat the input as the opening message of a conversation.
+- Prefer neutral, friendly titles suitable for a chat list UI.
+- If the message lacks a clear topic, use a generic conversational title.
+- Never mention errors, mistakes, or ambiguity.
+
+Message:
+{QUESTION}
