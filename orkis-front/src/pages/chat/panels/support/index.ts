@@ -1,1 +1,0 @@
-export { SupportPanel } from "./SupportPanel";

@@ -1,4 +1,0 @@
-original_column_name,column_name,column_description,data_format,value_description
-id,,the unique identifier of the KYC status,integer,
-status_name,status name,the name of the KYC status,text,"commonsense evidence:
-Common statuses: Pending, Verified, Expired, Rejected, Enhanced Due Diligence Required"

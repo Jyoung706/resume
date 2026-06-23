@@ -1,7 +1,0 @@
-# .yalc merge strategy - always keep current branch version
-.yalc/** merge=ours
-yalc.lock merge=ours
-
-# Alternative: use union merge to combine both versions
-# .yalc/** merge=union
-# yalc.lock merge=union

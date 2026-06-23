@@ -1,6 +1,0 @@
-original_column_name,column_name,column_description,data_format,value_description
-id,,the unique identifier of the transaction type,integer,
-type_name,type name,the name of the transaction type,text,"commonsense evidence:
-Examples: Deposit, Withdrawal, Wire Transfer, Cash Transaction, International Transfer, Payment"
-risk_weight,risk weight,the risk weight of this transaction type,integer,"commonsense evidence:
-Risk weight ranges from 1 to 10. Higher values indicate higher inherent risk. Cash and international transfers typically have higher weights."

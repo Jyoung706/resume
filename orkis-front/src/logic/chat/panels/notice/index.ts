@@ -1,2 +1,0 @@
-export { useNoticePanel } from "./useNoticePanel";
-

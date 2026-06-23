@@ -1,6 +1,0 @@
-original_column_name,column_name,column_description,data_format,value_description
-id,,the unique identifier of the occupation,integer,
-occupation_name,occupation name,the name of the occupation,text,"commonsense evidence:
-Examples: Business Owner, Employed, Self-Employed, Retired, Unemployed, Student"
-risk_category,risk category,the risk category of this occupation,text,"commonsense evidence:
-Risk categories: Low, Medium, High. High-risk occupations include money service businesses, casinos, precious metals dealers."

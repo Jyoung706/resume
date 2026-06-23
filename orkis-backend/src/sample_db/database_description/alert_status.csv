@@ -1,4 +1,0 @@
-original_column_name,column_name,column_description,data_format,value_description
-id,,the unique identifier of the alert status,integer,
-status_name,status name,the name of the alert status,text,"commonsense evidence:
-Common statuses: New, Under Investigation, Escalated, Resolved - False Positive, Resolved - SAR Filed, Closed"

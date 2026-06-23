@@ -1,6 +1,0 @@
-original_column_name,column_name,column_description,data_format,value_description
-id,,the unique identifier of the transaction channel,integer,
-channel_name,channel name,the name of the transaction channel,text,"commonsense evidence:
-Common channels: ATM, Online Banking, Mobile App, Branch, Wire Transfer, Third-Party Payment"
-channel_risk_level,channel risk level,the risk level of this channel,text,"commonsense evidence:
-Risk levels: Low, Medium, High. ATM and cash channels typically have higher risk."
