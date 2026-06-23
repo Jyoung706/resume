@@ -1,0 +1,24 @@
+[submodule "orkis-ai"]
+	path = orkis-ai
+	url = git@github.com:Jyoung706/orkis-ai.git
+[submodule "orkis-backend"]
+	path = orkis-backend
+	url = git@github.com:Jyoung706/orkis-backend.git
+[submodule "orkis-core"]
+	path = orkis-core
+	url = git@github.com:Jyoung706/orkis-core.git
+[submodule "orkis-desktop"]
+	path = orkis-desktop
+	url = git@github.com:Jyoung706/orkis-desktop.git
+[submodule "orkis-desktop-ai"]
+	path = orkis-desktop-ai
+	url = git@github.com:Jyoung706/orkis-desktop-ai.git
+[submodule "orkis-front"]
+	path = orkis-front
+	url = git@github.com:Jyoung706/orkis-front.git
+[submodule "orkis-interface"]
+	path = orkis-interface
+	url = git@github.com:Jyoung706/orkis-interface.git
+[submodule "orkis-jobs"]
+	path = orkis-jobs
+	url = git@github.com:Jyoung706/orkis-jobs.git
