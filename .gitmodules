@@ -25,3 +25,6 @@
 [submodule "orkis-ai-preprocess"]
 	path = orkis-ai-preprocess
 	url = git@github.com:Jyoung706/orkis-preprocess.git
+[submodule "k8s-config"]
+	path = k8s-config
+	url = git@github.com:Jyoung706/beomik-k8s-config.git
