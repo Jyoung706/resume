@@ -28,3 +28,12 @@
 [submodule "k8s-config"]
 	path = k8s-config
 	url = git@github.com:Jyoung706/beomik-k8s-config.git
+[submodule "parking-server"]
+	path = parking-server
+	url = git@github.com:Jyoung706/parking-server.git
+[submodule "cluster-chat-server"]
+	path = cluster-chat-server
+	url = git@github.com:Jyoung706/cluster-chat-server.git
+[submodule "cluster-chat-client"]
+	path = cluster-chat-client
+	url = git@github.com:Jyoung706/cluster-chat-client.git
