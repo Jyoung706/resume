@@ -22,3 +22,6 @@
 [submodule "orkis-jobs"]
 	path = orkis-jobs
 	url = git@github.com:Jyoung706/orkis-jobs.git
+[submodule "orkis-ai-preprocess"]
+	path = orkis-ai-preprocess
+	url = git@github.com:Jyoung706/orkis-preprocess.git
